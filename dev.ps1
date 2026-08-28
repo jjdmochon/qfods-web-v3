@@ -22,7 +22,8 @@
 
 param(
     [switch]$Build,
-    [switch]$Back
+    [switch]$Back,
+    [switch]$Pages
 )
 
 $ErrorActionPreference = 'Stop'
@@ -100,6 +101,45 @@ if (-not (Test-Path "$Local\node_modules\vite\bin\vite.js")) {
 
 Sync-ToLocal
 Push-Location $Local
+
+if ($Pages) {
+    # GitHub Pages sirve el sitio bajo /<repositorio>/, no en la raiz del
+    # dominio. Sin esta base, el HTML pide sus recursos a la raiz y Pages
+    # responde 404: la pagina sale en blanco sin ningun error a la vista.
+    $env:PAGES_BASE = '/qfods-web-v3/'
+
+    Write-Host 'Comprobando tipos...' -ForegroundColor Cyan
+    node 'node_modules\typescript\lib\tsc.js' --noEmit -p tsconfig.app.json
+    if ($LASTEXITCODE -ne 0) { Pop-Location; throw 'Hay errores de tipos.' }
+
+    Write-Host "Compilando para GitHub Pages (base $env:PAGES_BASE)..." -ForegroundColor Cyan
+    node 'node_modules\vite\bin\vite.js' build
+    if ($LASTEXITCODE -ne 0) { Pop-Location; throw 'Fallo la compilacion.' }
+    Remove-Item Env:\PAGES_BASE
+
+    Pop-Location
+
+    # Se publica desde docs\ en la rama main: no hace falta una rama aparte
+    $docs = Join-Path $Source 'docs'
+    if (Test-Path $docs) { Remove-Item $docs -Recurse -Force }
+    New-Item -ItemType Directory -Force $docs | Out-Null
+    Copy-Item "$Local\dist\*" $docs -Recurse -Force
+
+    # Sin este fichero, Pages pasa el sitio por Jekyll y descarta lo que
+    # empiece por guion bajo
+    New-Item -ItemType File -Force (Join-Path $docs '.nojekyll') | Out-Null
+
+    # La aplicacion es de una sola pagina: cualquier ruta desconocida debe
+    # devolver el mismo index.html en lugar del 404 de GitHub
+    Copy-Item (Join-Path $docs 'index.html') (Join-Path $docs '404.html') -Force
+
+    Write-Host ''
+    Write-Host "Version publicable lista en: $docs" -ForegroundColor Green
+    Write-Host 'Ahora:' -ForegroundColor Cyan
+    Write-Host '  git add docs && git commit -m "Publica build" && git push'
+    Write-Host '  y en GitHub: Settings -> Pages -> Source: main / docs'
+    return
+}
 
 if ($Build) {
     Write-Host 'Comprobando tipos...' -ForegroundColor Cyan
