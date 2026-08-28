@@ -18,7 +18,7 @@ export interface Reactivo {
   papel: 'reactivo' | 'producto' | 'intermedio' | 'disolvente' | 'base' | 'acido';
 }
 
-export const REACTIVOS: Record<string, Reactivo> = {
+export const REACTIVOS = {
   alfaNaftol: {
     id: 'alfaNaftol',
     nombre: 'α-Naftol',
@@ -151,7 +151,7 @@ export const REACTIVOS: Record<string, Reactivo> = {
     peligros: ['Fotosensible — proteger de la luz'],
     papel: 'producto'
   }
-};
+} satisfies Record<string, Reactivo>;
 
 // ==========================================================================
 // Tipos para Calculadoras y Reactivos
@@ -185,7 +185,7 @@ export interface LabProduct {
   rfReference?: string;
 }
 
-export const LAB_REAGENTS: Record<string, LabReagent> = {
+export const LAB_REAGENTS = {
   alfa_naftol: {
     id: 'alfa_naftol',
     name: '1-Naftol (α-Naftol)',
@@ -306,9 +306,9 @@ export const LAB_REAGENTS: Record<string, LabReagent> = {
     pictograms: ['GHS05'],
     cas: '1310-73-2'
   }
-};
+} satisfies Record<string, LabReagent>;
 
-export const LAB_PRODUCTS: Record<string, LabProduct> = {
+export const LAB_PRODUCTS = {
   oxirano_step1: {
     id: 'oxirano_step1',
     name: '2-(1-Naftil)oximetiloxirano (I)',
@@ -354,7 +354,7 @@ export const LAB_PRODUCTS: Record<string, LabProduct> = {
     aspect: 'Cristales amarillo intenso fotosensibles',
     appearance: 'Cristales amarillo intenso fotosensibles'
   }
-};
+} satisfies Record<string, LabProduct>;
 
 // ==========================================================================
 // Protocolos y Pasos Experimentales
@@ -649,7 +649,7 @@ export interface CompoundSpectra {
   diagnosticKeys: string[];
 }
 
-export const COMPOUND_SPECTRA_DATA: Record<string, CompoundSpectra> = {
+export const COMPOUND_SPECTRA_DATA = {
   propranolol: {
     id: 'propranolol',
     compoundName: 'Propranolol Base Libre',
@@ -795,7 +795,7 @@ export const COMPOUND_SPECTRA_DATA: Record<string, CompoundSpectra> = {
       'Ninguna señal invertida en DEPT-135: como el DHPP, la molécula no tiene ningún CH2'
     ]
   }
-};
+} satisfies Record<string, CompoundSpectra>;
 
 // ==========================================================================
 // Normas de Seguridad Oficiales y Precauciones Químicas (Págs. 3, 4 y 22-23)

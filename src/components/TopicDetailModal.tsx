@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QfdosTopic, CourseAttachment } from '../data/qfdosData';
 import { Chem2DDrawer } from './Chem2DDrawer';
+import { useAuth } from '../context/AuthContext';
 import { 
   X, 
   BookOpen, 
@@ -17,7 +18,8 @@ import {
   AlertCircle,
   Play,
   Share2,
-  Atom
+  Atom,
+  Lock
 } from 'lucide-react';
 
 interface TopicDetailModalProps {
@@ -36,6 +38,41 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
   onOpenSpotifyPlayer
 }) => {
   const [activeTab, setActiveTab] = useState<'sar' | 'materials' | 'drugs'>('sar');
+  const { isProfesor } = useAuth();
+
+  // Última barrera: aquí convergen el temario, el panel de inicio y la búsqueda
+  // global, así que basta con comprobarlo una vez en este punto.
+  const bloqueado =
+    topic.status === 'Próximamente' && !isProfesor;
+
+  if (bloqueado) {
+    return (
+      <div className="modal-overlay" onClick={onClose}>
+        <div
+          className="modal-container"
+          style={{ maxWidth: '520px' }}
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="modal-body" style={{ padding: '2rem 1.9rem', textAlign: 'center' }}>
+            <div className="proximamente-icono">
+              <Lock size={26} />
+            </div>
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-title)', marginBottom: 8 }}>
+              {topic.number} · {topic.title}
+            </h2>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-main)', lineHeight: 1.6, maxWidth: '46ch', margin: '0 auto 1.25rem' }}>
+              Este tema todavía no está publicado. Cuando el profesorado suba los
+              materiales aparecerá aquí completo, con sus apuntes, diapositivas,
+              podcast y autoevaluación.
+            </p>
+            <button onClick={onClose} className="btn btn-primary">
+              Volver al temario
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handlePlayPodcast = () => {
     if (topic.spotifyPodcastUrl) {

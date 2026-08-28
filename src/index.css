@@ -1628,3 +1628,99 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-left: 3px solid var(--navy);
 }
 .calc-global .calc-resultado-grande { color: var(--navy); }
+
+/* Sección que ha fallado — el resto de la aplicación sigue en pie */
+.error-zona {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 1.15rem 1.3rem;
+  margin: 1rem 0;
+  border-radius: var(--radius-lg);
+  background: var(--semantic-warn-bg);
+  border: 1px solid rgba(184, 115, 15, 0.3);
+}
+.error-zona strong { color: var(--text-title); display: block; margin-bottom: 3px; }
+.error-zona p {
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--text-main);
+  margin: 0 0 7px;
+  max-width: 66ch;
+}
+.error-zona details { font-size: 0.76rem; color: var(--text-muted); }
+.error-zona summary { cursor: pointer; }
+.error-zona code {
+  display: block;
+  margin-top: 5px;
+  padding: 6px 9px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   Temas «Próximamente» — visibles, pero sin acceso
+   ========================================================================== */
+.qfdos-card.tema-proximamente {
+  /* Se apaga en lugar de ocultarse: el alumno debe ver que el tema existe
+     y que llegará, pero sin poder abrirlo todavía. */
+  background: var(--surface-alt);
+  border-color: var(--border-color);
+  box-shadow: none;
+  opacity: 0.72;
+  filter: saturate(0.35);
+}
+.qfdos-card.tema-proximamente:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border-color);
+}
+
+/* La franja de color de la tarjeta también se apaga */
+.tema-proximamente.card-navy,
+.tema-proximamente.card-teal,
+.tema-proximamente.card-mint,
+.tema-proximamente.card-purple,
+.tema-proximamente.card-amber {
+  border-top-color: var(--border-strong);
+  border-left-color: var(--border-strong);
+}
+
+/* La estructura química se atenúa aún más: es lo que más llama la atención */
+.qfdos-card.tema-proximamente .chem-2d-container { opacity: 0.55; }
+
+.qfdos-card.tema-proximamente h3,
+.qfdos-card.tema-proximamente h4 { color: var(--text-muted); }
+
+.tema-proximamente .btn:disabled,
+.tema-proximamente .btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Insignia de estado en gris, no en verde de «publicado» */
+.qfdos-badge.badge-muted {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border-strong);
+}
+
+@media print {
+  .tema-proximamente { opacity: 1; filter: none; }
+}
+
+.proximamente-icono {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 1rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}

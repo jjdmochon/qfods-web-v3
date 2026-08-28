@@ -5,7 +5,7 @@ import { MolPropertyStrip } from './MolPropertyStrip';
 import { useAuth } from '../context/AuthContext';
 import {
   Award, Activity, Bell, ArrowRight, ChevronRight, FileText,
-  ShieldCheck, UploadCloud, FlaskConical, Shuffle
+  ShieldCheck, UploadCloud, FlaskConical, Shuffle, Lock
 } from 'lucide-react';
 
 interface HubDashboardProps {
@@ -268,15 +268,20 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '1.15rem' }}>
-        {topics.slice(0, 4).map((t, idx) => (
+        {topics.slice(0, 4).map((t, idx) => {
+          const bloqueado = (t.status === 'Próximamente') && !isProfesor;
+          const abrir = () => { if (!bloqueado) onSelectTopic(t); };
+
+          return (
           <div
             key={t.id}
-            onClick={() => onSelectTopic(t)}
-            className={`qfdos-card topic-card ${['card-navy', 'card-teal', 'card-mint', 'card-purple'][idx % 4]}`}
-            style={{ cursor: 'pointer', justifyContent: 'space-between' }}
-            role="button"
-            tabIndex={0}
-            onKeyDown={e => { if (e.key === 'Enter') onSelectTopic(t); }}
+            onClick={abrir}
+            className={`qfdos-card topic-card ${['card-navy', 'card-teal', 'card-mint', 'card-purple'][idx % 4]} ${bloqueado ? 'tema-proximamente' : ''}`}
+            style={{ cursor: bloqueado ? 'default' : 'pointer', justifyContent: 'space-between' }}
+            role={bloqueado ? undefined : 'button'}
+            tabIndex={bloqueado ? -1 : 0}
+            aria-disabled={bloqueado || undefined}
+            onKeyDown={e => { if (e.key === 'Enter') abrir(); }}
           >
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
@@ -317,12 +322,15 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
               <span className="tabular" style={{ fontSize: '0.71rem', color: 'var(--text-muted)' }}>
                 {t.drugs?.length || 0} fármacos · {t.testQuestions?.length || 0} preguntas
               </span>
-              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--navy)', display: 'flex', alignItems: 'center', gap: 3 }}>
-                Entrar <ArrowRight size={12} />
+              <span style={{ fontSize: '0.74rem', fontWeight: 700, color: bloqueado ? 'var(--text-muted)' : 'var(--navy)', display: 'flex', alignItems: 'center', gap: 3 }}>
+                {bloqueado
+                  ? <><Lock size={12} /> Próximamente</>
+                  : <>Entrar <ArrowRight size={12} /></>}
               </span>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>

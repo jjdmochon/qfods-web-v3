@@ -7,6 +7,7 @@ import { PracticasLabEquipment } from './PracticasLabEquipment';
 import { PracticasExamSimulator } from './PracticasExamSimulator';
 import { PracticasPairReport } from './PracticasPairReport';
 import { PracticasSafetyRules } from './PracticasSafetyRules';
+import { LimiteDeError } from '../LimiteDeError';
 import {
   FlaskConical, Layers, Calculator, Droplets, Activity,
   Settings, GraduationCap, Sparkles, BookOpen, ExternalLink, Users,
@@ -239,13 +240,27 @@ export const PracticasSection: React.FC = () => {
             isUnlocked={isSafetyAccepted}
           />
         )}
-        {activeSubTab === 'protocols' && <PracticasProtocols />}
-        {activeSubTab === 'yields' && <PracticasYieldCalculator />}
-        {activeSubTab === 'solutions' && <PracticasSolutionsCalculator />}
-        {activeSubTab === 'spectroscopy' && <PracticasSpectroscopyWorkshop />}
-        {activeSubTab === 'equipment' && <PracticasLabEquipment />}
-        {activeSubTab === 'exam' && <PracticasExamSimulator />}
-        {activeSubTab === 'pair_report' && <PracticasPairReport />}
+        {activeSubTab === 'protocols' && (
+          <LimiteDeError zona="Protocolos de sintesis"><PracticasProtocols /></LimiteDeError>
+        )}
+        {activeSubTab === 'yields' && (
+          <LimiteDeError zona="Calculadora de rendimientos"><PracticasYieldCalculator /></LimiteDeError>
+        )}
+        {activeSubTab === 'solutions' && (
+          <LimiteDeError zona="Preparacion de disoluciones"><PracticasSolutionsCalculator /></LimiteDeError>
+        )}
+        {activeSubTab === 'spectroscopy' && (
+          <LimiteDeError zona="Taller de espectroscopia"><PracticasSpectroscopyWorkshop /></LimiteDeError>
+        )}
+        {activeSubTab === 'equipment' && (
+          <LimiteDeError zona="Material y montajes"><PracticasLabEquipment /></LimiteDeError>
+        )}
+        {activeSubTab === 'exam' && (
+          <LimiteDeError zona="Simulador de examen"><PracticasExamSimulator /></LimiteDeError>
+        )}
+        {activeSubTab === 'pair_report' && (
+          <LimiteDeError zona="Cuaderno de parejas"><PracticasPairReport /></LimiteDeError>
+        )}
       </div>
 
     </div>

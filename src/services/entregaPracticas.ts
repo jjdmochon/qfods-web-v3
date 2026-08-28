@@ -132,8 +132,59 @@ export function componerTexto(titulo: string, datos: Record<string, string>): st
   ].join('\n');
 }
 
+/**
+ * Nombres legibles para el informe. Las claves se mantienen estables porque
+ * son también los encabezados de columna de la hoja de cálculo; lo que cambia
+ * es cómo se leen en el correo.
+ */
+const ETIQUETAS: Record<string, string> = {
+  grupo: 'Grupo',
+  puesto: 'Puesto',
+  alumno1: 'Alumno 1',
+  email1: 'Correo 1',
+  alumno2: 'Alumno 2',
+  email2: 'Correo 2',
+  cuentaDeEnvio: 'Enviado desde',
+  tipoDeCuenta: 'Tipo de cuenta',
+  fechaSesion: 'Fecha de la sesión',
+  entregadoEn: 'Entregado el',
+  etapa1Naftol: 'Etapa 1 · α-naftol pesado',
+  etapa1Crudo: 'Etapa 1 · oxirano crudo obtenido',
+  etapa1Rendimiento: 'Etapa 1 · rendimiento',
+  etapa1Aspecto: 'Etapa 1 · aspecto',
+  etapa2Oxirano: 'Etapa 2 · oxirano de partida',
+  etapa2Propranolol: 'Etapa 2 · propranolol obtenido',
+  etapa2RendEtapa: 'Etapa 2 · rendimiento de etapa',
+  etapa2RendGlobal: 'Etapa 2 · rendimiento global',
+  etapa2PuntoFusion: 'Etapa 2 · punto de fusión',
+  etapa3Compuesto: 'Etapa 3 · compuesto',
+  etapa3Aldehido: 'Etapa 3 · aldehído empleado',
+  etapa3Producto: 'Etapa 3 · producto obtenido',
+  etapa3Rendimiento: 'Etapa 3 · rendimiento',
+  etapa3PuntoFusion: 'Etapa 3 · punto de fusión',
+  etapa3Cristales: 'Etapa 3 · hábito cristalino',
+  cuestion1: 'Cuestión 1',
+  cuestion2: 'Cuestión 2',
+  cuestion3: 'Cuestión 3',
+  observaciones: 'Observaciones',
+  nombre: 'Nombre',
+  email: 'Correo',
+  iniciales: 'Iniciales',
+  fecha: 'Fecha',
+  hora: 'Hora',
+  materialFaltante: 'Material que falta',
+  totalFaltante: 'Nº de elementos que faltan',
+  normasAceptadas: 'Normas aceptadas'
+};
+
 function etiquetar(clave: string): string {
-  const s = clave.replace(/([A-Z])/g, ' $1').toLowerCase().trim();
+  if (ETIQUETAS[clave]) return ETIQUETAS[clave];
+  // Separa camelCase y también los dígitos pegados: etapa1Crudo → etapa 1 crudo
+  const s = clave
+    .replace(/([a-zá-ú])([A-ZÁ-Ú])/g, '$1 $2')
+    .replace(/([a-zA-Z])(\d)/g, '$1 $2')
+    .toLowerCase()
+    .trim();
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 

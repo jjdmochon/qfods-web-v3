@@ -49,7 +49,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 99.0
       }
     ],
-    product: LAB_PRODUCTS.naftoximetiloxirano,
+    product: LAB_PRODUCTS.oxirano_step1,
     productStoichiometry: 1
   },
   {
@@ -81,7 +81,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 99.5
       }
     ],
-    product: LAB_PRODUCTS.propranolol,
+    product: LAB_PRODUCTS.propranolol_base,
     productStoichiometry: 1
   },
   {
@@ -98,7 +98,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 99.0
       },
       {
-        reagent: LAB_REAGENTS.acetoacetato_metilo,
+        reagent: LAB_REAGENTS.metil_acetoacetato,
         stoichiometry: 2,
         defaultIsVolume: true,
         defaultAmount: 5.40,
@@ -106,7 +106,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 99.0
       },
       {
-        reagent: LAB_REAGENTS.amoniaco_35,
+        reagent: LAB_REAGENTS.amoniaco_conc,
         stoichiometry: 1,
         defaultIsVolume: true,
         defaultAmount: 3.20,
@@ -138,7 +138,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 98.0
       },
       {
-        reagent: LAB_REAGENTS.acetoacetato_metilo,
+        reagent: LAB_REAGENTS.metil_acetoacetato,
         stoichiometry: 2,
         defaultIsVolume: true,
         defaultAmount: 5.40,
@@ -146,7 +146,7 @@ const PRESET_REACTIONS: PresetReaction[] = [
         purity: 99.0
       },
       {
-        reagent: LAB_REAGENTS.amoniaco_35,
+        reagent: LAB_REAGENTS.amoniaco_conc,
         stoichiometry: 1,
         defaultIsVolume: true,
         defaultAmount: 3.20,
@@ -331,7 +331,12 @@ export const PracticasYieldCalculator: React.FC = () => {
                 className={`btn btn-sm ${selectedPresetId === preset.id ? 'btn-navy' : 'btn-outline'}`}
                 style={{ fontWeight: selectedPresetId === preset.id ? 700 : 500, fontSize: '0.78rem' }}
               >
-                {preset.name.split(':')[0]}
+                {/* Se muestra lo que hay TRAS los dos puntos cuando existe: los dos
+                    presets de Hantzsch comparten prefijo y sólo se distinguen por
+                    el producto, así que cortar por el prefijo los volvía idénticos. */}
+                {preset.name.includes(':')
+                  ? preset.name.slice(preset.name.indexOf(':') + 1).trim()
+                  : preset.name}
               </button>
             ))}
           </div>

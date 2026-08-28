@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { EncabezadoReaccion } from './EncabezadoReaccion';
 import { DesgloseRendimiento } from './DesgloseRendimiento';
+import { EntregaProfesor } from './EntregaProfesor';
 import { useAuth } from '../../context/AuthContext';
 
 const STORAGE_KEY = 'qfdos_pair_reports';
@@ -257,6 +258,55 @@ export const PracticasPairReport: React.FC = () => {
     setCurrentReport(finalReport);
     setSubmitSuccess(true);
     setTimeout(() => setSubmitSuccess(false), 5000);
+  };
+
+  /**
+   * Aplana el informe a pares clave-valor de texto: es el formato que entiende
+   * tanto la hoja de cálculo (una columna por clave) como el cuerpo del correo.
+   */
+  const construirDatosEntrega = (): Record<string, string> => {
+    const r = currentReport;
+    // Sin dato no se escribe la unidad: «— g» se lee peor que dejarlo vacío
+    const con = (v: number, unidad: string) =>
+      v ? `${v.toLocaleString('es-ES')} ${unidad}` : '';
+
+    return {
+      grupo: r.grupo,
+      puesto: String(r.puesto),
+      alumno1: r.student1.nombre || '',
+      email1: r.student1.email || '',
+      alumno2: r.student2.nombre || '',
+      email2: r.student2.email || '',
+      cuentaDeEnvio: user?.email ?? '',
+      tipoDeCuenta: user?.institucional === false ? 'personal (no UGR)' : 'institucional UGR',
+      fechaSesion: r.fecha || '',
+      entregadoEn: r.submittedAt || '',
+
+      etapa1Naftol: con(r.step1.mass1Naftol, 'g'),
+      etapa1Crudo: con(r.step1.massProductCrude, 'g'),
+      etapa1Rendimiento: con(r.step1.yieldPercentage, '%'),
+      etapa1Aspecto: r.step1.aspect || '',
+
+      etapa2Oxirano: con(r.step2.massOxirane, 'g'),
+      etapa2Propranolol: con(r.step2.massProductBase, 'g'),
+      etapa2RendEtapa: con(r.step2.yieldStage, '%'),
+      etapa2RendGlobal: con(r.step2.yieldAccumulated, '%'),
+      etapa2PuntoFusion: r.step2.meltingPointObserved || '',
+
+      etapa3Compuesto: r.step3.compoundType,
+      etapa3Aldehido: r.step3.amountAldehyde || '',
+      etapa3Producto: con(r.step3.massProduct, 'g'),
+      etapa3Rendimiento: con(r.step3.yieldPercentage, '%'),
+      etapa3PuntoFusion: r.step3.meltingPointObserved || '',
+      etapa3Cristales: r.step3.crystalHabit || '',
+
+      cuestion1: r.cuestiones?.q1_dcm_density || '',
+      cuestion2: r.cuestiones?.q2_nmr_c4_proton || '',
+      cuestion3: r.cuestiones?.q3_reflux_safety || '',
+
+      observaciones: [r.step1.observations, r.step2.observations, r.step3.observations]
+        .filter(Boolean).join(' | ')
+    };
   };
 
   // Print or PDF export handler
@@ -1157,9 +1207,20 @@ export const PracticasPairReport: React.FC = () => {
               className="btn btn-teal"
               style={{ padding: '0.75rem 1.75rem', fontWeight: 800, fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
-              <Send size={16} /> Enviar Informe al Profesor Juanjo ✓
+              <Send size={16} /> Guardar y preparar la entrega
             </button>
           </div>
+
+          {/* La entrega de verdad: guardar el informe sólo lo deja en este
+              navegador, así que aquí es donde sale del equipo de la pareja. */}
+          <EntregaProfesor
+            hoja="Cuaderno de parejas"
+            titulo={`Cuaderno de prácticas · ${currentReport.grupo} · Puesto ${currentReport.puesto}`}
+            nombreFichero={`cuaderno-${currentReport.grupo.replace(/\s+/g, '')}-puesto${currentReport.puesto}`}
+            deshabilitado={!currentReport.student1.nombre || !currentReport.student2.nombre}
+            motivoDeshabilitado="Escribid los nombres de los dos miembros de la pareja antes de entregar."
+            datos={construirDatosEntrega()}
+          />
 
         </form>
       )}

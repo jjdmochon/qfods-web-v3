@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QfdosTopic } from '../data/qfdosData';
 import { Chem2DDrawer } from './Chem2DDrawer';
+import { useAuth } from '../context/AuthContext';
 import { 
   BookOpen, 
   Layers, 
@@ -10,6 +11,7 @@ import {
   Search, 
   ArrowRight,
   Sparkles,
+  Lock,
   Award,
   FileText,
   Calendar,
@@ -29,6 +31,7 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
   onOpenQuiz,
   onOpenFlashcards
 }) => {
+  const { isProfesor } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'teoria' | 'examen' | 'trabajo' | 'seminario'>('all');
 
@@ -125,11 +128,17 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
           const isProject = topic.category === 'trabajo';
           const accentClass = isExam ? 'card-amber' : isProject ? 'card-emerald' : idx % 3 === 0 ? 'card-navy' : idx % 3 === 1 ? 'card-teal' : 'card-mint';
 
+          // Un tema sin publicar se muestra, para que se vea que existe y esta
+          // por venir, pero sin acceso: el profesorado si entra, para prepararlo.
+          const esProximamente = topic.status === 'Próximamente';
+          const bloqueado = esProximamente && !isProfesor;
+
           return (
             <div
               key={topic.id}
-              className={`qfdos-card ${accentClass}`}
+              className={`qfdos-card ${accentClass} ${bloqueado ? 'tema-proximamente' : ''}`}
               style={{ justifyContent: 'space-between' }}
+              aria-disabled={bloqueado || undefined}
             >
               <div>
                 {/* Card Header */}
@@ -150,7 +159,11 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
                         PDB: {topic.pdbTargetId}
                       </span>
                     )}
-                    <span className="qfdos-badge badge-emerald" style={{ fontSize: '0.68rem' }}>
+                    <span
+                      className={`qfdos-badge ${esProximamente ? 'badge-muted' : 'badge-emerald'}`}
+                      style={{ fontSize: '0.68rem' }}
+                    >
+                      {esProximamente && <Lock size={10} style={{ marginRight: 3 }} />}
                       {topic.status}
                     </span>
                   </div>
@@ -158,8 +171,8 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
 
                 {/* Title and Subtitle */}
                 <h3 
-                  onClick={() => onSelectTopic(topic)}
-                  style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', cursor: 'pointer', marginBottom: '4px' }}
+                  onClick={() => { if (!bloqueado) onSelectTopic(topic); }}
+                  style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', cursor: bloqueado ? 'default' : 'pointer', marginBottom: '4px' }}
                 >
                   {topic.title}
                 </h3>
@@ -229,15 +242,18 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <button
                     onClick={() => onSelectTopic(topic)}
+                    disabled={bloqueado}
+                    title={bloqueado ? 'Este tema aún no está publicado' : undefined}
                     className="btn btn-sm btn-primary"
                     style={{ flex: 1, fontSize: '0.75rem' }}
                   >
-                    Guía & Materiales <ArrowRight size={12} />
+                    {bloqueado ? <><Lock size={12} /> No disponible</> : <>Guía & Materiales <ArrowRight size={12} /></>}
                   </button>
 
                   {topic.testQuestions && topic.testQuestions.length > 0 && (
                     <button
                       onClick={() => onOpenQuiz(topic)}
+                      disabled={bloqueado}
                       className="btn btn-sm btn-secondary"
                       style={{ fontSize: '0.75rem' }}
                       title="Realizar autoevaluación tipo test"
@@ -249,6 +265,7 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
                   {topic.flashcards && topic.flashcards.length > 0 && (
                     <button
                       onClick={() => onOpenFlashcards(topic)}
+                      disabled={bloqueado}
                       className="btn btn-sm btn-mint"
                       style={{ fontSize: '0.75rem' }}
                       title="Repasar flashcards de memoria activa"

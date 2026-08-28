@@ -72,6 +72,30 @@ dentro de la pestaña *Módulos*.
 
 ---
 
+## Recepción de entregas
+
+Las entregas del cuaderno, las firmas de las normas de seguridad y los partes de
+material van a la hoja de cálculo del profesor mediante un Apps Script
+desplegado como aplicación web (código en `google-apps-script/Codigo.gs`).
+
+La URL del despliegue se lee de `VITE_PRACTICAS_WEBAPP_URL` en `.env.local`.
+El script crea cada pestaña la primera vez que recibe datos y añade columnas
+nuevas por su cuenta, así que ampliar un formulario no rompe lo ya registrado.
+
+Hojas que se alimentan solas: **Cuaderno de parejas**, **normas de seguridad**
+y **Material**.
+
+A diferencia del envío a ciegas habitual con `no-cors`, aquí se lee la respuesta
+del script: el alumno ve «Recibido y anotado en la hoja …, fila N». Si esa
+lectura falla, la plataforma lo dice en lugar de dar por buena la entrega, y
+ofrece el correo a juandiaz@ugr.es como alternativa.
+
+Para volver a desplegar el script tras editarlo hay que crear una **implementación
+nueva** (no basta con guardar): Google mantiene la URL antigua apuntando a la
+versión anterior.
+
+---
+
 ## Enlaces de interés
 
 Pestaña **Enlaces** de la barra superior. Recopila material externo —artículos,
