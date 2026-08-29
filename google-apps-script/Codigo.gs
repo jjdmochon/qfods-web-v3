@@ -35,7 +35,7 @@ var HOJA_ID = '1RrMzWJPFOKKH76vJh70pQw9vbiQZNOGOJH7vNaTGkso';
  *
  * CÁMBIALA por una tuya antes de desplegar.
  */
-var CLAVE_PUBLICACION = 'cambia-esta-clave-2627';
+var CLAVE_PUBLICACION = 'qfdos-2627-jjdm';
 
 /** Pestaña donde vive el contenido publicado. */
 var HOJA_CONTENIDO = '_Contenido';

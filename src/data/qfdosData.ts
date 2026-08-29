@@ -172,6 +172,19 @@ export type ResourceCategory = typeof RESOURCE_CATEGORIES[number];
 
 export const INITIAL_RESOURCE_LINKS: QfdosResourceLink[] = [
   {
+    id: 'link-acs-fall-2026-disclosures',
+    title: 'ACS Fall 2026: 13 nuevas estructuras y candidatos clínicos desvelados',
+    url: 'https://drughunter.com/articles/acs-fall-2026-first-time-disclosures',
+    summary:
+      'Primera publicación de 13 candidatos de molécula pequeña presentados en la división MEDI de la ACS. Ejemplos reales de vanguardia: inhibidores alostéricos de KRAS G12D, pegamentos moleculares de IKZF2/4, inhibidores duales Wee1/Myt1 por FEP, fármacos antivirulencia contra FimH y dianas emergentes en inflamación (cGAS, MRGPRX2, KIT). Imprescindible para ver cómo la optimización farmacófora y de seguridad (hERG, atropoisomería) se aplica hoy en día.',
+    category: 'Descubrimiento de fármacos',
+    source: 'Drug Hunter / ACS MEDI',
+    duration: '12 min',
+    relatedTopic: 'Tema 00',
+    featured: true,
+    addedAt: '2026-08-29'
+  },
+  {
     id: 'link-imatinib',
     title: 'Imatinib: del cromosoma Filadelfia a la primera terapia dirigida',
     url: 'https://www.nature.com/articles/nrd4570',
