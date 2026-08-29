@@ -7,11 +7,12 @@ import { PracticasLabEquipment } from './PracticasLabEquipment';
 import { PracticasExamSimulator } from './PracticasExamSimulator';
 import { PracticasPairReport } from './PracticasPairReport';
 import { PracticasSafetyRules } from './PracticasSafetyRules';
+import { PracticasProgreso } from './PracticasProgreso';
 import { LimiteDeError } from '../LimiteDeError';
 import {
   FlaskConical, Layers, Calculator, Droplets, Activity,
   Settings, GraduationCap, Sparkles, BookOpen, ExternalLink, Users,
-  ShieldAlert, CheckCircle2, Lock, X
+  ShieldAlert, CheckCircle2, Lock, X, ClipboardCheck
 } from 'lucide-react';
 
 export const PracticasSection: React.FC = () => {
@@ -22,13 +23,20 @@ export const PracticasSection: React.FC = () => {
   const [showLockNotice, setShowLockNotice] = useState(false);
 
   const [activeSubTab, setActiveSubTab] = useState<
-    'safety' | 'protocols' | 'yields' | 'solutions' | 'spectroscopy' | 'equipment' | 'exam' | 'pair_report'
+    'progreso' | 'safety' | 'protocols' | 'yields' | 'solutions' | 'spectroscopy' | 'equipment' | 'exam' | 'pair_report'
   >(() => {
     const accepted = !!localStorage.getItem('qfdos_practicas_safety_accepted');
-    return accepted ? 'protocols' : 'safety';
+    return accepted ? 'progreso' : 'safety';
   });
 
   const SUB_TABS = [
+    {
+      id: 'progreso',
+      label: 'Mi progreso',
+      icon: <ClipboardCheck size={15} />,
+      desc: 'Qué has entregado y qué te falta',
+      locked: !isSafetyAccepted
+    },
     {
       id: 'safety',
       label: '0. Normas de Seguridad',
@@ -234,6 +242,11 @@ export const PracticasSection: React.FC = () => {
       )}
 
       <div>
+        {activeSubTab === 'progreso' && (
+          <LimiteDeError zona="Mi progreso">
+            <PracticasProgreso onIr={(d) => setActiveSubTab(d as any)} />
+          </LimiteDeError>
+        )}
         {activeSubTab === 'safety' && (
           <PracticasSafetyRules
             onAcceptAndProceed={handleSafetyAccepted}

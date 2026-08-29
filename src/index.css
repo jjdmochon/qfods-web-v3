@@ -1950,3 +1950,128 @@ html, body { overflow-x: hidden; max-width: 100%; }
   .mis-entregas-campos dd { margin-bottom: 5px; }
   .mis-entregas-fecha { margin-left: 0; width: 100%; }
 }
+
+/* ==========================================================================
+   Buscador de la cabecera
+   Ocupa el hueco entre la marca y las herramientas. Antes ese espacio quedaba
+   vacío y, aunque las dos filas estaban alineadas al píxel, la de arriba
+   parecía descolgada por contraste con la barra continua de navegación.
+   ========================================================================== */
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 460px;
+  /* Se pega a la marca y empuja las herramientas al extremo: el hueco queda
+     todo a la derecha, en vez de partirse a ambos lados del buscador. */
+  margin-right: auto;
+  padding: 5px 11px;
+  border-radius: var(--radius-md);
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+.header-search:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+.header-search:focus-visible {
+  border-color: var(--border-focus);
+  background: var(--surface);
+}
+
+.header-search-texto {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-search kbd {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-light);
+}
+
+/* Al estrecharse, el buscador se reduce a su icono antes de desaparecer */
+@media (max-width: 900px) {
+  .header-search { max-width: none; }
+  .header-search-texto,
+  .header-search kbd { display: none; }
+  .header-search { flex: 0 0 auto; padding: 6px 9px; }
+}
+
+/* ==========================================================================
+   Progreso de prácticas
+   ========================================================================== */
+.progreso-lista { display: flex; flex-direction: column; gap: 8px; }
+
+.progreso-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+}
+.progreso-item.is-hecho { background: var(--semantic-ok-bg); border-color: transparent; }
+
+.progreso-titulo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-title);
+}
+.progreso-etiqueta {
+  font-size: 0.63rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+.progreso-detalle {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+}
+
+.progreso-resumen {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  background: var(--semantic-warn-bg);
+  color: var(--accent-amber);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.progreso-resumen.is-completo {
+  background: var(--semantic-ok-bg);
+  color: var(--accent-emerald);
+}
+
+@media (max-width: 560px) {
+  .progreso-item { flex-wrap: wrap; }
+  .progreso-item .btn { margin-left: 30px; }
+}

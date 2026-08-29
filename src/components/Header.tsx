@@ -89,19 +89,19 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </button>
 
+          {/* Buscador: ocupa el espacio entre la marca y las herramientas */}
+          <button
+            onClick={onOpenSearch}
+            className="header-search"
+            title="Búsqueda global (Ctrl+K)"
+          >
+            <Search size={15} />
+            <span className="header-search-texto">Buscar temas, fármacos, dianas…</span>
+            <kbd>⌘K</kbd>
+          </button>
+
           {/* Right tools */}
           <div className="header-tools" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            {/* Search */}
-            <button
-              onClick={onOpenSearch}
-              className="btn btn-sm btn-ghost"
-              title="Búsqueda Global (Ctrl+K)"
-              style={{ gap: '5px' }}
-            >
-              <Search size={14} />
-              <span className="tool-label" style={{ fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-mono)' }}>⌘K</span>
-            </button>
-
             {/* Exam AI */}
             <button
               onClick={onOpenExamGenerator}

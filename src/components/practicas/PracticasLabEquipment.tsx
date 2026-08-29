@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { recurso } from '../../services/rutas';
 import {
   LAB_EQUIPMENT_INVENTORY,
   LabEquipmentItem,
@@ -29,7 +30,7 @@ const EXPERIMENTAL_SETUPS: SetupGuide[] = [
     name: '1. Montaje de Calefacción a Reflujo',
     purpose: 'Mantener la reacción a temperatura de ebullición constante del disolvente sin pérdida de reactivos volátiles.',
     imageIcon: '🔥',
-    imageSrc: '/practicas/setups/setup_reflux.svg',
+    imageSrc: recurso('/practicas/setups/setup_reflux.svg'),
     sourceAttribution: 'Esquema representativo de síntesis orgánica (Dominio público / BioArt NIAID style)',
     equipmentRequired: [
       'Placa calefactora con agitación magnética digital',
@@ -64,7 +65,7 @@ const EXPERIMENTAL_SETUPS: SetupGuide[] = [
     name: '2. Montaje de Filtración a Vacío (Büchner + Kitasato)',
     purpose: 'Separar y secar precipitados sólidos cristalinos (como DHPP o sales) de sus aguas madres de forma rápida y eficiente.',
     imageIcon: '🌪️',
-    imageSrc: '/practicas/setups/setup_buchner.svg',
+    imageSrc: recurso('/practicas/setups/setup_buchner.svg'),
     sourceAttribution: 'Esquema representativo de filtración a vacío (Dominio público / BioArt NIAID style)',
     equipmentRequired: [
       'Matraz Kitasato de vidrio grueso con oliva lateral de vacío',
@@ -99,7 +100,7 @@ const EXPERIMENTAL_SETUPS: SetupGuide[] = [
     name: '3. Extracción Líquido-Líquido (Embudo de Decantación)',
     purpose: 'Separar y purificar compuestos orgánicos transfiriéndolos selectivamente entre dos fases inmiscibles (acuosa y orgánica).',
     imageIcon: '🧪',
-    imageSrc: '/practicas/setups/setup_extraction.svg',
+    imageSrc: recurso('/practicas/setups/setup_extraction.svg'),
     sourceAttribution: 'Esquema representativo de extracción bifásica (Dominio público / BioArt NIAID style)',
     equipmentRequired: [
       'Embudo de decantación (100 o 250 mL) con llave de teflón y tapón esmerilado',
@@ -133,7 +134,7 @@ const EXPERIMENTAL_SETUPS: SetupGuide[] = [
     name: '4. Evaporador Rotatorio (Rotavapor)',
     purpose: 'Eliminar a presión reducida y baja temperatura grandes volúmenes de disolventes orgánicos volátiles de forma suave.',
     imageIcon: '🌀',
-    imageSrc: '/practicas/setups/setup_rotavapor.svg',
+    imageSrc: recurso('/practicas/setups/setup_rotavapor.svg'),
     sourceAttribution: 'Esquema representativo de evaporación rotatoria (Dominio público / BioArt NIAID style)',
     equipmentRequired: [
       'Matraz esférico con la disolución orgánica seca y filtrada (máximo 50% de llenado)',

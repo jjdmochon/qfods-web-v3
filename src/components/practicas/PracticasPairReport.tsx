@@ -11,7 +11,6 @@ import {
 import { EncabezadoReaccion } from './EncabezadoReaccion';
 import { DesgloseRendimiento } from './DesgloseRendimiento';
 import { EntregaProfesor } from './EntregaProfesor';
-import { MisEntregas } from '../MisEntregas';
 import { useAuth } from '../../context/AuthContext';
 
 const STORAGE_KEY = 'qfdos_pair_reports';
@@ -1223,8 +1222,6 @@ export const PracticasPairReport: React.FC = () => {
             datos={construirDatosEntrega()}
           />
 
-          {/* Registro de lo ya entregado, leido de la hoja del profesor */}
-          <MisEntregas />
 
         </form>
       )}
