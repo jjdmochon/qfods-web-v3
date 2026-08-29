@@ -131,12 +131,6 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
               <BookOpen size={14} /> Contenido & Autoevaluación
             </button>
             <button
-              onClick={() => setActiveTab('materials')}
-              className={`tab-btn ${activeTab === 'materials' ? 'active' : ''}`}
-            >
-              <FileText size={14} /> 6 Recursos Didácticos
-            </button>
-            <button
               onClick={() => setActiveTab('drugs')}
               className={`tab-btn ${activeTab === 'drugs' ? 'active' : ''}`}
             >
@@ -302,73 +296,6 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                 </div>
               </div>
 
-            </div>
-          )}
-
-          {/* TAB 2: Recursos Oficiales Exhaustivos */}
-          {activeTab === 'materials' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div className="qfdos-card" style={{ padding: '1.25rem' }}>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-title)', marginBottom: '6px' }}>
-                  Repositorio de Documentos & Enlaces Oficiales
-                </h3>
-                <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-                  Materiales aprobados por la Cátedra de Química Farmacéutica de la UGR para el Tema {topic.number}.
-                </p>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {topic.attachments?.map((att, i) => (
-                    <div
-                      key={att.id || i}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '12px 16px',
-                        background: 'var(--surface-alt)',
-                        borderRadius: 'var(--radius-md)',
-                        border: '1px solid var(--border-color)'
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        {att.type === 'pdf' && <FileText size={20} color="var(--navy)" />}
-                        {att.type === 'spotify' && <Radio size={20} color="#1db954" />}
-                        {att.type === 'notebook' && <Sparkles size={20} color="var(--teal)" />}
-                        <div>
-                          <strong style={{ fontSize: '0.88rem', color: 'var(--text-title)', display: 'block' }}>
-                            {att.title}
-                          </strong>
-                          <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                            {att.size ? `${att.size} • ` : ''}{att.date} • Tipo: {att.type.toUpperCase()}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div style={{ display: 'flex', gap: '6px' }}>
-                        {att.type === 'spotify' ? (
-                          <button
-                            onClick={() => onOpenSpotifyPlayer(att)}
-                            className="btn btn-sm btn-outline"
-                            style={{ fontSize: '0.78rem', color: '#1db954', borderColor: '#1db954' }}
-                          >
-                            <Play size={12} /> Reproducir
-                          </button>
-                        ) : (
-                          <a
-                            href={att.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-sm btn-outline"
-                            style={{ fontSize: '0.78rem' }}
-                          >
-                            <ExternalLink size={12} /> Abrir
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           )}
 
