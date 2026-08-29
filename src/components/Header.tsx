@@ -229,33 +229,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Fila Inferior: Barra Completa de Navegación de Secciones */}
-        <nav
-          className="header-nav"
-          aria-label="Secciones"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            width: '100%',
-            overflowX: 'auto',
-            paddingTop: '2px',
-            borderTop: '1px solid rgba(0,0,0,0.04)'
-          }}
-        >
+        <nav className="header-nav" aria-label="Secciones">
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               className={`nav-tab ${activeTab === item.id ? 'active' : ''}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                padding: '6px 14px',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                flexShrink: 0
-              }}
             >
               {item.icon}
               {item.label}

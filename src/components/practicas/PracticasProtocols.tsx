@@ -36,9 +36,18 @@ export const PracticasProtocols: React.FC = () => {
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-title)', margin: '0.2rem 0' }}>
               Síntesis Orgánica y Farmacoquímica en el Laboratorio
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '0 0 0.5rem 0' }}>
               Cuaderno oficial de prácticas: Preparación de Propranolol (II) y Dihidropiridinas de Hantzsch (DHPP / Nifedipina).
             </p>
+            <a
+              href="https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-sm btn-secondary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', fontWeight: 700 }}
+            >
+              📥 Descargar Cuaderno Completo (PDF)
+            </a>
           </div>
 
           {/* Step switcher tabs */}

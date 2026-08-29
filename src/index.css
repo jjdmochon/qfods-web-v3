@@ -2075,3 +2075,56 @@ html, body { overflow-x: hidden; max-width: 100%; }
   .progreso-item { flex-wrap: wrap; }
   .progreso-item .btn { margin-left: 30px; }
 }
+
+/* ==========================================================================
+   Cabecera de dos filas — comportamiento con zoom
+   Ampliar el zoom reduce el viewport en píxeles CSS, así que aquí se aplican
+   las mismas reglas que en pantallas estrechas. La fila de secciones siempre
+   se desliza, y el degradado del borde avisa de que queda contenido a la
+   derecha en lugar de dejarlo cortado sin más.
+   ========================================================================== */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 2px;
+  border-top: 1px solid var(--border-color);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* Difumina el último tramo: se ve que la barra continúa */
+  mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+}
+.header-nav::-webkit-scrollbar { display: none; }
+
+.header-nav .nav-tab {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* A partir de aquí las pestañas se estrechan antes de tener que deslizarse.
+   Estas reglas no funcionaban mientras los botones llevaban estilos en línea:
+   un estilo en línea gana siempre a una media query. */
+@media (max-width: 1150px) {
+  .header-nav .nav-tab { padding: 6px 10px; font-size: 0.79rem; gap: 4px; }
+}
+
+@media (max-width: 980px) {
+  .header-nav .nav-tab { padding: 6px 8px; font-size: 0.76rem; }
+  .header-nav .nav-tab svg { width: 13px; height: 13px; }
+}
+
+@media (max-width: 780px) {
+  /* Los iconos se van antes que las palabras: el texto es lo que orienta */
+  .header-nav .nav-tab svg { display: none; }
+  .header-nav .nav-tab { padding: 6px 9px; }
+}
+
+/* Con zoom muy alto o pantallas diminutas, deslizar es la única salida
+   razonable: encoger más haría el texto ilegible. */
+@media (max-width: 560px) {
+  .header-nav .nav-tab { font-size: 0.75rem; padding: 5px 8px; }
+}

@@ -155,19 +155,38 @@ export const PracticasSection: React.FC = () => {
             de reactivos sólidos y líquidos, elucida espectros de RMN/MS, prepárate para el examen con estructuras 2D y entrega el informe oficial por parejas.
           </p>
 
-          {/* Quick Metrics Bar */}
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          {/* Quick Metrics Bar & Download Cuaderno */}
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a
+              href="https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-sm btn-mint"
+              style={{
+                fontWeight: 800,
+                fontSize: '0.82rem',
+                padding: '8px 16px',
+                background: '#ffffff',
+                color: 'var(--navy)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              📥 <span>Descargar Cuaderno de Prácticas (PDF)</span>
+            </a>
             <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
-              🛡️ <strong>Seguridad:</strong> 16 normas y precauciones químicas
+              🛡️ <strong>Seguridad:</strong> 16 normas y precauciones
             </div>
             <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
-              ⚗️ <strong>3 Reacciones Clave:</strong> Propranolol (I y II) & DHPP Hantzsch
+              ⚗️ <strong>3 Reacciones:</strong> Propranolol (I y II) & DHPP
             </div>
             <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
-              🔬 <strong>12 Espectros Reales:</strong> ¹H, ¹³C, DEPT-135 y HR-MS TOF ES⁺
+              🔬 <strong>12 Espectros:</strong> ¹H, ¹³C, DEPT & HRMS
             </div>
             <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
-              👥 <strong>Entrega por Parejas:</strong> Cuaderno conjunto y panel del profesor
+              👥 <strong>Parejas:</strong> Cuaderno conjunto
             </div>
           </div>
         </div>

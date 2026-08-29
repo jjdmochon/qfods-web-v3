@@ -43,8 +43,8 @@ export const SpotifyPlayerModal: React.FC<SpotifyPlayerModalProps> = ({
         {/* Body with Spotify Iframe */}
         <div className="modal-body" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span className="qfdos-badge badge-mint" style={{ fontSize: '0.72rem', background: '#1db954', color: '#fff' }}>
-              🎙️ Video Podcast Oficial · UGR
+            <span className="qfdos-badge badge-mint" style={{ fontSize: '0.72rem', background: '#1db954', color: '#fff', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Radio size={12} /> Podcast Oficial · UGR
             </span>
             <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
               Facultad de Farmacia
@@ -58,19 +58,31 @@ export const SpotifyPlayerModal: React.FC<SpotifyPlayerModalProps> = ({
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
-            style={{ borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-md)', minHeight: '232px' }}
+            style={{ borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-md)', minHeight: '232px', border: 'none' }}
           />
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-            <span>Episodio oficial de Química Farmacéutica II</span>
+          <div style={{
+            background: 'var(--surface-alt)',
+            padding: '10px 14px',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid var(--border-color)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '8px'
+          }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', maxWidth: '360px', lineHeight: 1.4 }}>
+              💡 <em>Nota sobre el vídeo:</em> El reproductor web embebido de Spotify transmite el audio del episodio. Para ver el <strong>vídeo sincronizado en alta definición</strong>, abre el episodio directamente en la app o web de Spotify.
+            </div>
             <a 
               href={attachment.url} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="btn btn-sm btn-outline"
-              style={{ fontSize: '0.72rem' }}
+              className="btn btn-sm btn-secondary"
+              style={{ fontSize: '0.75rem', fontWeight: 700, borderColor: '#1db954', color: '#1db954', whiteSpace: 'nowrap' }}
             >
-              <ExternalLink size={12} /> Abrir en App de Spotify
+              <ExternalLink size={13} /> Ver Vídeo en Spotify
             </a>
           </div>
         </div>
