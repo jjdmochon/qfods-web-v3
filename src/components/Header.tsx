@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'practicas',  label: 'Prácticas',        icon: <FlaskConical size={14} /> },
     { id: 'simulador',  label: 'Simulador',        icon: <Award size={14} /> },
     { id: 'admet',      label: 'ADMET',            icon: <Activity size={14} /> },
-    { id: 'glosario',   label: 'Glosario',         icon: null },
+    { id: 'glosario',   label: 'Glosario',         icon: <BookOpen size={14} /> },
     { id: 'enlaces',    label: 'Enlaces',          icon: <Compass size={14} /> },
     { id: 'evaluacion', label: 'Evaluación',       icon: <GraduationCap size={14} /> },
   ];
