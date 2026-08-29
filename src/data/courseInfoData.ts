@@ -53,6 +53,35 @@ export const COURSE_GENERAL_INFO = {
       { day: "Jueves", time: "17:00 - 18:00 h", room: "Aula 7", subject: "Química Farmacéutica II (Grupo E)", code: "QF2" }
     ]
   },
+  examSchedule: [
+    {
+      tipo: "Examen Parcial (Evaluación Continua)",
+      fecha: "19 de noviembre de 2026",
+      hora: "Horario de docencia (17:00 h)",
+      observaciones: "Prueba parcial no eliminatoria; pondera un 20% de la nota final.",
+      ponderacion: "20%",
+      caracter: "No eliminatorio",
+      badgeColor: "teal"
+    },
+    {
+      tipo: "Convocatoria Ordinaria (Examen Final)",
+      fecha: "13 de enero de 2027",
+      hora: "16:00 h",
+      observaciones: "Obligatorio en evaluación continua; pondera un 70% (requiere una nota mínima de 5 para promediar).",
+      ponderacion: "70%",
+      caracter: "Obligatorio (mín. 5,0)",
+      badgeColor: "navy"
+    },
+    {
+      tipo: "Convocatoria Extraordinaria",
+      fecha: "4 de febrero de 2027",
+      hora: "11:30 h",
+      observaciones: "Examen teórico que comprende el 100% de la materia del curso.",
+      ponderacion: "100% (o 70% + 30% según modalidad)",
+      caracter: "Materia completa (100%)",
+      badgeColor: "purple"
+    }
+  ],
   tutoring: {
     hours: [
       { day: "Lunes", time: "15:00 - 17:00 h" },
@@ -186,6 +215,15 @@ export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
   },
   // Noviembre 2026
   {
+    id: 'cal-qfdos-parcial-2026',
+    date: '2026-11-19',
+    title: '📝 Examen Parcial QFDOS (Evaluación Continua)',
+    category: 'examen',
+    description: 'Prueba parcial teórica no eliminatoria en horario de docencia (17:00 h). Pondera un 20% de la nota final.',
+    semester: 1,
+    important: true
+  },
+  {
     id: 'cal-nov-01',
     date: '2026-11-01',
     title: 'Todos los Santos',
@@ -272,14 +310,22 @@ export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
     semester: 1
   },
   {
+    id: 'cal-qfdos-ordinaria-2027',
+    date: '2027-01-13',
+    title: '🎯 Examen Final QFDOS (Convocatoria Ordinaria)',
+    category: 'examen',
+    description: 'Examen teórico oficial de Química Farmacéutica II a las 16:00 h. Obligatorio en evaluación continua (70% ponderación, mín. 5,0 para promediar).',
+    semester: 1,
+    important: true
+  },
+  {
     id: 'cal-ene-11',
     date: '2027-01-11',
     endDate: '2027-01-25',
-    title: 'Evaluación Ordinaria 1.er Semestre (Exámenes)',
+    title: 'Periodo Evaluación Ordinaria 1.er Semestre (Exámenes Generales)',
     category: 'examen',
     description: 'Periodo oficial de exámenes de la Convocatoria Ordinaria del Primer Semestre.',
-    semester: 1,
-    important: true
+    semester: 1
   },
   // Febrero 2027
   {
@@ -291,14 +337,22 @@ export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
     semester: 1
   },
   {
+    id: 'cal-qfdos-extraordinaria-2027',
+    date: '2027-02-04',
+    title: '🔥 Examen Final QFDOS (Convocatoria Extraordinaria)',
+    category: 'examen',
+    description: 'Examen teórico de Química Farmacéutica II a las 11:30 h. Comprende el 100% de la materia del curso.',
+    semester: 1,
+    important: true
+  },
+  {
     id: 'cal-feb-03',
     date: '2027-02-03',
     endDate: '2027-02-12',
-    title: 'Evaluación Extraordinaria 1.er Semestre (Exámenes)',
+    title: 'Periodo Evaluación Extraordinaria 1.er Semestre (Exámenes Generales)',
     category: 'examen',
     description: 'Periodo de exámenes de la Convocatoria Extraordinaria del Primer Semestre.',
-    semester: 1,
-    important: true
+    semester: 1
   },
   {
     id: 'cal-feb-15',

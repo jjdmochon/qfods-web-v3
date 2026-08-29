@@ -17,7 +17,7 @@ export const CourseInfoSection: React.FC = () => {
   const [selectedSemester, setSelectedSemester] = useState<string>('todos');
   const [activeTab, setActiveTab] = useState<'info' | 'evaluacion' | 'calendario' | 'tutorias'>('info');
 
-  const { subject, teachingStaff, classSchedule, tutoring, links } = COURSE_GENERAL_INFO;
+  const { subject, teachingStaff, classSchedule, examSchedule, tutoring, links } = COURSE_GENERAL_INFO;
 
   // Filtrado de eventos de calendario
   const filteredEvents = ACADEMIC_CALENDAR_EVENTS.filter(event => {
@@ -273,6 +273,70 @@ export const CourseInfoSection: React.FC = () => {
                   <li key={i}>{p}</li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* Card: Calendario Oficial de Exámenes (Teoría) */}
+          <div className="qfdos-card card-navy" style={{ gridColumn: '1 / -1', padding: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Calendar size={24} color="var(--navy)" />
+                <div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-title)', margin: 0 }}>
+                    Calendario Oficial de Exámenes (Teoría QFDOS)
+                  </h3>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    Convocatorias Oficiales del Curso 2026/2027 · Aprobadas en Junta de Facultad
+                  </span>
+                </div>
+              </div>
+              <span className="qfdos-badge badge-teal" style={{ fontSize: '0.74rem', fontWeight: 800 }}>
+                Aprobación con mín. 5,0 en Bloque Teórico
+              </span>
+            </div>
+
+            {/* Tabla Responsive de Exámenes */}
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.86rem' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--border-color)', background: 'var(--surface-alt)' }}>
+                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Tipo de Convocatoria / Examen</th>
+                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Fecha</th>
+                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Hora</th>
+                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Observaciones y Ponderación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {examSchedule.map((ex, idx) => (
+                    <tr key={idx} style={{
+                      borderBottom: '1px solid var(--border-color)',
+                      background: idx % 2 === 0 ? 'var(--surface)' : 'var(--surface-alt)'
+                    }}>
+                      <td style={{ padding: '14px', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span className={`qfdos-badge badge-${ex.badgeColor}`} style={{ fontSize: '0.7rem', padding: '2px 8px', fontWeight: 800 }}>
+                            {ex.caracter}
+                          </span>
+                          <strong style={{ color: 'var(--text-title)', fontSize: '0.92rem' }}>{ex.tipo}</strong>
+                        </div>
+                      </td>
+                      <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
+                        <span style={{ fontWeight: 800, color: 'var(--navy)', fontFamily: 'var(--font-mono)' }}>
+                          📅 {ex.fecha}
+                        </span>
+                      </td>
+                      <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
+                        <span style={{ fontWeight: 700, color: 'var(--teal)', fontFamily: 'var(--font-mono)' }}>
+                          ⏰ {ex.hora}
+                        </span>
+                      </td>
+                      <td style={{ padding: '14px', verticalAlign: 'middle', color: 'var(--text-main)', lineHeight: 1.45 }}>
+                        <p style={{ margin: 0, fontSize: '0.84rem' }}>{ex.observaciones}</p>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
