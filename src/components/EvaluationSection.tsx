@@ -37,8 +37,8 @@ export const EvaluationSection: React.FC = () => {
       ? student.attempts.reduce((sum, a) => sum + a.score, 0) / student.attempts.length
       : 0;
 
-    // Weighting: 70% Exams/Tests, 15% Lab, 15% Project
-    const finalScore = (avgTestScore * 0.7) + (student.labGrade * 0.15) + (student.projectGrade * 0.15);
+    // Ponderación Oficial Guía Docente: 70% Examen Final, 20% Parcial/Cuestionarios, 5% Lab, 5% Proyecto/Seminarios
+    const finalScore = (avgTestScore * 0.7) + (student.projectGrade * 0.20) + (student.labGrade * 0.05) + (student.projectGrade * 0.05);
     return {
       avgTestScore: avgTestScore.toFixed(1),
       finalScore: finalScore.toFixed(2),

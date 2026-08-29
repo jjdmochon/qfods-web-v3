@@ -296,7 +296,7 @@ export interface StudentQuestion {
 export const COURSE_DATA_VERSION = '3.2.0';
 
 export const QFDOS_INFO = {
-  code: "2627 QFDOS E",
+  code: "2041142 (2627 QFDOS E)",
   name: "Química Farmacéutica II",
   year: "2026/2027",
   institution: "Universidad de Granada (UGR)",
@@ -306,9 +306,10 @@ export const QFDOS_INFO = {
   designSystem: "QFDOS Structural Affinity Identity v2.0",
   driveFolderUrl: "https://drive.google.com/drive/folders/1_QFDOS_2627_Classroom",
   evaluacion: {
-    examenes: 70,
-    practicas: 15,
-    cuestionariosProyecto: 15
+    examenFinal: 70,
+    examenParcial: 20,
+    practicas: 5,
+    trabajosSeminarios: 5
   }
 };
 

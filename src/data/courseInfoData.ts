@@ -80,8 +80,88 @@ export const COURSE_GENERAL_INFO = {
     teachingGuide: "https://grados.ugr.es/farmacia/pages/titulacion/guias_docentes/2041142",
     facultyCalendar: "https://farmacia.ugr.es/docencia/grado-farmacia/calendario-academico",
     dgeCalendar: "https://sl.ugr.es/DGE_calendario_2627",
-    labNotebookPdf: "https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing"
+    labNotebookPdf: "https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing",
+    evaluationNormativaUgr: "https://goo.gl/uHfqJy",
+    incidenciasSedeUgr: "https://sede.ugr.es/procs/Gestion-Academica-Solicitud-de-evaluacion-por-incidencias/"
   }
+};
+
+export const COURSE_EVALUATION_GUIDE = {
+  normativaUrl: "https://goo.gl/uHfqJy",
+  sedeIncidenciasUrl: "https://sede.ugr.es/procs/Gestion-Academica-Solicitud-de-evaluacion-por-incidencias/",
+  criterioMinimoUniforme: "En TODAS las pruebas de evaluación (ordinaria, extraordinaria o única final), el alumno/a debe mostrar un conocimiento mínimo y uniforme de todas las cuestiones propuestas, así como de las competencias necesarias. El conocimiento mínimo se alcanza obteniendo un 5 en todas las cuestiones o bloques de las pruebas.",
+  tabla1Continua: [
+    {
+      sistema: "Examen final",
+      codigos: "SE.1, SE.2, SE.3 y SE.4",
+      porcentaje: 70,
+      caracter: "Obligatorio (nota mínima: 5,0)",
+      descripcion: "Examen teórico oficial de la materia completa. Requisito indispensable aprobarlo con un 5 para promediar."
+    },
+    {
+      sistema: "Examen parcial",
+      codigos: "SE.1, SE.2, SE.3 y SE.4",
+      porcentaje: 20,
+      caracter: "No eliminatorio",
+      descripcion: "Prueba intermedia de progreso para afianzar conceptos clave de la primera mitad del curso."
+    },
+    {
+      sistema: "Prácticas de laboratorio",
+      codigos: "SE.7, SE.8, SE.9, SE.10 y SE.15",
+      porcentaje: 5,
+      caracter: "Obligatorio (superación indispensable)",
+      descripcion: "Asistencia al 100% de sesiones, cuaderno conjunto de laboratorio y examen práctico/escrito."
+    },
+    {
+      sistema: "Trabajos y/o seminarios",
+      codigos: "SE.1, SE.2, SE.3, SE.4, SE.5, SE.6, SE.11 y SE.12",
+      porcentaje: 5,
+      caracter: "Continuo",
+      descripcion: "Preparación de trabajos, resolución de casos y participación en seminarios/cuestionarios."
+    }
+  ],
+  tabla2Codigos: [
+    { codigo: "SE.1", desc: "Exámenes escritos de desarrollo" },
+    { codigo: "SE.2", desc: "Exámenes escritos de respuesta corta" },
+    { codigo: "SE.3", desc: "Exámenes escritos tipo test" },
+    { codigo: "SE.4", desc: "Exámenes orales" },
+    { codigo: "SE.5", desc: "Exposición de trabajos" },
+    { codigo: "SE.6", desc: "Presentación de temas" },
+    { codigo: "SE.7", desc: "Exámenes de prácticas mediante prueba práctica" },
+    { codigo: "SE.8", desc: "Exámenes de prácticas mediante prueba escrita" },
+    { codigo: "SE.9", desc: "Exámenes de prácticas mediante prueba oral" },
+    { codigo: "SE.10", desc: "Elaboración de informe o cuaderno de prácticas" },
+    { codigo: "SE.11", desc: "Preparación de trabajos en grupo" },
+    { codigo: "SE.12", desc: "Preparación individual de trabajos" },
+    { codigo: "SE.15", desc: "Asistencia" }
+  ],
+  ordinariaDetalle: {
+    teoria: "La calificación final se obtendrá mediante la suma de las calificaciones obtenidas en cada una de las partes de la Tabla 1, siempre y cuando en el examen final se haya obtenido una calificación mínima de 5. Ninguno de los exámenes aprobados se guardará ni para convocatorias extraordinarias ni para posteriores cursos académicos.",
+    practicas: "Es obligatorio aprobar las prácticas para poder superar la asignatura. El alumno debe asistir a TODAS las sesiones prácticas y superar las pruebas de conocimiento. Ante cualquier duda razonable, el profesor podrá realizar pruebas orales o prácticas individuales complementarias. Alumnos con prácticas no realizadas o suspensas no podrán superar la asignatura en convocatoria ordinaria."
+  },
+  extraordinariaDetalle: {
+    resumen: "Convocatoria para estudiantes que no hayan superado la asignatura en la Ordinaria, con independencia de haber seguido o no la Evaluación Continua.",
+    partes: [
+      { parte: "Parte Teórica (100%)", desc: "Un examen teórico que comprenderá toda la materia del curso (100% de la nota final en acta)." },
+      { parte: "Parte Práctica", desc: "Dos exámenes, teórico y práctico, correspondientes a las prácticas de laboratorio. Imprescindible superarlos." }
+    ],
+    calificacionFinal: "Es obligatorio aprobar todos los exámenes de ambas partes. La calificación numérica final que figurará en acta será la obtenida en el examen teórico."
+  },
+  unicaFinalDetalle: {
+    solicitud: "Para estudiantes que por motivos laborales, salud, discapacidad u otra causa justificada no puedan seguir la evaluación continua. Se solicita al Director/a de Departamento en las 2 primeras semanas de clase (o 2 semanas tras matriculación posterior) por vía telemática. Plazo de resolución: 10 días hábiles.",
+    partes: [
+      { parte: "Parte Teórica (100%)", desc: "Examen teórico global de toda la materia del curso (100% de la nota en acta)." },
+      { parte: "Parte Práctica", desc: "Dos exámenes, teórico y práctico, de las prácticas de laboratorio. Obligatorio aprobar ambos." }
+    ]
+  },
+  incidencias: [
+    { inc: "Incidencia 1", motivo: "Asistencia a órganos colegiados de gobierno o representación", plazo: "Desde recepción de convocatoria hasta fecha de examen", doc: "Original de la convocatoria" },
+    { inc: "Incidencia 2", motivo: "Deportistas de alto nivel/rendimiento o representación oficial UGR", plazo: "Antelación mínima de 10 días hábiles", doc: "Documentación oficial acreditativa" },
+    { inc: "Incidencia 3", motivo: "Coincidencia de fecha y hora de 2 o más exámenes oficiales", plazo: "Antelación mínima de 10 días hábiles", doc: "Convocatorias oficiales de las asignaturas" },
+    { inc: "Incidencia 4", motivo: "Enfermedad justificada", plazo: "5 días naturales antes o hasta 5 días hábiles después", doc: "Certificado médico oficial" },
+    { inc: "Incidencia 5", motivo: "Fallecimiento de familiar (hasta 2.º grado, últimos 10 días)", plazo: "Hasta 5 días naturales después del examen", doc: "Certificado de defunción y parentesco" },
+    { inc: "Incidencia 6", motivo: "Inicio estancia de movilidad saliente (Erasmus, etc.)", plazo: "Antelación mínima de 20 días hábiles", doc: "Credencial de becario y fechas de incorporación" }
+  ]
 };
 
 export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [

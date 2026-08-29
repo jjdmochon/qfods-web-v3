@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   COURSE_GENERAL_INFO,
+  COURSE_EVALUATION_GUIDE,
   ACADEMIC_CALENDAR_EVENTS,
   AcademicCalendarEvent
 } from '../data/courseInfoData';
@@ -8,13 +9,13 @@ import {
   Calendar, Clock, MapPin, Mail, ExternalLink, BookOpen,
   Sparkles, CheckCircle2, AlertCircle, FileText,
   HelpCircle, ChevronRight, UserCheck, ShieldCheck,
-  Building, Video, Users, Info
+  Building, Video, Users, Info, Award, AlertTriangle, Scale
 } from 'lucide-react';
 
 export const CourseInfoSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [selectedSemester, setSelectedSemester] = useState<string>('todos');
-  const [activeTab, setActiveTab] = useState<'info' | 'calendario' | 'tutorias'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'evaluacion' | 'calendario' | 'tutorias'>('info');
 
   const { subject, teachingStaff, classSchedule, tutoring, links } = COURSE_GENERAL_INFO;
 
@@ -160,25 +161,32 @@ export const CourseInfoSection: React.FC = () => {
       </div>
 
       {/* Selector de Pestañas Interiores */}
-      <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', marginBottom: '1.75rem', paddingBottom: '0.2rem' }}>
+      <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid var(--border-color)', marginBottom: '1.75rem', paddingBottom: '0.2rem', overflowX: 'auto' }}>
         <button
           onClick={() => setActiveTab('info')}
           className={`btn ${activeTab === 'info' ? 'btn-navy' : 'btn-ghost'}`}
-          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}
+          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
         >
           <Info size={16} /> Información General & Horarios
         </button>
         <button
+          onClick={() => setActiveTab('evaluacion')}
+          className={`btn ${activeTab === 'evaluacion' ? 'btn-navy' : 'btn-ghost'}`}
+          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
+        >
+          <FileText size={16} /> Sistema de Evaluación (Oficial)
+        </button>
+        <button
           onClick={() => setActiveTab('tutorias')}
           className={`btn ${activeTab === 'tutorias' ? 'btn-navy' : 'btn-ghost'}`}
-          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}
+          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
         >
           <Users size={16} /> Horarios de Tutorías
         </button>
         <button
           onClick={() => setActiveTab('calendario')}
           className={`btn ${activeTab === 'calendario' ? 'btn-navy' : 'btn-ghost'}`}
-          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}
+          style={{ fontSize: '0.88rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
         >
           <Calendar size={16} /> Calendario Académico & Fechas Clave
         </button>
@@ -313,7 +321,243 @@ export const CourseInfoSection: React.FC = () => {
         </div>
       )}
 
-      {/* PESTAÑA 2: HORARIOS DE TUTORÍAS */}
+      {/* PESTAÑA: SISTEMA DE EVALUACIÓN OFICIAL (GUÍA DOCENTE) */}
+      {activeTab === 'evaluacion' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+          
+          {/* Criterio General Uniforme Banner */}
+          <div className="qfdos-card" style={{
+            background: 'linear-gradient(135deg, rgba(30,58,138,0.07) 0%, rgba(13,148,136,0.05) 100%)',
+            borderLeft: '5px solid var(--navy)',
+            padding: '1.5rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+              <Scale size={24} color="var(--navy)" />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
+                Criterios Generales de Evaluación y Calificación (UGR)
+              </h3>
+            </div>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-main)', lineHeight: 1.6, margin: '0 0 10px 0' }}>
+              {COURSE_EVALUATION_GUIDE.criterioMinimoUniforme}
+            </p>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <a
+                href={COURSE_EVALUATION_GUIDE.normativaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-sm btn-outline"
+                style={{ fontSize: '0.78rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+              >
+                <ExternalLink size={13} /> Normativa Oficial de Evaluación UGR
+              </a>
+              <span className="qfdos-badge badge-teal" style={{ fontSize: '0.75rem', fontWeight: 700 }}>
+                Aprobación con nota mínima de 5 en cada bloque
+              </span>
+            </div>
+          </div>
+
+          {/* 1. MODALIDAD DE EVALUACIÓN CONTINUA (PREFERENTE) */}
+          <div className="qfdos-card card-teal" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+              <div>
+                <span className="qfdos-badge badge-mint" style={{ fontSize: '0.74rem', fontWeight: 800, marginBottom: '4px' }}>
+                  MODALIDAD PREFERENTE
+                </span>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--text-title)', margin: 0 }}>
+                  1. Evaluación Continua (Convocatoria Ordinaria)
+                </h3>
+              </div>
+              <span style={{ fontSize: '0.84rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--teal)' }}>
+                TOTAL: 100%
+              </span>
+            </div>
+
+            {/* Tabla 1: Desglose de Porcentajes */}
+            <h4 style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-title)', margin: '0.5rem 0 0.75rem 0' }}>
+              Tabla 1. Sistemas de evaluación y porcentajes sobre la calificación final:
+            </h4>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+              {COURSE_EVALUATION_GUIDE.tabla1Continua.map((item, idx) => (
+                <div key={idx} style={{
+                  padding: '1.2rem',
+                  background: 'var(--surface-alt)',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border-color)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
+                      <strong style={{ fontSize: '1rem', color: 'var(--text-title)' }}>{item.sistema}</strong>
+                      <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--navy)', fontFamily: 'var(--font-mono)' }}>
+                        {item.porcentaje}%
+                      </span>
+                    </div>
+                    <span className="qfdos-badge badge-navy" style={{ fontSize: '0.66rem', marginBottom: '8px' }}>
+                      Códigos: {item.codigos}
+                    </span>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.45, margin: '6px 0 0 0' }}>
+                      {item.descripcion}
+                    </p>
+                  </div>
+                  <div style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid var(--border-color)', fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)' }}>
+                    • {item.caracter}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Normas Teóricas y Prácticas de Evaluación Continua */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
+              <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '6px' }}>
+                  I. Teoría (Examen Parcial + Examen Final):
+                </h5>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5, margin: 0 }}>
+                  {COURSE_EVALUATION_GUIDE.ordinariaDetalle.teoria}
+                </p>
+              </div>
+
+              <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--teal)', marginBottom: '6px' }}>
+                  II. Prácticas de Laboratorio (Superación Obligatoria):
+                </h5>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5, margin: 0 }}>
+                  {COURSE_EVALUATION_GUIDE.ordinariaDetalle.practicas}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. EVALUACIÓN EXTRAORDINARIA & 3. EVALUACIÓN ÚNICA FINAL */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
+            
+            {/* Convocatoria Extraordinaria */}
+            <div className="qfdos-card card-purple" style={{ padding: '1.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <Award size={20} color="#9333ea" />
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
+                  Evaluación Extraordinaria
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                {COURSE_EVALUATION_GUIDE.extraordinariaDetalle.resumen}
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '12px' }}>
+                {COURSE_EVALUATION_GUIDE.extraordinariaDetalle.partes.map((p, i) => (
+                  <div key={i} style={{ padding: '10px', background: 'var(--surface-alt)', borderRadius: '6px', fontSize: '0.82rem' }}>
+                    <strong style={{ color: 'var(--text-title)' }}>{p.parte}:</strong> {p.desc}
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-main)', background: 'rgba(147,51,234,0.06)', padding: '8px 10px', borderRadius: '6px' }}>
+                ⚠️ <strong>Calificación en acta:</strong> {COURSE_EVALUATION_GUIDE.extraordinariaDetalle.calificacionFinal}
+              </div>
+            </div>
+
+            {/* Evaluación Única Final */}
+            <div className="qfdos-card card-amber" style={{ padding: '1.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <AlertTriangle size={20} color="var(--accent-amber)" />
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
+                  Evaluación Única Final
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                {COURSE_EVALUATION_GUIDE.unicaFinalDetalle.solicitud}
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '12px' }}>
+                {COURSE_EVALUATION_GUIDE.unicaFinalDetalle.partes.map((p, i) => (
+                  <div key={i} style={{ padding: '10px', background: 'var(--surface-alt)', borderRadius: '6px', fontSize: '0.82rem' }}>
+                    <strong style={{ color: 'var(--text-title)' }}>{p.parte}:</strong> {p.desc}
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ fontSize: '0.78rem', color: 'var(--text-main)', background: 'rgba(245,158,11,0.08)', padding: '8px 10px', borderRadius: '6px' }}>
+                📌 <strong>Solicitud:</strong> Procedimiento electrónico al Director/a de Departamento en las 2 primeras semanas.
+              </div>
+            </div>
+
+          </div>
+
+          {/* 4. EVALUACIÓN POR INCIDENCIAS (ART. 9 NORMATIVA UGR) */}
+          <div className="qfdos-card card-navy" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <HelpCircle size={22} color="var(--navy)" />
+                <div>
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
+                    Evaluación por Incidencias (Artículo 9 Normativa UGR)
+                  </h3>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    Procedimiento reglado mediante Registro Electrónico de la Universidad de Granada
+                  </span>
+                </div>
+              </div>
+
+              <a
+                href={COURSE_EVALUATION_GUIDE.sedeIncidenciasUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-sm btn-secondary"
+                style={{ fontSize: '0.8rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              >
+                <ExternalLink size={13} /> Sede Electrónica UGR · Solicitud de Incidencias
+              </a>
+            </div>
+
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-main)', marginBottom: '1rem' }}>
+              Las solicitudes se presentan por impreso en Secretaría o telemáticamente en Sede Electrónica. Tras la resolución positiva del Departamento, 
+              el alumno/a dispone de un <strong>plazo máximo de 12 días naturales</strong> para contactar por correo electrónico con el profesor/a y el Director/a de Departamento.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
+              {COURSE_EVALUATION_GUIDE.incidencias.map((inc, i) => (
+                <div key={i} style={{ padding: '12px', background: 'var(--surface-alt)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <strong style={{ fontSize: '0.86rem', color: 'var(--navy)' }}>{inc.inc}</strong>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                      Plazo: {inc.plazo}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-title)', fontWeight: 600, margin: '2px 0 4px 0' }}>
+                    {inc.motivo}
+                  </p>
+                  <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                    📄 Justificante: {inc.doc}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 5. CÓDIGOS DE SISTEMAS DE EVALUACIÓN (TABLA 2) */}
+          <div className="qfdos-card" style={{ padding: '1.25rem' }}>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-title)', marginBottom: '10px' }}>
+              Tabla 2. Códigos informativos de los distintos sistemas de evaluación de la Guía Docente:
+            </h4>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px' }}>
+              {COURSE_EVALUATION_GUIDE.tabla2Codigos.map((cod, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem' }}>
+                  <span className="qfdos-badge badge-teal" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', padding: '1px 5px', flexShrink: 0 }}>
+                    {cod.codigo}
+                  </span>
+                  <span style={{ color: 'var(--text-main)' }}>{cod.desc}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      )}
+
+      {/* PESTAÑA: HORARIOS DE TUTORÍAS */}
       {activeTab === 'tutorias' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           

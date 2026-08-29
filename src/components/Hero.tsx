@@ -116,16 +116,17 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToTemas, onNavigateToSimul
             </div>
 
             {[
-              { label: 'Exámenes de Convocatoria Oficial', pct: 70, color: 'var(--mint)' },
-              { label: 'Prácticas de Laboratorio & Informes', pct: 15, color: 'var(--secondary-light)' },
-              { label: 'Seminarios, Cuestionarios & Proyecto', pct: 15, color: 'var(--primary-light)' }
+              { label: 'Examen Final Oficial (Obligatorio, mín. 5)', pct: 70, color: 'var(--mint)' },
+              { label: 'Examen Parcial (No eliminatorio)', pct: 20, color: 'var(--teal)' },
+              { label: 'Prácticas de Laboratorio (Obligatorio)', pct: 5, color: 'var(--secondary-light)' },
+              { label: 'Trabajos y/o Seminarios', pct: 5, color: 'var(--accent-purple)' }
             ].map(item => (
-              <div key={item.label} style={{ marginBottom: 12 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', marginBottom: 4 }}>
+              <div key={item.label} style={{ marginBottom: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', marginBottom: 3 }}>
                   <span style={{ fontWeight: 600, color: '#e2e8f0' }}>{item.label}</span>
                   <span style={{ fontWeight: 700, color: item.color, fontFamily: 'var(--font-mono)' }}>{item.pct}%</span>
                 </div>
-                <div className="stat-bar-track">
+                <div className="stat-bar-track" style={{ height: '6px' }}>
                   <div className="stat-bar-fill" style={{ width: `${item.pct}%`, background: item.color }} />
                 </div>
               </div>
