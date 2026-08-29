@@ -42,6 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const NAV_ITEMS = [
     { id: 'hub',        label: 'Hub',             icon: <Layers size={14} /> },
+    { id: 'info',       label: 'Curso & Horarios', icon: <GraduationCap size={14} /> },
     { id: 'temas',      label: 'Temario',          icon: <BookOpen size={14} /> },
     { id: 'practicas',  label: 'Prácticas',        icon: <FlaskConical size={14} /> },
     { id: 'simulador',  label: 'Simulador',        icon: <Award size={14} /> },

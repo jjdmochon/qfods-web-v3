@@ -30,6 +30,7 @@ import { GlossarySection } from './components/GlossarySection';
 import { ResourceLinksSection } from './components/ResourceLinksSection';
 import { EvaluationSection } from './components/EvaluationSection';
 import { PracticasSection } from './components/practicas/PracticasSection';
+import { CourseInfoSection } from './components/CourseInfoSection';
 
 import { QuizModal } from './components/QuizModal';
 import { FlashcardsModal } from './components/FlashcardsModal';
@@ -90,7 +91,7 @@ function loadUserOwned<T>(key: string, seed: T): T {
 export const App: React.FC = () => {
   const { isAuthenticated, isProfesor } = useAuth();
 
-  const [activeTab, setActiveTab] = useState<'hub' | 'temas' | 'practicas' | 'simulador' | 'admet' | 'glosario' | 'enlaces' | 'evaluacion'>('hub');
+  const [activeTab, setActiveTab] = useState<'hub' | 'info' | 'temas' | 'practicas' | 'simulador' | 'admet' | 'glosario' | 'enlaces' | 'evaluacion'>('hub');
 
   // Se ejecuta antes que cualquier lectura de caché de abajo
   const [topics, setTopics] = useState<QfdosTopic[]>(() => {
@@ -203,6 +204,7 @@ export const App: React.FC = () => {
             topics={topics}
             announcements={announcements}
             onSelectTopic={setSelectedTopicDetail}
+            onNavigateToCourseInfo={() => setActiveTab('info')}
             onNavigateToTemas={() => setActiveTab('temas')}
             onNavigateToSimulador={() => setActiveTab('simulador')}
             onNavigateToAdmet={() => setActiveTab('admet')}
@@ -211,6 +213,7 @@ export const App: React.FC = () => {
             onOpenAdminCms={() => setIsAdminCmsOpen(true)}
           />
         )}
+        {activeTab === 'info' && <CourseInfoSection />}
         {activeTab === 'temas' && (
           <TemasSection
             topics={topics}

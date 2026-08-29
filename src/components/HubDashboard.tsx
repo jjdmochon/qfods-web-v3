@@ -5,13 +5,14 @@ import { MolPropertyStrip } from './MolPropertyStrip';
 import { useAuth } from '../context/AuthContext';
 import {
   Award, Activity, Bell, ArrowRight, ChevronRight, FileText,
-  ShieldCheck, UploadCloud, FlaskConical, Shuffle, Lock
+  ShieldCheck, UploadCloud, FlaskConical, Shuffle, Lock, Calendar
 } from 'lucide-react';
 
 interface HubDashboardProps {
   topics: QfdosTopic[];
   announcements: QfdosAnnouncement[];
   onSelectTopic: (topic: QfdosTopic) => void;
+  onNavigateToCourseInfo: () => void;
   onNavigateToTemas: () => void;
   onNavigateToSimulador: () => void;
   onNavigateToAdmet: () => void;
@@ -24,6 +25,7 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
   topics,
   announcements,
   onSelectTopic,
+  onNavigateToCourseInfo,
   onNavigateToTemas,
   onNavigateToSimulador,
   onNavigateToAdmet,
@@ -141,6 +143,29 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
 
           {/* Herramientas */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <button
+              onClick={onNavigateToCourseInfo}
+              className="qfdos-card card-teal tool-card"
+              style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, rgba(13,148,136,0.08) 0%, rgba(30,58,138,0.06) 100%)', borderLeft: '4px solid var(--teal)' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Calendar size={24} color="var(--teal)" />
+                  <div style={{ textAlign: 'left' }}>
+                    <h4 style={{ margin: 0, fontSize: '1.02rem', fontWeight: 700, color: 'var(--teal)' }}>
+                      Curso, Horarios, Tutorías & Calendario 2026/2027
+                    </h4>
+                    <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                      Aula 7 (L, M, J a las 17:00 h), tutorías (Farmacia / GENYO / GMeet), Guía Docente y Gemini NotebookLM.
+                    </p>
+                  </div>
+                </div>
+                <span className="tool-card-cta" style={{ color: 'var(--teal)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
+                  Consultar <ArrowRight size={13} />
+                </span>
+              </div>
+            </button>
+
             <button
               onClick={onNavigateToPracticas}
               className="qfdos-card card-navy tool-card"
