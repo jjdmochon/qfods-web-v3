@@ -66,12 +66,12 @@ export const Header: React.FC<HeaderProps> = ({
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)'
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.55rem 1.5rem' }}>
+      <div className="container header-bar">
 
         {/* Brand */}
         <button
           onClick={() => setActiveTab('hub')}
-          style={{ display: 'flex', alignItems: 'center', gap: '9px', background: 'none', border: 'none', cursor: 'pointer', padding: '4px 0', flexShrink: 0, userSelect: 'none' }}
+          className="header-brand"
         >
           <img
             src="https://i.ibb.co/HLCYDc3c/Logo-primario-QFDOS.png"
@@ -84,12 +84,12 @@ export const Header: React.FC<HeaderProps> = ({
               <span style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-title)', letterSpacing: '-0.01em' }}>QFDOS</span>
               <span className="qfdos-badge badge-teal" style={{ fontSize: '0.6rem', padding: '1px 5px' }}>v3</span>
             </div>
-            <span style={{ fontSize: '0.64rem', color: 'var(--text-muted)' }}>Química Farm. II · UGR</span>
+            <span className="brand-sub">Química Farm. II · UGR</span>
           </div>
         </button>
 
         {/* Nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '2px', flex: 1 }}>
+        <nav className="header-nav" aria-label="Secciones">
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
@@ -103,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Right tools */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+        <div className="header-tools">
 
           {/* Search */}
           <button
@@ -113,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
             style={{ gap: '5px' }}
           >
             <Search size={15} />
-            <span style={{ fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-mono)' }}>⌘K</span>
+            <span className="tool-label" style={{ fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-mono)' }}>⌘K</span>
           </button>
 
           {/* Exam AI - always visible */}
@@ -122,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="btn btn-sm btn-secondary"
             title="Generador de Exámenes IA"
           >
-            <FileText size={14} /> Examen IA
+            <FileText size={14} /><span className="tool-label">Examen IA</span>
           </button>
 
           {/* Buzón */}
@@ -171,7 +171,7 @@ export const Header: React.FC<HeaderProps> = ({
               ) : (
                 <div className="user-avatar-fallback">{initials}</div>
               )}
-              <div style={{ lineHeight: 1.2 }}>
+              <div className="user-chip-text">
                 <div className="user-chip-name">{user?.name?.split(' ')[0]}</div>
                 <div className="user-chip-role">
                   {!isInstitucional && (

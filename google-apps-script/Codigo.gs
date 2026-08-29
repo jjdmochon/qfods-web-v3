@@ -1,100 +1,226 @@
 /**
- * QFDOS · Recepción de entregas de prácticas
+ * QFDOS · Recepción de entregas y publicación de contenido
  * Química Farmacéutica II — Universidad de Granada
  *
- * Este script recibe los datos que envía la plataforma y los escribe en la
- * hoja de cálculo del profesor, creando una pestaña por tipo de entrega y
- * añadiendo las columnas nuevas que vayan apareciendo.
+ * Hace tres cosas:
+ *   1. Recibe entregas del alumnado y las anota en la hoja correspondiente.
+ *   2. Guarda el contenido del curso que publica el profesor, para que sus
+ *      cambios los vea todo el mundo y no sólo su navegador.
+ *   3. Devuelve a cada estudiante lo que él mismo ha entregado.
  *
  * ---------------------------------------------------------------------------
- * CÓMO DESPLEGARLO (una sola vez, ~3 minutos)
+ * DESPLIEGUE
  * ---------------------------------------------------------------------------
- *  1. Abre la hoja de cálculo:
- *     https://docs.google.com/spreadsheets/d/1RrMzWJPFOKKH76vJh70pQw9vbiQZNOGOJH7vNaTGkso
- *  2. Menú  Extensiones → Apps Script
- *  3. Borra el contenido de Código.gs y pega ESTE fichero entero. Guarda.
- *  4. Botón azul  Implementar → Nueva implementación
- *       · Tipo:            Aplicación web
- *       · Ejecutar como:   Yo (tu cuenta)
- *       · Quién tiene acceso: CUALQUIER USUARIO   ← imprescindible
- *  5. Implementar. Google pedirá autorización: acéptala
- *     (en «Configuración avanzada» → «Ir a … (no seguro)», es tu propio script).
- *  6. Copia la URL que termina en /exec y pégala en el fichero .env.local
- *     del proyecto:
+ *  1. Hoja: https://docs.google.com/spreadsheets/d/1RrMzWJPFOKKH76vJh70pQw9vbiQZNOGOJH7vNaTGkso
+ *  2. Extensiones → Apps Script. Pega este fichero entero y guarda.
+ *  3. CAMBIA la constante CLAVE_PUBLICACION de abajo por una tuya.
+ *  4. Implementar → Nueva implementación → Aplicación web
+ *       · Ejecutar como:       Yo
+ *       · Quién tiene acceso:  CUALQUIER USUARIO
+ *  5. Copia la URL /exec en .env.local (VITE_PRACTICAS_WEBAPP_URL).
  *
- *        VITE_PRACTICAS_WEBAPP_URL=https://script.google.com/macros/s/AKfy…/exec
- *
- *  7. Reinicia el servidor de desarrollo.
- *
- * Comprobación rápida: abre la URL /exec en el navegador. Debe responder
- * {"ok":true,"servicio":"QFDOS"} — si pide iniciar sesión, el paso 4 quedó
- * como «Solo yo» y hay que volver a implementar con «Cualquier usuario».
+ * IMPORTANTE: al editar este script, guardar NO basta. Hay que crear una
+ * IMPLEMENTACIÓN NUEVA, o la URL seguirá sirviendo la versión anterior.
  * ---------------------------------------------------------------------------
  */
 
 var HOJA_ID = '1RrMzWJPFOKKH76vJh70pQw9vbiQZNOGOJH7vNaTGkso';
 
-function doGet(e) {
-  return manejar(e);
-}
+/**
+ * Clave que autoriza a publicar contenido del curso.
+ *
+ * Sin ella, cualquiera que abriese las herramientas del navegador podría
+ * reescribir el temario de todos. No se guarda en el código de la web: el
+ * profesor la teclea una vez y queda en SU navegador.
+ *
+ * CÁMBIALA por una tuya antes de desplegar.
+ */
+var CLAVE_PUBLICACION = 'cambia-esta-clave-2627';
 
-function doPost(e) {
-  return manejar(e);
-}
+/** Pestaña donde vive el contenido publicado. */
+var HOJA_CONTENIDO = '_Contenido';
+
+function doGet(e)  { return manejar(e); }
+function doPost(e) { return manejar(e); }
 
 function manejar(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
+    var accion = p.accion || '';
 
-    // Sin parámetros: sirve de comprobación de que el despliegue funciona
+    if (accion === 'leerContenido')   return leerContenido();
+    if (accion === 'guardarContenido') return guardarContenido(p, e);
+    if (accion === 'misEntregas')      return misEntregas(p);
+
     if (!p.sheetName) {
-      return json({ ok: true, servicio: 'QFDOS', mensaje: 'Endpoint operativo.' });
+      return json({
+        ok: true,
+        servicio: 'QFDOS',
+        version: 2,
+        acciones: ['leerContenido', 'guardarContenido', 'misEntregas'],
+        mensaje: 'Endpoint operativo.'
+      });
     }
-
-    var libro = SpreadsheetApp.openById(p.sheetId || HOJA_ID);
-    var hoja = libro.getSheetByName(p.sheetName) || libro.insertSheet(p.sheetName);
-
-    // Los campos de control no son datos de la entrega
-    var datos = {};
-    Object.keys(p).forEach(function (k) {
-      if (k !== 'sheetId' && k !== 'sheetName' && k !== 'callback') datos[k] = p[k];
-    });
-
-    // Marca de tiempo del servidor: no depende del reloj del alumno
-    datos.recibidoEn = new Date();
-
-    var cabeceras = leerCabeceras(hoja);
-
-    // Toda clave nueva se añade como columna, para no perder datos si el
-    // formulario de la plataforma crece más adelante
-    Object.keys(datos).forEach(function (k) {
-      if (cabeceras.indexOf(k) === -1) cabeceras.push(k);
-    });
-    hoja.getRange(1, 1, 1, cabeceras.length).setValues([cabeceras]);
-    hoja.getRange(1, 1, 1, cabeceras.length).setFontWeight('bold');
-    hoja.setFrozenRows(1);
-
-    var fila = cabeceras.map(function (c) {
-      return datos[c] !== undefined ? datos[c] : '';
-    });
-    hoja.appendRow(fila);
-
-    return json({
-      ok: true,
-      hoja: p.sheetName,
-      fila: hoja.getLastRow(),
-      recibidoEn: datos.recibidoEn.toISOString()
-    });
+    return anotarFila(p);
   } catch (err) {
     return json({ ok: false, error: String(err) });
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* 1. Entregas                                                         */
+/* ------------------------------------------------------------------ */
+
+function anotarFila(p) {
+  var libro = SpreadsheetApp.openById(p.sheetId || HOJA_ID);
+  var hoja = libro.getSheetByName(p.sheetName) || libro.insertSheet(p.sheetName);
+
+  var datos = {};
+  Object.keys(p).forEach(function (k) {
+    if (k !== 'sheetId' && k !== 'sheetName' && k !== 'callback' && k !== 'accion') {
+      datos[k] = p[k];
+    }
+  });
+  datos.recibidoEn = new Date();
+
+  var cabeceras = leerCabeceras(hoja);
+  Object.keys(datos).forEach(function (k) {
+    if (cabeceras.indexOf(k) === -1) cabeceras.push(k);
+  });
+  hoja.getRange(1, 1, 1, cabeceras.length).setValues([cabeceras]).setFontWeight('bold');
+  hoja.setFrozenRows(1);
+
+  hoja.appendRow(cabeceras.map(function (c) {
+    return datos[c] !== undefined ? datos[c] : '';
+  }));
+
+  return json({
+    ok: true,
+    hoja: p.sheetName,
+    fila: hoja.getLastRow(),
+    recibidoEn: datos.recibidoEn.toISOString()
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. Contenido del curso                                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * El contenido se guarda por trozos porque una celda admite 50 000
+ * caracteres y el temario completo los supera con holgura.
+ */
+function guardarContenido(p, e) {
+  if (p.clave !== CLAVE_PUBLICACION) {
+    return json({ ok: false, error: 'Clave de publicación incorrecta.' });
+  }
+
+  // El contenido llega por POST: en la URL no cabría
+  var cuerpo = (e && e.postData && e.postData.contents) ? e.postData.contents : (p.datos || '');
+  if (!cuerpo) return json({ ok: false, error: 'No se recibió contenido.' });
+
+  var libro = SpreadsheetApp.openById(HOJA_ID);
+  var hoja = libro.getSheetByName(HOJA_CONTENIDO);
+  if (hoja) { libro.deleteSheet(hoja); }
+  hoja = libro.insertSheet(HOJA_CONTENIDO);
+  hoja.hideSheet();
+
+  hoja.getRange(1, 1, 1, 3)
+      .setValues([['trozo', 'contenido', 'publicadoEn']])
+      .setFontWeight('bold');
+
+  var TAM = 45000;
+  var filas = [];
+  for (var i = 0; i * TAM < cuerpo.length; i++) {
+    filas.push([i, cuerpo.substr(i * TAM, TAM), i === 0 ? new Date() : '']);
+  }
+  hoja.getRange(2, 1, filas.length, 3).setValues(filas);
+
+  return json({ ok: true, trozos: filas.length, bytes: cuerpo.length });
+}
+
+function leerContenido() {
+  var libro = SpreadsheetApp.openById(HOJA_ID);
+  var hoja = libro.getSheetByName(HOJA_CONTENIDO);
+  if (!hoja || hoja.getLastRow() < 2) {
+    return json({ ok: true, vacio: true });
+  }
+
+  var filas = hoja.getRange(2, 1, hoja.getLastRow() - 1, 3).getValues();
+  filas.sort(function (a, b) { return a[0] - b[0]; });
+
+  var texto = filas.map(function (f) { return f[1]; }).join('');
+  var publicadoEn = filas.length ? filas[0][2] : '';
+
+  try {
+    return json({
+      ok: true,
+      vacio: false,
+      publicadoEn: publicadoEn ? new Date(publicadoEn).toISOString() : '',
+      contenido: JSON.parse(texto)
+    });
+  } catch (err) {
+    return json({ ok: false, error: 'El contenido guardado no es JSON válido.' });
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 3. Entregas de un estudiante                                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Devuelve las filas en las que aparece ese correo, mirando en cualquier
+ * columna de correo. Así cada estudiante ve lo suyo, y sólo lo suyo.
+ */
+function misEntregas(p) {
+  var correo = String(p.email || '').trim().toLowerCase();
+  if (!correo) return json({ ok: false, error: 'Falta el correo.' });
+
+  var libro = SpreadsheetApp.openById(HOJA_ID);
+  var resultado = [];
+
+  libro.getSheets().forEach(function (hoja) {
+    var nombre = hoja.getName();
+    if (nombre.charAt(0) === '_') return;          // hojas internas
+    if (hoja.getLastRow() < 2) return;
+
+    var datos = hoja.getDataRange().getValues();
+    var cabeceras = datos[0];
+
+    var columnasCorreo = [];
+    cabeceras.forEach(function (c, i) {
+      if (/email|correo|cuenta/i.test(String(c))) columnasCorreo.push(i);
+    });
+    if (!columnasCorreo.length) return;
+
+    for (var f = 1; f < datos.length; f++) {
+      var coincide = columnasCorreo.some(function (i) {
+        return String(datos[f][i]).trim().toLowerCase() === correo;
+      });
+      if (!coincide) continue;
+
+      var fila = {};
+      cabeceras.forEach(function (c, i) {
+        if (c === '') return;
+        var v = datos[f][i];
+        fila[String(c)] = (v instanceof Date) ? v.toISOString() : String(v);
+      });
+      resultado.push({ hoja: nombre, fila: f + 1, datos: fila });
+    }
+  });
+
+  resultado.sort(function (a, b) {
+    return String(b.datos.recibidoEn || '').localeCompare(String(a.datos.recibidoEn || ''));
+  });
+
+  return json({ ok: true, email: correo, total: resultado.length, entregas: resultado });
+}
+
+/* ------------------------------------------------------------------ */
+
 function leerCabeceras(hoja) {
   if (hoja.getLastRow() === 0 || hoja.getLastColumn() === 0) return [];
-  return hoja.getRange(1, 1, 1, hoja.getLastColumn())
-             .getValues()[0]
-             .filter(String);
+  return hoja.getRange(1, 1, 1, hoja.getLastColumn()).getValues()[0].filter(String);
 }
 
 function json(obj) {

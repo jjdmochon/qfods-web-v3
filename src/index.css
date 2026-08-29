@@ -1023,7 +1023,10 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   align-items: start;
 }
 @media (max-width: 940px) {
-  .hub-grid { grid-template-columns: 1fr; }
+  /* minmax(0, 1fr) y no 1fr: un track '1fr' equivale a minmax(auto, 1fr),
+     y ese 'auto' deja que el contenido ancho empuje la columna mas alla del
+     viewport. Es la causa clasica del desplazamiento lateral en movil. */
+  .hub-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Tarjetas de herramienta: son botones, así que se resetea el estilo nativo */
@@ -1723,4 +1726,241 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-radius: var(--radius-full);
   background: var(--surface-alt);
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Cabecera adaptable
+   La barra lleva marca + ocho secciones + cinco herramientas + perfil. En un
+   portátil entra; por debajo hay que ir cediendo espacio en este orden:
+   etiquetas de herramienta → subtítulo de marca → nombre de usuario →
+   la navegación pasa a deslizarse horizontalmente.
+   ========================================================================== */
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 1.5rem;
+  min-width: 0;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  flex-shrink: 0;
+  user-select: none;
+}
+.brand-sub { font-size: 0.64rem; color: var(--text-muted); }
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.header-nav::-webkit-scrollbar { display: none; }
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.user-chip-text { line-height: 1.2; }
+
+/* --- Portátiles pequeños: las herramientas se quedan sin texto --- */
+@media (max-width: 1250px) {
+  .tool-label,
+  .admin-btn-label { display: none; }
+}
+
+/* --- Tabletas: la marca pierde el subtítulo y el perfil, el nombre --- */
+@media (max-width: 1050px) {
+  .brand-sub { display: none; }
+  .user-chip-text { display: none; }
+  .nav-tab { padding: 6px 9px; font-size: 0.78rem; }
+}
+
+/* --- Tabletas estrechas: la navegación baja a su propia fila --- */
+@media (max-width: 860px) {
+  .header-bar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+    row-gap: 0.4rem;
+  }
+  .header-nav {
+    order: 3;
+    flex-basis: 100%;
+    /* Se desliza con el dedo; el degradado del borde avisa de que hay más */
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+  }
+  .header-tools { margin-left: auto; }
+}
+
+/* --- Móviles: sólo iconos, y la navegación sigue accesible deslizando --- */
+@media (max-width: 560px) {
+  .header-bar { padding: 0.5rem 0.75rem; gap: 0.5rem; }
+  .nav-tab { font-size: 0.75rem; padding: 5px 8px; }
+  .nav-tab svg { display: none; }
+  .header-tools { gap: 3px; }
+  .header-tools .btn { padding: 0.5rem; }
+}
+
+/* En pantallas táctiles el objetivo mínimo cómodo es 40 px */
+@media (pointer: coarse) {
+  .nav-tab { min-height: 40px; }
+  .header-tools .btn { min-height: 40px; }
+}
+
+/* --- Guardia contra el desplazamiento lateral en móvil ---------------------
+   Aunque cada rejilla esté bien definida, basta un elemento ancho suelto
+   (una tabla, un bloque de código, una imagen) para que la página entera se
+   pueda arrastrar de lado. Se corta aquí de raíz: quien necesite desbordar
+   lo hace dentro de su propio contenedor con scroll. */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+@media (max-width: 940px) {
+  /* Las rejillas de dos columnas del panel pasan a una sola en móvil */
+  .course-stats { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .container { padding: 0 0.85rem; }
+  .course-stats { grid-template-columns: 1fr 1fr; }
+  .resource-grid,
+  .topic-card-grid,
+  .glossary-grid { grid-template-columns: minmax(0, 1fr); }
+  /* Las parejas de tarjetas de herramienta se apilan */
+  .hub-grid .tool-card { grid-column: 1 / -1 !important; }
+}
+
+/* ==========================================================================
+   Publicación de contenido y registro de entregas
+   ========================================================================== */
+.spin { animation: spin 900ms linear infinite; }
+
+.publicar-box,
+.mis-entregas {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid var(--teal);
+}
+
+.publicar-cabecera { display: flex; align-items: flex-start; gap: 9px; }
+.publicar-cabecera strong { display: block; color: var(--text-title); font-size: 0.92rem; }
+.publicar-cabecera p {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-main);
+  margin: 3px 0 0;
+  max-width: 62ch;
+}
+
+.publicar-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-alt);
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+.publicar-fecha { font-size: 0.73rem; color: var(--text-muted); }
+
+.publicar-clave { display: flex; flex-direction: column; gap: 4px; }
+
+/* --- Mis entregas --- */
+.mis-entregas-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.mis-entregas-cabecera strong { color: var(--text-title); font-size: 0.92rem; }
+.mis-entregas-sub { font-size: 0.76rem; color: var(--text-muted); margin: -4px 0 0; }
+.mis-entregas-sub code {
+  font-family: var(--font-mono);
+  background: var(--surface-alt);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.mis-entregas-estado {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.mis-entregas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mis-entregas-item {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+}
+.mis-entregas-item-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.mis-entregas-item-cabecera strong { font-size: 0.85rem; color: var(--text-title); }
+.mis-entregas-fecha {
+  font-size: 0.71rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-left: auto;
+}
+
+/* Dos columnas: etiqueta y valor, alineadas */
+.mis-entregas-campos {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 3px 12px;
+  margin: 0;
+  font-size: 0.78rem;
+}
+.mis-entregas-campos dt { color: var(--text-muted); }
+.mis-entregas-campos dd {
+  margin: 0;
+  color: var(--text-main);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .mis-entregas-campos { grid-template-columns: minmax(0, 1fr); gap: 1px; }
+  .mis-entregas-campos dd { margin-bottom: 5px; }
+  .mis-entregas-fecha { margin-left: 0; width: 100%; }
 }

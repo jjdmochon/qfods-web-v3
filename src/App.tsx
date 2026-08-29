@@ -16,6 +16,7 @@ import {
   TestQuestion
 } from './data/qfdosData';
 import { useAuth } from './context/AuthContext';
+import { descargarContenido, contenidoEnCache } from './services/contenidoRemoto';
 
 import { LoginPage } from './components/LoginPage';
 import { Header } from './components/Header';
@@ -94,19 +95,19 @@ export const App: React.FC = () => {
   // Se ejecuta antes que cualquier lectura de caché de abajo
   const [topics, setTopics] = useState<QfdosTopic[]>(() => {
     purgeStaleCourseCache();
-    return loadCached('qfdos_v3_topics', INITIAL_TOPICS);
+    return contenidoEnCache()?.topics ?? loadCached('qfdos_v3_topics', INITIAL_TOPICS);
   });
 
   const [announcements, setAnnouncements] = useState<QfdosAnnouncement[]>(() =>
-    loadCached('qfdos_v3_announcements', INITIAL_ANNOUNCEMENTS)
+    contenidoEnCache()?.announcements ?? loadCached('qfdos_v3_announcements', INITIAL_ANNOUNCEMENTS)
   );
 
   const [glossary, setGlossary] = useState<QfdosGlossaryTerm[]>(() =>
-    loadCached('qfdos_v3_glossary', INITIAL_GLOSSARY)
+    contenidoEnCache()?.glossary ?? loadCached('qfdos_v3_glossary', INITIAL_GLOSSARY)
   );
 
   const [resourceLinks, setResourceLinks] = useState<QfdosResourceLink[]>(() =>
-    loadUserOwned('qfdos_v3_links', INITIAL_RESOURCE_LINKS)
+    contenidoEnCache()?.resourceLinks ?? loadUserOwned('qfdos_v3_links', INITIAL_RESOURCE_LINKS)
   );
 
   const [studentQuestions, setStudentQuestions] = useState<StudentQuestion[]>(() =>
@@ -122,6 +123,7 @@ export const App: React.FC = () => {
   const [isExamGeneratorOpen, setIsExamGeneratorOpen] = useState(false);
   const [isStudentQuestionOpen, setIsStudentQuestionOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
+  const [publicadoEn, setPublicadoEn] = useState<string>(contenidoEnCache()?.publicadoEn ?? '');
 
   // Persist data
   useEffect(() => { localStorage.setItem('qfdos_v3_topics', JSON.stringify(topics)); }, [topics]);
@@ -129,6 +131,29 @@ export const App: React.FC = () => {
   useEffect(() => { localStorage.setItem('qfdos_v3_glossary', JSON.stringify(glossary)); }, [glossary]);
   useEffect(() => { localStorage.setItem('qfdos_v3_links', JSON.stringify(resourceLinks)); }, [resourceLinks]);
   useEffect(() => { localStorage.setItem('qfdos_v3_student_questions', JSON.stringify(studentQuestions)); }, [studentQuestions]);
+
+  /**
+   * Trae el contenido que el profesor haya publicado.
+   *
+   * Se hace en cada arranque y sin bloquear la interfaz: la aplicación ya se
+   * ha pintado con la última copia conocida, y si hay algo más reciente en la
+   * hoja se sustituye. Así los cambios del profesor llegan a todo el mundo, en
+   * lugar de quedarse en su navegador.
+   */
+  useEffect(() => {
+    let cancelado = false;
+
+    descargarContenido().then(remoto => {
+      if (cancelado || !remoto) return;
+      if (Array.isArray(remoto.topics) && remoto.topics.length) setTopics(remoto.topics);
+      if (Array.isArray(remoto.announcements)) setAnnouncements(remoto.announcements);
+      if (Array.isArray(remoto.glossary)) setGlossary(remoto.glossary);
+      if (Array.isArray(remoto.resourceLinks)) setResourceLinks(remoto.resourceLinks);
+      setPublicadoEn(remoto.publicadoEn || '');
+    });
+
+    return () => { cancelado = true; };
+  }, []);
 
   // Ctrl+K search shortcut
   useEffect(() => {
@@ -261,6 +286,8 @@ export const App: React.FC = () => {
           onUpdateAnnouncements={setAnnouncements}
           onUpdateGlossary={setGlossary}
           onUpdateResourceLinks={setResourceLinks}
+          publicadoEn={publicadoEn}
+          onPublicado={(cuando: string) => setPublicadoEn(cuando)}
           onUpdateStudentQuestions={setStudentQuestions}
         />
       )}

@@ -14,6 +14,7 @@ import {
   setStoredGeminiApiKey 
 } from '../services/geminiService';
 import { MaterialUploader } from './MaterialUploader';
+import { PublicarContenido } from './PublicarContenido';
 import {
   X, 
   Settings, 
@@ -51,6 +52,8 @@ interface AdminCmsModalProps {
   onUpdateAnnouncements: (updated: QfdosAnnouncement[]) => void;
   onUpdateGlossary: (updated: QfdosGlossaryTerm[]) => void;
   onUpdateResourceLinks: (updated: QfdosResourceLink[]) => void;
+  publicadoEn?: string;
+  onPublicado?: (cuando: string) => void;
   onUpdateStudentQuestions: (updated: StudentQuestion[]) => void;
 }
 
@@ -65,6 +68,8 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
   onUpdateAnnouncements,
   onUpdateGlossary,
   onUpdateResourceLinks,
+  publicadoEn,
+  onPublicado,
   onUpdateStudentQuestions
 }) => {
   const [activeTab, setActiveTab] = useState<'materials' | 'modules' | 'announcements' | 'links' | 'drugs' | 'questions' | 'apikey'>('materials');
@@ -517,6 +522,12 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
           {/* TAB 0: Materiales — subida de ficheros */}
           {activeTab === 'materials' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              <PublicarContenido
+                contenido={{ topics, announcements, glossary, resourceLinks }}
+                publicadoEn={publicadoEn}
+                onPublicado={onPublicado}
+              />
+
               <div>
                 <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-title)' }}>
                   Materiales del curso
