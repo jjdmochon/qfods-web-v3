@@ -66,182 +66,204 @@ export const Header: React.FC<HeaderProps> = ({
       backdropFilter: 'blur(16px)',
       WebkitBackdropFilter: 'blur(16px)'
     }}>
-      <div className="container header-bar">
-
-        {/* Brand */}
-        <button
-          onClick={() => setActiveTab('hub')}
-          className="header-brand"
-        >
-          <img
-            src="https://i.ibb.co/HLCYDc3c/Logo-primario-QFDOS.png"
-            alt="QFDOS"
-            style={{ width: 34, height: 34, borderRadius: 8 }}
-            onError={e => { e.currentTarget.style.display = 'none'; }}
-          />
-          <div style={{ lineHeight: 1.2 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-              <span style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-title)', letterSpacing: '-0.01em' }}>QFDOS</span>
-              <span className="qfdos-badge badge-teal" style={{ fontSize: '0.6rem', padding: '1px 5px' }}>v3</span>
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', padding: '0.45rem 1.5rem' }}>
+        {/* Fila Superior: Marca + Herramientas / Perfil */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+          {/* Brand */}
+          <button
+            onClick={() => setActiveTab('hub')}
+            className="header-brand"
+          >
+            <img
+              src="https://i.ibb.co/HLCYDc3c/Logo-primario-QFDOS.png"
+              alt="QFDOS"
+              style={{ width: 32, height: 32, borderRadius: 8 }}
+              onError={e => { e.currentTarget.style.display = 'none'; }}
+            />
+            <div style={{ lineHeight: 1.15, textAlign: 'left' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-title)', letterSpacing: '-0.01em' }}>QFDOS</span>
+                <span className="qfdos-badge badge-teal" style={{ fontSize: '0.58rem', padding: '1px 5px' }}>v3</span>
+              </div>
+              <span className="brand-sub" style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>Química Farmacéutica II · UGR</span>
             </div>
-            <span className="brand-sub">Química Farm. II · UGR</span>
-          </div>
-        </button>
+          </button>
 
-        {/* Nav */}
-        <nav className="header-nav" aria-label="Secciones">
+          {/* Right tools */}
+          <div className="header-tools" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {/* Search */}
+            <button
+              onClick={onOpenSearch}
+              className="btn btn-sm btn-ghost"
+              title="Búsqueda Global (Ctrl+K)"
+              style={{ gap: '5px' }}
+            >
+              <Search size={14} />
+              <span className="tool-label" style={{ fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-mono)' }}>⌘K</span>
+            </button>
+
+            {/* Exam AI */}
+            <button
+              onClick={onOpenExamGenerator}
+              className="btn btn-sm btn-secondary"
+              title="Generador de Exámenes IA"
+            >
+              <FileText size={14} /><span className="tool-label">Examen IA</span>
+            </button>
+
+            {/* Buzón */}
+            <button
+              onClick={onOpenStudentQuestion}
+              className="btn btn-sm btn-ghost"
+              title="Buzón de Dudas"
+            >
+              <HelpCircle size={15} />
+            </button>
+
+            {/* Admin (sólo profesorado) */}
+            {isProfesor && (
+              <button
+                onClick={onOpenAdminCms}
+                className="btn btn-sm btn-secondary"
+                style={{ fontWeight: 700, whiteSpace: 'nowrap' }}
+                title="Subir materiales y administrar el curso"
+              >
+                <Settings size={14} />
+                <span className="admin-btn-label">Gestionar curso</span>
+              </button>
+            )}
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-sm btn-ghost"
+              title={theme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
+            >
+              {theme === 'dark'
+                ? <Sun size={15} color="#f59e0b" />
+                : <Moon size={15} color="var(--navy)" />
+              }
+            </button>
+
+            {/* User chip with dropdown */}
+            <div ref={menuRef} style={{ position: 'relative' }}>
+              <button
+                onClick={() => setMenuOpen(o => !o)}
+                className="user-chip"
+                style={{ cursor: 'pointer' }}
+              >
+                {user?.avatarUrl ? (
+                  <img src={user.avatarUrl} alt="avatar" className="user-avatar" />
+                ) : (
+                  <div className="user-avatar-fallback">{initials}</div>
+                )}
+                <div className="user-chip-text">
+                  <div className="user-chip-name">{user?.name?.split(' ')[0]}</div>
+                  <div className="user-chip-role">
+                    {!isInstitucional && (
+                      <span
+                        title="Has entrado con una cuenta personal de Google, no con la de la UGR"
+                        style={{ color: 'var(--accent-amber)', fontWeight: 700, marginRight: 5 }}
+                      >
+                        Cuenta personal ·
+                      </span>
+                    )}
+                    {isProfesor
+                      ? <span style={{ color: 'var(--teal)', fontWeight: 700 }}>Profesor</span>
+                      : <span>Estudiante</span>
+                    }
+                  </div>
+                </div>
+                <ChevronDown size={13} color="var(--text-muted)" style={{ transition: 'transform 200ms', transform: menuOpen ? 'rotate(180deg)' : 'none' }} />
+              </button>
+
+              {menuOpen && (
+                <div style={{
+                  position: 'absolute',
+                  top: 'calc(100% + 8px)',
+                  right: 0,
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: 'var(--radius-lg)',
+                  boxShadow: 'var(--shadow-lg)',
+                  minWidth: 220,
+                  overflow: 'hidden',
+                  animation: 'slideUp 160ms var(--ease-out)',
+                  zIndex: 200
+                }}>
+                  <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border-color)', background: 'var(--surface-alt)' }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-title)' }}>{user?.name}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 2 }}>{user?.email}</div>
+                    {isProfesor && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
+                        <ShieldCheck size={12} color="var(--teal)" />
+                        <span style={{ fontSize: '0.72rem', color: 'var(--teal)', fontWeight: 700 }}>Acceso Profesor</span>
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => { logout(); setMenuOpen(false); }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      width: '100%',
+                      padding: '10px 14px',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      color: 'var(--accent-red)',
+                      fontSize: '0.84rem',
+                      fontWeight: 600,
+                      transition: 'background var(--transition-fast)'
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.06)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'none')}
+                  >
+                    <LogOut size={15} /> Cerrar sesión
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Fila Inferior: Barra Completa de Navegación de Secciones */}
+        <nav
+          className="header-nav"
+          aria-label="Secciones"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            width: '100%',
+            overflowX: 'auto',
+            paddingTop: '2px',
+            borderTop: '1px solid rgba(0,0,0,0.04)'
+          }}
+        >
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               className={`nav-tab ${activeTab === item.id ? 'active' : ''}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                padding: '6px 14px',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                flexShrink: 0
+              }}
             >
               {item.icon}
               {item.label}
             </button>
           ))}
         </nav>
-
-        {/* Right tools */}
-        <div className="header-tools">
-
-          {/* Search */}
-          <button
-            onClick={onOpenSearch}
-            className="btn btn-sm btn-ghost"
-            title="Búsqueda Global (Ctrl+K)"
-            style={{ gap: '5px' }}
-          >
-            <Search size={15} />
-            <span className="tool-label" style={{ fontSize: '0.7rem', opacity: 0.6, fontFamily: 'var(--font-mono)' }}>⌘K</span>
-          </button>
-
-          {/* Exam AI - always visible */}
-          <button
-            onClick={onOpenExamGenerator}
-            className="btn btn-sm btn-secondary"
-            title="Generador de Exámenes IA"
-          >
-            <FileText size={14} /><span className="tool-label">Examen IA</span>
-          </button>
-
-          {/* Buzón */}
-          <button
-            onClick={onOpenStudentQuestion}
-            className="btn btn-sm btn-ghost"
-            title="Buzón de Dudas"
-          >
-            <HelpCircle size={16} />
-          </button>
-
-          {/* Admin (sólo profesorado) — con etiqueta: es la vía de subida de materiales */}
-          {isProfesor && (
-            <button
-              onClick={onOpenAdminCms}
-              className="btn btn-sm btn-secondary"
-              style={{ fontWeight: 700, whiteSpace: 'nowrap' }}
-              title="Subir materiales y administrar el curso"
-            >
-              <Settings size={15} />
-              <span className="admin-btn-label">Gestionar curso</span>
-            </button>
-          )}
-
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="btn btn-sm btn-ghost"
-            title={theme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
-          >
-            {theme === 'dark'
-              ? <Sun size={16} color="#f59e0b" />
-              : <Moon size={16} color="var(--navy)" />
-            }
-          </button>
-
-          {/* User chip with dropdown */}
-          <div ref={menuRef} style={{ position: 'relative' }}>
-            <button
-              onClick={() => setMenuOpen(o => !o)}
-              className="user-chip"
-              style={{ cursor: 'pointer' }}
-            >
-              {user?.avatarUrl ? (
-                <img src={user.avatarUrl} alt="avatar" className="user-avatar" />
-              ) : (
-                <div className="user-avatar-fallback">{initials}</div>
-              )}
-              <div className="user-chip-text">
-                <div className="user-chip-name">{user?.name?.split(' ')[0]}</div>
-                <div className="user-chip-role">
-                  {!isInstitucional && (
-                    <span
-                      title="Has entrado con una cuenta personal de Google, no con la de la UGR"
-                      style={{ color: 'var(--accent-amber)', fontWeight: 700, marginRight: 5 }}
-                    >
-                      Cuenta personal ·
-                    </span>
-                  )}
-                  {isProfesor
-                    ? <span style={{ color: 'var(--teal)', fontWeight: 700 }}>Profesor</span>
-                    : <span>Estudiante</span>
-                  }
-                </div>
-              </div>
-              <ChevronDown size={13} color="var(--text-muted)" style={{ transition: 'transform 200ms', transform: menuOpen ? 'rotate(180deg)' : 'none' }} />
-            </button>
-
-            {menuOpen && (
-              <div style={{
-                position: 'absolute',
-                top: 'calc(100% + 8px)',
-                right: 0,
-                background: 'var(--surface)',
-                border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-lg)',
-                boxShadow: 'var(--shadow-lg)',
-                minWidth: 220,
-                overflow: 'hidden',
-                animation: 'slideUp 160ms var(--ease-out)',
-                zIndex: 200
-              }}>
-                <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border-color)', background: 'var(--surface-alt)' }}>
-                  <div style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-title)' }}>{user?.name}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 2 }}>{user?.email}</div>
-                  {isProfesor && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
-                      <ShieldCheck size={12} color="var(--teal)" />
-                      <span style={{ fontSize: '0.72rem', color: 'var(--teal)', fontWeight: 700 }}>Acceso Profesor</span>
-                    </div>
-                  )}
-                </div>
-                <button
-                  onClick={() => { logout(); setMenuOpen(false); }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    width: '100%',
-                    padding: '10px 14px',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: 'var(--accent-red)',
-                    fontSize: '0.84rem',
-                    fontWeight: 600,
-                    transition: 'background var(--transition-fast)'
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.06)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = 'none')}
-                >
-                  <LogOut size={15} /> Cerrar sesión
-                </button>
-              </div>
-            )}
-          </div>
-
-        </div>
       </div>
     </header>
   );
 };
+

@@ -121,9 +121,8 @@ if ($Pages) {
 
     # Se publica desde docs\ en la rama main: no hace falta una rama aparte
     $docs = Join-Path $Source 'docs'
-    if (Test-Path $docs) { Remove-Item $docs -Recurse -Force }
-    New-Item -ItemType Directory -Force $docs | Out-Null
-    Copy-Item "$Local\dist\*" $docs -Recurse -Force
+    if (-not (Test-Path $docs)) { New-Item -ItemType Directory -Force $docs | Out-Null }
+    robocopy "$Local\dist" "$docs" /MIR /R:2 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
 
     # Sin este fichero, Pages pasa el sitio por Jekyll y descarta lo que
     # empiece por guion bajo
