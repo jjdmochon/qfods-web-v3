@@ -5,12 +5,20 @@ import { descargarSemanaPracticas } from '../services/calendarioIcs';
 
 const CLAVE = 'qfdos_v3_semana_practicas';
 
-/** Lunes de cada semana lectiva del primer semestre. */
+/**
+ * Lunes de cada semana en la que caben las cinco sesiones completas.
+ *
+ * Se exige que el VIERNES siga dentro del periodo lectivo: la semana del 21 de
+ * diciembre empieza en plazo pero su viernes es Navidad, así que no sirve.
+ */
 function lunesDelSemestre(): string[] {
   const lunes: string[] = [];
   const d = new Date('2026-09-14T12:00:00Z');          // primer lunes de docencia
-  const fin = new Date('2026-12-22T12:00:00Z');
-  while (d <= fin) {
+  const finDocencia = new Date('2026-12-22T12:00:00Z');
+  while (true) {
+    const viernes = new Date(d);
+    viernes.setUTCDate(viernes.getUTCDate() + 4);
+    if (viernes > finDocencia) break;
     lunes.push(d.toISOString().slice(0, 10));
     d.setUTCDate(d.getUTCDate() + 7);
   }
