@@ -138,7 +138,7 @@ export const QuizModal: React.FC<QuizModalProps> = ({
         {/* Header */}
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <HelpCircle size={20} color="var(--teal)" />
+            <HelpCircle size={20} color="var(--teal-ink)" />
             <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-title)' }}>
               Autoevaluación: {topic.number}
             </h3>
@@ -152,7 +152,7 @@ export const QuizModal: React.FC<QuizModalProps> = ({
             <div>
               {/* Progress & Difficulty Bar */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--navy)' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--navy-ink)' }}>
                   Pregunta {currentIndex + 1} de {questions.length}
                 </span>
                 <div style={{ display: 'flex', gap: '6px' }}>
@@ -287,7 +287,7 @@ export const QuizModal: React.FC<QuizModalProps> = ({
             /* Results Screen */
             <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
               <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--primary-bg)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                <Award size={36} color="var(--navy)" />
+                <Award size={36} color="var(--navy-ink)" />
               </div>
               <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-title)', marginBottom: '6px' }}>
                 ¡Autoevaluación Finalizada!

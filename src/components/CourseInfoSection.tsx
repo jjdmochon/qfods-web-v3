@@ -87,7 +87,7 @@ export const CourseInfoSection: React.FC = () => {
               <span className="qfdos-badge" style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff', fontSize: '0.74rem' }}>
                 {subject.credits} • {subject.year}
               </span>
-              <span className="qfdos-badge" style={{ background: '#10b981', color: '#ffffff', fontSize: '0.74rem', fontWeight: 700 }}>
+              <span className="qfdos-badge" style={{ background: '#047857', color: '#ffffff', fontSize: '0.74rem', fontWeight: 700 }}>
                 {subject.group}
               </span>
             </div>
@@ -99,15 +99,15 @@ export const CourseInfoSection: React.FC = () => {
               Coordinación e información docente oficial, horarios de aula, tutorías presenciales y online, y calendario académico completo.
             </p>
 
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <div className="panel-claro" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <a
                 href={links.geminiNotebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-sm btn-mint"
                 style={{
-                  background: '#ffffff',
-                  color: 'var(--navy)',
+                  
+                  color: 'var(--navy-ink)',
                   fontWeight: 800,
                   fontSize: '0.82rem',
                   padding: '8px 16px',
@@ -117,7 +117,7 @@ export const CourseInfoSection: React.FC = () => {
                   gap: '6px'
                 }}
               >
-                <Sparkles size={15} color="var(--teal)" /> Gemini Notebook Oficial del Curso
+                <Sparkles size={15} color="var(--teal-ink)" /> Gemini Notebook Oficial del Curso
               </a>
               <a
                 href={links.teachingGuide}
@@ -204,7 +204,7 @@ export const CourseInfoSection: React.FC = () => {
           {/* Card: Clases Teóricas */}
           <div className="qfdos-card card-navy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Clock size={22} color="var(--navy)" />
+              <Clock size={22} color="var(--navy-ink)" />
               <div>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                   Clases Teóricas Presenciales
@@ -232,7 +232,7 @@ export const CourseInfoSection: React.FC = () => {
                       {s.time}
                     </span>
                   </div>
-                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--teal)' }}>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--teal-ink)' }}>
                     {s.room}
                   </span>
                 </div>
@@ -247,7 +247,7 @@ export const CourseInfoSection: React.FC = () => {
           {/* Card: Profesorado y Contacto */}
           <div className="qfdos-card card-teal">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <UserCheck size={22} color="var(--teal)" />
+              <UserCheck size={22} color="var(--teal-ink)" />
               <div>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                   Profesorado Responsable
@@ -260,12 +260,12 @@ export const CourseInfoSection: React.FC = () => {
               <div style={{ fontWeight: 800, fontSize: '0.98rem', color: 'var(--text-title)' }}>
                 {teachingStaff.coordinator}
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--teal)', fontWeight: 600, marginTop: '2px' }}>
+              <div style={{ fontSize: '0.82rem', color: 'var(--teal-ink)', fontWeight: 600, marginTop: '2px' }}>
                 {teachingStaff.role}
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '8px', fontSize: '0.84rem' }}>
                 <Mail size={14} color="var(--text-muted)" />
-                <a href={`mailto:${teachingStaff.email}`} style={{ color: 'var(--navy)', fontWeight: 700 }}>
+                <a href={`mailto:${teachingStaff.email}`} style={{ color: 'var(--navy-ink)', fontWeight: 700 }}>
                   {teachingStaff.email}
                 </a>
               </div>
@@ -280,7 +280,7 @@ export const CourseInfoSection: React.FC = () => {
           <div className="qfdos-card card-navy" style={{ gridColumn: '1 / -1', padding: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Calendar size={24} color="var(--navy)" />
+                <Calendar size={24} color="var(--navy-ink)" />
                 <div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-title)', margin: 0 }}>
                     Calendario Oficial de Exámenes (Teoría QFDOS)
@@ -321,12 +321,12 @@ export const CourseInfoSection: React.FC = () => {
                         </div>
                       </td>
                       <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
-                        <span style={{ fontWeight: 800, color: 'var(--navy)', fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ fontWeight: 800, color: 'var(--navy-ink)', fontFamily: 'var(--font-mono)' }}>
                           📅 {ex.fecha}
                         </span>
                       </td>
                       <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
-                        <span style={{ fontWeight: 700, color: 'var(--teal)', fontFamily: 'var(--font-mono)' }}>
+                        <span style={{ fontWeight: 700, color: 'var(--teal-ink)', fontFamily: 'var(--font-mono)' }}>
                           ⏰ {ex.hora}
                         </span>
                       </td>
@@ -396,7 +396,7 @@ export const CourseInfoSection: React.FC = () => {
             padding: '1.5rem'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <Scale size={24} color="var(--navy)" />
+              <Scale size={24} color="var(--navy-ink)" />
               <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                 Criterios Generales de Evaluación y Calificación (UGR)
               </h3>
@@ -431,7 +431,7 @@ export const CourseInfoSection: React.FC = () => {
                   1. Evaluación Continua (Convocatoria Ordinaria)
                 </h3>
               </div>
-              <span style={{ fontSize: '0.84rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--teal)' }}>
+              <span style={{ fontSize: '0.84rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--teal-ink)' }}>
                 TOTAL: 100%
               </span>
             </div>
@@ -453,9 +453,9 @@ export const CourseInfoSection: React.FC = () => {
                   justifyContent: 'space-between'
                 }}>
                   <div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '4px' }}>
-                      <strong style={{ fontSize: '1rem', color: 'var(--text-title)' }}>{item.sistema}</strong>
-                      <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--navy)', fontFamily: 'var(--font-mono)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 10px', marginBottom: '4px' }}>
+                      <strong style={{ fontSize: '1rem', color: 'var(--text-title)', minWidth: 0, overflowWrap: 'anywhere' }}>{item.sistema}</strong>
+                      <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--navy-ink)', fontFamily: 'var(--font-mono)' }}>
                         {item.porcentaje}%
                       </span>
                     </div>
@@ -466,7 +466,7 @@ export const CourseInfoSection: React.FC = () => {
                       {item.descripcion}
                     </p>
                   </div>
-                  <div style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid var(--border-color)', fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)' }}>
+                  <div style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid var(--border-color)', fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal-ink)' }}>
                     • {item.caracter}
                   </div>
                 </div>
@@ -476,7 +476,7 @@ export const CourseInfoSection: React.FC = () => {
             {/* Normas Teóricas y Prácticas de Evaluación Continua */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
               <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '6px' }}>
+                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--navy-ink)', marginBottom: '6px' }}>
                   I. Teoría (Examen Parcial + Examen Final):
                 </h5>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5, margin: 0 }}>
@@ -485,7 +485,7 @@ export const CourseInfoSection: React.FC = () => {
               </div>
 
               <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--teal)', marginBottom: '6px' }}>
+                <h5 style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--teal-ink)', marginBottom: '6px' }}>
                   II. Prácticas de Laboratorio (Superación Obligatoria):
                 </h5>
                 <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5, margin: 0 }}>
@@ -554,7 +554,7 @@ export const CourseInfoSection: React.FC = () => {
           <div className="qfdos-card card-navy" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <HelpCircle size={22} color="var(--navy)" />
+                <HelpCircle size={22} color="var(--navy-ink)" />
                 <div>
                   <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                     Evaluación por Incidencias (Artículo 9 Normativa UGR)
@@ -584,9 +584,11 @@ export const CourseInfoSection: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '10px' }}>
               {COURSE_EVALUATION_GUIDE.incidencias.map((inc, i) => (
                 <div key={i} style={{ padding: '12px', background: 'var(--surface-alt)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                    <strong style={{ fontSize: '0.86rem', color: 'var(--navy)' }}>{inc.inc}</strong>
-                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                  {/* «Incidencia N» es corto y fijo, así que se ancla él y es el
+                      plazo el que envuelve. Sin gap las dos cadenas se tocaban. */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '4px 10px', marginBottom: '4px' }}>
+                    <strong style={{ fontSize: '0.86rem', color: 'var(--navy-ink)', whiteSpace: 'nowrap', flexShrink: 0 }}>{inc.inc}</strong>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', minWidth: 0, overflowWrap: 'anywhere' }}>
                       Plazo: {inc.plazo}
                     </span>
                   </div>
@@ -627,7 +629,7 @@ export const CourseInfoSection: React.FC = () => {
           
           <div className="qfdos-card card-teal" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.75rem' }}>
-              <Users size={24} color="var(--teal)" />
+              <Users size={24} color="var(--teal-ink)" />
               <div>
                 <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                   Horario Semanal de Tutorías (Dr. Juan José Díaz-Mochón)
@@ -651,7 +653,7 @@ export const CourseInfoSection: React.FC = () => {
                   <span className="qfdos-badge badge-teal" style={{ fontSize: '0.78rem', fontWeight: 800, marginBottom: '6px' }}>
                     {h.day}
                   </span>
-                  <div style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--navy)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--navy-ink)', marginTop: '4px' }}>
                     {h.time}
                   </div>
                   <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>Franja Oficial de Atención</span>
@@ -669,7 +671,7 @@ export const CourseInfoSection: React.FC = () => {
               {/* Sede 1: Farmacia */}
               <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                  <Building size={18} color="var(--navy)" />
+                  <Building size={18} color="var(--navy-ink)" />
                   <strong style={{ fontSize: '0.92rem', color: 'var(--text-title)' }}>1. Facultad de Farmacia</strong>
                 </div>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
@@ -680,7 +682,7 @@ export const CourseInfoSection: React.FC = () => {
               {/* Sede 2: Centro GENYO */}
               <div style={{ padding: '1rem', background: 'var(--surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                  <MapPin size={18} color="var(--teal)" />
+                  <MapPin size={18} color="var(--teal-ink)" />
                   <strong style={{ fontSize: '0.92rem', color: 'var(--text-title)' }}>2. Centro GENYO (PTS)</strong>
                 </div>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>

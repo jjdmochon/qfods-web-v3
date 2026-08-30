@@ -16,8 +16,8 @@ interface MaterialUploaderProps {
 }
 
 const KIND_META: Record<string, { icon: React.ElementType; color: string; label: string }> = {
-  slides: { icon: FileText, color: 'var(--navy)', label: 'Diapositivas' },
-  notes: { icon: FileText, color: 'var(--teal)', label: 'Apuntes' },
+  slides: { icon: FileText, color: 'var(--navy-ink)', label: 'Diapositivas' },
+  notes: { icon: FileText, color: 'var(--teal-ink)', label: 'Apuntes' },
   audio: { icon: Music, color: '#1db954', label: 'Audio' },
   image: { icon: ImageIcon, color: 'var(--accent-purple)', label: 'Imagen' },
   other: { icon: FileIcon, color: 'var(--text-muted)', label: 'Otro' }
@@ -114,7 +114,7 @@ export const MaterialUploader: React.FC<MaterialUploaderProps> = ({
           </strong>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
             o haz clic para seleccionarlos
-            {topicLabel && <> · se asocian a <strong style={{ color: 'var(--teal)' }}>{topicLabel}</strong></>}
+            {topicLabel && <> · se asocian a <strong style={{ color: 'var(--teal-ink)' }}>{topicLabel}</strong></>}
           </span>
           <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: 4, opacity: 0.85 }}>
             PDF · PPTX · DOCX · imágenes · audio — hasta 40 MB por fichero

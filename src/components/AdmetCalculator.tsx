@@ -386,7 +386,7 @@ export const AdmetCalculator: React.FC<AdmetCalculatorProps> = ({ initialDrug })
                 Espacio de Biodisponibilidad (Radar Físico-Químico)
               </span>
               <div style={{ display: 'flex', gap: '8px', fontSize: '0.7rem' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--teal)' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--teal-ink)' }}>
                   <span style={{ width: '8px', height: '8px', background: 'var(--teal)', display: 'inline-block', borderRadius: '2px' }}></span> Fármaco
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--text-muted)' }}>

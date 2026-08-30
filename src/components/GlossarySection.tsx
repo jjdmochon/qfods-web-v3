@@ -34,7 +34,7 @@ export const GlossarySection: React.FC<GlossarySectionProps> = ({ glossary }) =>
       {/* Title & Filter Header */}
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <BookOpen size={24} color="var(--navy)" />
+          <BookOpen size={24} color="var(--navy-ink)" />
           <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-title)' }}>
             Glosario Farmacológico & Biofísico Oficial
           </h2>
@@ -105,7 +105,7 @@ export const GlossarySection: React.FC<GlossarySectionProps> = ({ glossary }) =>
                   borderRadius: 'var(--radius-sm)',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.75rem',
-                  color: 'var(--navy)',
+                  color: 'var(--navy-ink)',
                   fontWeight: 700,
                   marginBottom: '8px',
                   width: 'fit-content'
@@ -125,7 +125,7 @@ export const GlossarySection: React.FC<GlossarySectionProps> = ({ glossary }) =>
               fontSize: '0.78rem',
               color: 'var(--text-muted)'
             }}>
-              <strong style={{ color: 'var(--teal)' }}>Relevancia:</strong> {t.clinicalRelevance}
+              <strong style={{ color: 'var(--teal-ink)' }}>Relevancia:</strong> {t.clinicalRelevance}
             </div>
           </div>
         ))}

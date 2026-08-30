@@ -156,7 +156,7 @@ export const PracticasSection: React.FC = () => {
           </p>
 
           {/* Quick Metrics Bar & Download Cuaderno */}
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div className="panel-claro" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <a
               href="https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing"
               target="_blank"
@@ -166,8 +166,8 @@ export const PracticasSection: React.FC = () => {
                 fontWeight: 800,
                 fontSize: '0.82rem',
                 padding: '8px 16px',
-                background: '#ffffff',
-                color: 'var(--navy)',
+                
+                color: 'var(--navy-ink)',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
                 display: 'inline-flex',
                 alignItems: 'center',

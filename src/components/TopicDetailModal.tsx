@@ -111,7 +111,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                   </span>
                 )}
               </div>
-              <span style={{ fontSize: '0.82rem', color: 'var(--teal)', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--teal-ink)', fontWeight: 600 }}>
                 {topic.subtitle}
               </span>
             </div>
@@ -159,7 +159,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
               {/* 6 PRIMARY RESOURCES SHOWCASE */}
               <div>
                 <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-title)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <Sparkles size={16} color="var(--teal)" /> Suite Completa de Recursos para el Alumno
+                  <Sparkles size={16} color="var(--teal-ink)" /> Suite Completa de Recursos para el Alumno
                 </h4>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px' }}>
@@ -167,7 +167,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                   {/* 1. Apuntes PDF */}
                   <div className="qfdos-card card-teal" style={{ padding: '1rem', background: 'var(--surface)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <FileText size={18} color="var(--teal)" />
+                      <FileText size={18} color="var(--teal-ink)" />
                       <strong style={{ fontSize: '0.88rem', color: 'var(--text-title)' }}>1. Apuntes Oficiales (PDF)</strong>
                     </div>
                     <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -187,7 +187,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                   {/* 2. Diapositivas PDF */}
                   <div className="qfdos-card card-navy" style={{ padding: '1rem', background: 'var(--surface)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <FileText size={18} color="var(--navy)" />
+                      <FileText size={18} color="var(--navy-ink)" />
                       <strong style={{ fontSize: '0.88rem', color: 'var(--text-title)' }}>2. Diapositivas (PDF)</strong>
                     </div>
                     <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -207,7 +207,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                   {/* 3. Gemini Notebook */}
                   <div className="qfdos-card card-mint" style={{ padding: '1rem', background: 'var(--surface)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <Sparkles size={18} color="var(--teal)" />
+                      <Sparkles size={18} color="var(--teal-ink)" />
                       <strong style={{ fontSize: '0.88rem', color: 'var(--text-title)' }}>3. Gemini NotebookLM</strong>
                     </div>
                     <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -263,7 +263,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                   {/* 6. Flashcards Interactivas */}
                   <div className="qfdos-card card-teal" style={{ padding: '1rem', background: 'var(--surface)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                      <Award size={18} color="var(--teal)" />
+                      <Award size={18} color="var(--teal-ink)" />
                       <strong style={{ fontSize: '0.88rem', color: 'var(--text-title)' }}>6. Flashcards Interactivas</strong>
                     </div>
                     <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -289,7 +289,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '8px' }}>
                   {topic.keyConcepts?.map((c, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '0.84rem' }}>
-                      <CheckCircle2 size={15} color="var(--teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <CheckCircle2 size={15} color="var(--teal-ink)" style={{ flexShrink: 0, marginTop: '2px' }} />
                       <span style={{ color: 'var(--text-main)' }}>{c}</span>
                     </div>
                   ))}
@@ -310,7 +310,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                         <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                           {drug.name}
                         </h4>
-                        <span style={{ fontSize: '0.78rem', color: 'var(--teal)', fontWeight: 600 }}>
+                        <span style={{ fontSize: '0.78rem', color: 'var(--teal-ink)', fontWeight: 600 }}>
                           {drug.role}
                         </span>
                       </div>
@@ -333,7 +333,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                       borderRadius: 'var(--radius-sm)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.72rem',
-                      color: 'var(--navy)',
+                      color: 'var(--navy-ink)',
                       wordBreak: 'break-all',
                       marginBottom: '10px'
                     }}>

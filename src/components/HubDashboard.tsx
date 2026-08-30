@@ -116,7 +116,7 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
           <div className="qfdos-card card-navy">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                <Bell size={17} color="var(--navy)" />
+                <Bell size={17} color="var(--navy-ink)" />
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-title)' }}>
                   Tablón de avisos
                 </h3>
@@ -150,9 +150,9 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <Calendar size={24} color="var(--teal)" />
+                  <Calendar size={24} color="var(--teal-ink)" />
                   <div style={{ textAlign: 'left' }}>
-                    <h4 style={{ margin: 0, fontSize: '1.02rem', fontWeight: 700, color: 'var(--teal)' }}>
+                    <h4 style={{ margin: 0, fontSize: '1.02rem', fontWeight: 700, color: 'var(--teal-ink)' }}>
                       Curso, Horarios, Tutorías & Calendario 2026/2027
                     </h4>
                     <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -160,7 +160,7 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
                     </p>
                   </div>
                 </div>
-                <span className="tool-card-cta" style={{ color: 'var(--teal)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
+                <span className="tool-card-cta" style={{ color: 'var(--teal-ink)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
                   Consultar <ArrowRight size={13} />
                 </span>
               </div>
@@ -173,9 +173,9 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <FlaskConical size={24} color="var(--navy)" />
+                  <FlaskConical size={24} color="var(--navy-ink)" />
                   <div style={{ textAlign: 'left' }}>
-                    <h4 style={{ margin: 0, fontSize: '1.02rem', fontWeight: 700, color: 'var(--navy)' }}>
+                    <h4 style={{ margin: 0, fontSize: '1.02rem', fontWeight: 700, color: 'var(--navy-ink)' }}>
                       Módulo de Prácticas de Laboratorio
                     </h4>
                     <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -183,17 +183,17 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
                     </p>
                   </div>
                 </div>
-                <span className="tool-card-cta" style={{ color: 'var(--navy)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
+                <span className="tool-card-cta" style={{ color: 'var(--navy-ink)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
                   Entrar <ArrowRight size={13} />
                 </span>
               </div>
             </button>
 
             <button onClick={onNavigateToSimulador} className="qfdos-card card-teal tool-card">
-              <Award size={22} color="var(--teal)" />
+              <Award size={22} color="var(--teal-ink)" />
               <h4>Simulador de afinidad</h4>
               <p>ΔG°, Kd, Ki, Cheng-Prusoff e IC50 en tiempo real.</p>
-              <span className="tool-card-cta" style={{ color: 'var(--teal)' }}>
+              <span className="tool-card-cta" style={{ color: 'var(--teal-ink)' }}>
                 Lanzar <ArrowRight size={12} />
               </span>
             </button>
@@ -225,7 +225,7 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
         <div className="qfdos-card spotlight-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-              <FlaskConical size={17} color="var(--teal)" />
+              <FlaskConical size={17} color="var(--teal-ink)" />
               <h3 style={{ fontSize: '1.02rem', fontWeight: 600, color: 'var(--text-title)' }}>
                 Foco estructural
               </h3>

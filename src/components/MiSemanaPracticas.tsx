@@ -71,7 +71,7 @@ export const MiSemanaPracticas: React.FC = () => {
   return (
     <div className="semana-practicas">
       <div className="semana-practicas-cabecera">
-        <FlaskConical size={17} color="var(--teal)" />
+        <FlaskConical size={17} color="var(--teal-ink)" />
         <div>
           <strong>Mi semana de prácticas</strong>
           <p>

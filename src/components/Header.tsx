@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import {
@@ -29,6 +29,30 @@ export const Header: React.FC<HeaderProps> = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  /* Regla de ocupación: una barra que se acopla bajo la pestaña activa.
+     Se mide sobre el DOM en vez de calcularse, porque el ancho de cada
+     pestaña depende de la fuente ya cargada y del zoom del navegador. */
+  const navRef = useRef<HTMLElement>(null);
+  const [occ, setOcc] = useState({ x: 0, w: 0, on: 0 });
+
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const medir = () => {
+      const el = nav.querySelector<HTMLElement>('.nav-tab.active');
+      if (!el) { setOcc(o => ({ ...o, on: 0 })); return; }
+      setOcc({ x: el.offsetLeft, w: el.offsetWidth, on: 1 });
+      el.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    };
+    medir();
+    const ro = new ResizeObserver(medir);
+    ro.observe(nav);
+    nav.querySelectorAll('.nav-tab').forEach(t => ro.observe(t));
+    // Montserrat llega después del primer pintado y cambia los anchos
+    document.fonts?.ready.then(medir).catch(() => {});
+    return () => ro.disconnect();
+  }, [activeTab]);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -58,7 +82,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="qfdos-header-root">
-      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', padding: '0.5rem 1.5rem' }}>
+      <div className="container">
         {/* Fila Superior: Marca Principal + Búsqueda Inteligente + Herramientas */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1.25rem' }}>
           {/* Brand */}
@@ -135,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               {theme === 'dark'
                 ? <Sun size={16} color="#fbbf24" />
-                : <Moon size={16} color="var(--navy)" />
+                : <Moon size={16} color="currentColor" />
               }
             </button>
 
@@ -163,7 +187,7 @@ export const Header: React.FC<HeaderProps> = ({
                       </span>
                     )}
                     {isProfesor
-                      ? <span style={{ color: 'var(--teal)', fontWeight: 700 }}>Prof. Responsable</span>
+                      ? <span style={{ color: 'var(--teal-ink)', fontWeight: 700 }}>Prof. Responsable</span>
                       : <span>Estudiante (Gr. E)</span>
                     }
                   </div>
@@ -190,8 +214,8 @@ export const Header: React.FC<HeaderProps> = ({
                     <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{user?.email}</div>
                     {isProfesor && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
-                        <ShieldCheck size={13} color="var(--teal)" />
-                        <span style={{ fontSize: '0.72rem', color: 'var(--teal)', fontWeight: 800 }}>Profesor Responsable (Grupo E)</span>
+                        <ShieldCheck size={13} color="var(--teal-ink)" />
+                        <span style={{ fontSize: '0.72rem', color: 'var(--teal-ink)', fontWeight: 800 }}>Profesor Responsable (Grupo E)</span>
                       </div>
                     )}
                   </div>
@@ -223,17 +247,27 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Fila Inferior: Navegación de Pestañas con micro-indicadores */}
-        <nav className="header-nav" aria-label="Secciones del curso">
+        <nav className="header-nav" aria-label="Secciones del curso" ref={navRef}>
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               className={`nav-tab ${activeTab === item.id ? 'active' : ''}`}
+              aria-current={activeTab === item.id ? 'page' : undefined}
             >
               {item.icon}
               <span>{item.label}</span>
             </button>
           ))}
+          <span
+            className="nav-occupancy"
+            aria-hidden="true"
+            style={{
+              ['--occ-x' as string]: `${occ.x}px`,
+              ['--occ-w' as string]: `${occ.w}px`,
+              ['--occ-o' as string]: occ.on,
+            } as React.CSSProperties}
+          />
         </nav>
       </div>
     </header>

@@ -98,7 +98,7 @@ export const EvaluationSection: React.FC = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-            <GraduationCap size={24} color="var(--navy)" />
+            <GraduationCap size={24} color="var(--navy-ink)" />
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-title)' }}>
               Matriz de Evaluación Continua & Actas
             </h2>
@@ -123,7 +123,7 @@ export const EvaluationSection: React.FC = () => {
         
         <div className="qfdos-card card-navy" style={{ padding: '1.25rem' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>Exámenes & Tests Oficiales</span>
-          <div className="font-mono" style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy)', margin: '4px 0' }}>
+          <div className="font-mono" style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--navy-ink)', margin: '4px 0' }}>
             70%
           </div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -133,7 +133,7 @@ export const EvaluationSection: React.FC = () => {
 
         <div className="qfdos-card card-teal" style={{ padding: '1.25rem' }}>
           <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>Prácticas de Laboratorio</span>
-          <div className="font-mono" style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--teal)', margin: '4px 0' }}>
+          <div className="font-mono" style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--teal-ink)', margin: '4px 0' }}>
             15%
           </div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>

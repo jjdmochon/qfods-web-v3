@@ -95,7 +95,7 @@ export const LoginPage: React.FC = () => {
         {/* Info boxes */}
         <div className="login-info-grid">
           <div className="login-info-box">
-            <GraduationCap size={18} color="var(--teal)" />
+            <GraduationCap size={18} color="var(--teal-ink)" />
             <div>
               <strong>Estudiantes</strong>
               <p>
@@ -106,7 +106,7 @@ export const LoginPage: React.FC = () => {
             </div>
           </div>
           <div className="login-info-box login-info-box--professor">
-            <Layers size={18} color="var(--navy)" />
+            <Layers size={18} color="var(--navy-ink)" />
             <div>
               <strong>Profesorado</strong>
               <p>El panel de administración requiere <code>juandiaz@ugr.es</code></p>

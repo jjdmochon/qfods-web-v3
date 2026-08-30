@@ -254,8 +254,8 @@ export const PracticasExamSimulator: React.FC = () => {
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Scale size={15} color="var(--teal)" />
-                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy)' }}>
+                    <Scale size={15} color="var(--teal-ink)" />
+                    <span style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                       Estructuras Químicas para Deducir los Pesos Moleculares (PM):
                     </span>
                   </div>
@@ -265,14 +265,14 @@ export const PracticasExamSimulator: React.FC = () => {
                 </div>
 
                 {/* Grid of Structure Cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
+                <div className="panel-claro" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
                   {currentQ.structures.map((st, sIdx) => {
                     const isProduct = st.role === 'producto_deseado';
                     return (
                       <div
                         key={sIdx}
                         style={{
-                          background: '#ffffff',
+                          
                           border: `1.5px solid ${isProduct ? 'var(--navy)' : 'var(--border)'}`,
                           borderRadius: '8px',
                           padding: '0.65rem',
@@ -299,8 +299,8 @@ export const PracticasExamSimulator: React.FC = () => {
                           {st.name}
                         </strong>
 
-                        <div style={{
-                          background: '#ffffff',
+                        <div className="panel-claro" style={{
+                          
                           width: '100%',
                           height: '110px',
                           display: 'flex',
@@ -524,10 +524,10 @@ export const PracticasExamSimulator: React.FC = () => {
                     </div>
 
                     {/* Step-by-Step Explanation */}
-                    <div style={{
+                    <div className="panel-claro" style={{
                       marginTop: '0.25rem',
                       padding: '8px 12px',
-                      background: '#fff',
+                      
                       borderRadius: '6px',
                       border: '1px solid var(--border-color)',
                       fontSize: '0.78rem',

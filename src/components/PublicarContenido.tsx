@@ -69,7 +69,7 @@ export const PublicarContenido: React.FC<PublicarContenidoProps> = ({
   return (
     <div className="publicar-box">
       <div className="publicar-cabecera">
-        <Globe size={17} color="var(--teal)" />
+        <Globe size={17} color="var(--teal-ink)" />
         <div style={{ flex: 1, minWidth: 0 }}>
           <strong>Publicar para todo el curso</strong>
           <p>

@@ -62,7 +62,7 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-            <BookOpen size={22} color="var(--navy)" />
+            <BookOpen size={22} color="var(--navy-ink)" />
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--text-title)' }}>
               Temario Oficial, Exámenes y Trabajos QFDOS
             </h2>
@@ -176,7 +176,7 @@ export const TemasSection: React.FC<TemasSectionProps> = ({
                 >
                   {topic.title}
                 </h3>
-                <h4 style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--teal)', marginBottom: '8px' }}>
+                <h4 style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--teal-ink)', marginBottom: '8px' }}>
                   {topic.subtitle}
                 </h4>
 

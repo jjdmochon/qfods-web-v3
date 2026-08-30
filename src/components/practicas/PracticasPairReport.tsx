@@ -518,7 +518,7 @@ export const PracticasPairReport: React.FC = () => {
             borderRadius: '8px',
             borderLeft: '4px solid var(--teal)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.84rem', color: 'var(--teal)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.84rem', color: 'var(--teal-ink)' }}>
               <Sparkles size={16} />
               <span><strong>Modo Pareja de Prácticas:</strong> Rellenad los datos conjuntos del puesto, calculad vuestros rendimientos experimentales y pulsad <strong>"Enviar Informe al Profesor"</strong> al finalizar la semana.</span>
             </div>
@@ -543,7 +543,7 @@ export const PracticasPairReport: React.FC = () => {
             borderRadius: '8px',
             borderLeft: '4px solid var(--navy)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.84rem', color: 'var(--navy)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.84rem', color: 'var(--navy-ink)' }}>
               <UserCheck size={16} />
               <span><strong>Modo Profesor (Dr. Juanjo):</strong> Visualiza las entregas en tiempo real, filtra por Grupo/Puesto, revisa los datos experimentales, asigna calificaciones (/10) y exporta las actas a CSV.</span>
             </div>
@@ -596,7 +596,7 @@ export const PracticasPairReport: React.FC = () => {
           {/* Section 1: Pair Identification */}
           <div className="qfdos-card" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>
-              <Users size={18} color="var(--navy)" />
+              <Users size={18} color="var(--navy-ink)" />
               <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                 1. Datos de Identificación de la Pareja de Laboratorio
               </h3>
@@ -663,7 +663,7 @@ export const PracticasPairReport: React.FC = () => {
               
               {/* Alumno 1 */}
               <div style={{ background: 'var(--surface-muted)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.88rem', fontWeight: 800, color: 'var(--navy)' }}>
+                <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.88rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                   👤 Alumno/a 1
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -707,7 +707,7 @@ export const PracticasPairReport: React.FC = () => {
 
               {/* Alumno 2 */}
               <div style={{ background: 'var(--surface-muted)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.88rem', fontWeight: 800, color: 'var(--navy)' }}>
+                <h4 style={{ margin: '0 0 0.75rem 0', fontSize: '0.88rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                   👤 Alumno/a 2
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -797,7 +797,7 @@ export const PracticasPairReport: React.FC = () => {
               </div>
 
               <div>
-                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--navy)' }}>
+                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--navy-ink)' }}>
                   Masa Real de Crudo Obtenida (g) *
                 </label>
                 <input
@@ -875,7 +875,7 @@ export const PracticasPairReport: React.FC = () => {
               </div>
 
               <div>
-                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--navy)' }}>
+                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--navy-ink)' }}>
                   Masa Propranolol Cristalizado (g) *
                 </label>
                 <input
@@ -1014,7 +1014,7 @@ export const PracticasPairReport: React.FC = () => {
               </div>
 
               <div>
-                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--teal)' }}>
+                <label className="label-text" style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--teal-ink)' }}>
                   Masa de Cristales Obtenida (g) *
                 </label>
                 <input
@@ -1129,7 +1129,7 @@ export const PracticasPairReport: React.FC = () => {
           {/* Section 5: Cuestiones Breves */}
           <div className="qfdos-card" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.6rem' }}>
-              <MessageSquare size={18} color="var(--navy)" />
+              <MessageSquare size={18} color="var(--navy-ink)" />
               <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                 5. Cuestiones Teórico-Prácticas del Cuaderno
               </h3>
@@ -1236,7 +1236,7 @@ export const PracticasPairReport: React.FC = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
             <div className="qfdos-card" style={{ padding: '1rem', borderLeft: '4px solid var(--navy)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>TOTAL ENTREGAS</span>
-              <h3 style={{ margin: '0.2rem 0 0 0', fontSize: '1.5rem', fontWeight: 900, color: 'var(--navy)' }}>
+              <h3 style={{ margin: '0.2rem 0 0 0', fontSize: '1.5rem', fontWeight: 900, color: 'var(--navy-ink)' }}>
                 {reports.length} Parejas
               </h3>
             </div>
@@ -1257,7 +1257,7 @@ export const PracticasPairReport: React.FC = () => {
 
             <div className="qfdos-card" style={{ padding: '1rem', borderLeft: '4px solid var(--teal)' }}>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>CALIFICACIÓN MEDIA</span>
-              <h3 style={{ margin: '0.2rem 0 0 0', fontSize: '1.5rem', fontWeight: 900, color: 'var(--teal)' }}>
+              <h3 style={{ margin: '0.2rem 0 0 0', fontSize: '1.5rem', fontWeight: 900, color: 'var(--teal-ink)' }}>
                 {(() => {
                   const graded = reports.filter(r => r.profesorGrade !== undefined);
                   if (!graded.length) return '-- / 10';
@@ -1318,7 +1318,7 @@ export const PracticasPairReport: React.FC = () => {
               <tbody>
                 {filteredProfessorReports.map((rep) => (
                   <tr key={rep.id} style={{ borderBottom: '1px solid var(--border)' }}>
-                    <td style={{ padding: '0.75rem', fontWeight: 800, color: 'var(--navy)' }}>
+                    <td style={{ padding: '0.75rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                       {rep.id} <br />
                       <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>Puesto {rep.puesto} ({rep.turno})</span>
                     </td>
@@ -1381,10 +1381,10 @@ export const PracticasPairReport: React.FC = () => {
 
           {/* Modal / Drawer for Reviewing & Grading */}
           {activeGradingReport && (
-            <div className="qfdos-card" style={{
+            <div className="qfdos-card panel-claro" style={{
               padding: '1.75rem',
               border: '2px solid var(--navy)',
-              background: '#ffffff',
+              
               boxShadow: '0 12px 32px rgba(30,58,138,0.12)'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', borderBottom: '1.5px solid var(--border)', paddingBottom: '0.75rem' }}>
@@ -1413,7 +1413,7 @@ export const PracticasPairReport: React.FC = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
                 {/* Stage 1 */}
                 <div style={{ background: 'var(--surface-muted)', padding: '0.85rem', borderRadius: '8px' }}>
-                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--teal)' }}>
+                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--teal-ink)' }}>
                     1. Naftoximetiloxirano
                   </h4>
                   <div style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
@@ -1426,7 +1426,7 @@ export const PracticasPairReport: React.FC = () => {
 
                 {/* Stage 2 */}
                 <div style={{ background: 'var(--surface-muted)', padding: '0.85rem', borderRadius: '8px' }}>
-                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--navy)' }}>
+                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                     2. Propranolol Base
                   </h4>
                   <div style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
@@ -1439,7 +1439,7 @@ export const PracticasPairReport: React.FC = () => {
 
                 {/* Stage 3 */}
                 <div style={{ background: 'var(--surface-muted)', padding: '0.85rem', borderRadius: '8px' }}>
-                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--teal)' }}>
+                  <h4 style={{ margin: '0 0 0.4rem 0', fontSize: '0.84rem', fontWeight: 800, color: 'var(--teal-ink)' }}>
                     3. {activeGradingReport.step3.compoundType}
                   </h4>
                   <div style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
@@ -1466,7 +1466,7 @@ export const PracticasPairReport: React.FC = () => {
               {/* Grading Input Form */}
               <div style={{ display: 'grid', gridTemplateColumns: '160px minmax(0, 1fr)', gap: '1.25rem', alignItems: 'flex-start', background: 'rgba(30,58,138,0.04)', padding: '1.25rem', borderRadius: '8px' }}>
                 <div>
-                  <label className="label-text" style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--navy)' }}>
+                  <label className="label-text" style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                     Calificación (/10) *
                   </label>
                   <input
@@ -1477,7 +1477,7 @@ export const PracticasPairReport: React.FC = () => {
                     value={tempGrade}
                     onChange={e => setTempGrade(parseFloat(e.target.value) || 0)}
                     className="qfdos-input"
-                    style={{ width: '100%', fontSize: '1.25rem', fontWeight: 900, color: 'var(--navy)' }}
+                    style={{ width: '100%', fontSize: '1.25rem', fontWeight: 900, color: 'var(--navy-ink)' }}
                   />
                 </div>
 

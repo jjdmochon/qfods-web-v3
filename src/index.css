@@ -3,27 +3,30 @@
    Universidad de Granada (UGR) — Química Farmacéutica II
 
    Identidad: atlas de química estructural.
-   Tipografía  Newsreader (display) · Public Sans (UI) · IBM Plex Mono (datos)
-   Color       Navy institucional UGR profundizado + verde azulado de enlace
+   Tipografía  Montserrat (display y UI) · Roboto Mono (datos y métricas)
+   Color       Navy #1e3a8a como ancla · Teal #0d9488 · Menta #2dd4bf
    Neutros     sesgados a azul frío, nunca gris puro
+
+   Los tokens de :root son la traducción literal de DESIGN.md v2.0. No se
+   ajustan «a ojo»: si un color no encaja, se corrige en DESIGN.md primero.
    ========================================================================== */
 
 :root {
   /* --- Marca --- */
-  --primary: #10315c;          /* Navy institucional, más profundo que el azul genérico */
-  --primary-dark: #071c38;
-  --primary-light: #2d5f9e;
-  --primary-bg: rgba(16, 49, 92, 0.06);
+  --primary: #1e3a8a;          /* Navy: ancla de madurez científica */
+  --primary-dark: #172554;
+  --primary-light: #3b82f6;
+  --primary-bg: rgba(30, 58, 138, 0.05);
 
-  --secondary: #0c7368;        /* Verde azulado de enlace químico */
-  --secondary-dark: #08544c;
-  --secondary-light: #14958a;
-  --secondary-bg: rgba(12, 115, 104, 0.08);
+  --secondary: #0d9488;        /* Teal: continuidad heredada de QFUNO */
+  --secondary-dark: #0f766e;
+  --secondary-light: #14b8a6;
+  --secondary-bg: rgba(13, 148, 136, 0.08);
 
-  --tertiary: #4fd1b5;         /* Menta: el único acento brillante */
-  --tertiary-light: #86e6d1;
-  --tertiary-dark: #0c7368;
-  --tertiary-bg: rgba(79, 209, 181, 0.12);
+  --tertiary: #2dd4bf;         /* Menta: el único acento brillante */
+  --tertiary-light: #5eead4;
+  --tertiary-dark: #0d9488;
+  --tertiary-bg: rgba(45, 212, 191, 0.12);
 
   /* Alias semánticos */
   --navy: var(--primary);
@@ -31,22 +34,10 @@
   --teal: var(--secondary);
   --mint: var(--tertiary);
 
-  /* --- Header & Footer Tokens --- */
-  --header-bg: #ffffff;
-  --header-border: rgba(30, 58, 138, 0.12);
-  --header-shadow: 0 4px 20px -2px rgba(30, 58, 138, 0.08), 0 2px 6px -1px rgba(30, 58, 138, 0.04);
-  --header-search-bg: #f8fafc;
-  --header-search-border: rgba(30, 58, 138, 0.18);
-  --header-search-text: #0f172a;
-  --header-tab-color: #334155;
-  --header-tab-hover-bg: #f1f5f9;
-  --header-tab-active-color: #1e3a8a;
-  --header-tab-active-bg: rgba(30, 58, 138, 0.08);
-  --header-tab-active-border: #1e3a8a;
-  --footer-bg: #172554;
-  --footer-border: rgba(45, 212, 191, 0.22);
-  --footer-text: #f8fafc;
-  --footer-text-muted: #94a3b8;
+  /* Tinta: mismo color en claro, pero legible sobre superficie oscura.
+     --navy y --teal siguen siendo el relleno de los botones y no se tocan. */
+  --navy-ink: var(--primary);
+  --teal-ink: var(--secondary-dark);
 
   /* --- Superficies (neutros con sesgo azul, no gris puro) --- */
   --neutral-bg: #f8fafc;
@@ -58,52 +49,52 @@
   --mol-canvas-bg: #ffffff;
 
   /* --- Texto --- */
-  --text-main: #0f172a;
-  --text-title: #0f2d5c;
-  --text-muted: #475569;
+  --text-main: #000000;        /* Negro puro: legible en proyector */
+  --text-title: #1e3a8a;
+  --text-muted: #475569;       /* Más oscuro que el #64748b del spec, mismo criterio */
   --text-light: #64748b;
   --text-on-dark: #ffffff;
 
   /* --- Bordes --- */
-  --border-color: rgba(16, 49, 92, 0.12);
-  --border-strong: rgba(16, 49, 92, 0.22);
-  --border-focus: #0c7368;
+  --border-color: rgba(30, 58, 138, 0.12);
+  --border-strong: rgba(30, 58, 138, 0.22);
+  --border-focus: #0d9488;
 
   /* --- Color semántico (separado del acento de marca) --- */
-  --accent-blue: #2563eb;
-  --accent-emerald: #059669;
-  --accent-amber: #d97706;
-  --accent-purple: #7c3aed;
+  --accent-blue: #3b82f6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-purple: #8b5cf6;
   --accent-red: #dc2626;
   --semantic-ok-bg: rgba(5, 150, 105, 0.10);
   --semantic-warn-bg: rgba(217, 119, 6, 0.10);
   --semantic-bad-bg: rgba(220, 38, 38, 0.10);
 
   /* --- Tipografía --- */
-  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-  --font-primary: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Roboto Mono', Consolas, monospace;
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Roboto Mono', 'Fira Code', Consolas, monospace;
 
   /* --- Radios --- */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 13px;
-  --radius-xl: 18px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   /* --- Sombras --- */
-  --shadow-sm: 0 1px 2px rgba(16, 49, 92, 0.05), 0 1px 3px rgba(16, 49, 92, 0.03);
-  --shadow-md: 0 4px 14px rgba(16, 49, 92, 0.08), 0 2px 6px rgba(16, 49, 92, 0.04);
-  --shadow-lg: 0 12px 28px rgba(16, 49, 92, 0.12), 0 5px 10px rgba(16, 49, 92, 0.05);
-  --shadow-hover: 0 18px 34px rgba(16, 49, 92, 0.14), 0 6px 12px rgba(12, 115, 104, 0.08);
-  --shadow-glass: 0 8px 32px rgba(16, 49, 92, 0.10);
+  --shadow-sm: 0 2px 4px -1px rgba(30, 58, 138, 0.05), 0 1px 3px rgba(30, 58, 138, 0.03);
+  --shadow-md: 0 8px 12px -3px rgba(30, 58, 138, 0.08), 0 2px 6px -1px rgba(30, 58, 138, 0.04);
+  --shadow-lg: 0 15px 20px -5px rgba(30, 58, 138, 0.12), 0 8px 8px -5px rgba(30, 58, 138, 0.06);
+  --shadow-hover: 0 15px 20px -5px rgba(30, 58, 138, 0.14), 0 8px 8px -5px rgba(13, 148, 136, 0.08);
+  --shadow-glass: 0 8px 32px rgba(30, 58, 138, 0.10);
 
   /* --- Transiciones --- */
-  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: 140ms ease-out;
-  --transition-spring: 260ms var(--ease-spring);
-  --transition-smooth: 220ms var(--ease-out);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* «binding snap» del spec */
+  --ease-spring: var(--ease-out);              /* alias histórico: ya no rebota */
+  --transition-fast: 150ms ease-out;
+  --transition-spring: 200ms var(--ease-out);
+  --transition-smooth: 200ms var(--ease-out);
 }
 
 /* --- Modo oscuro: preferencia del sistema y selección de usuario armonizada --- */
@@ -117,24 +108,56 @@
     --glass-border: rgba(79, 209, 181, 0.16);
     --mol-canvas-bg: #0f1c2e;
 
-    /* Header & Footer en Dark Mode armonizado */
-    --header-bg: rgba(11, 20, 34, 0.92);
-    --header-border: rgba(45, 212, 191, 0.16);
-    --header-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.55);
-    --header-search-bg: rgba(22, 38, 62, 0.85);
-    --header-search-border: rgba(45, 212, 191, 0.22);
-    --header-search-text: #e2e8f0;
-    --header-tab-color: #94a3b8;
-    --header-tab-hover-bg: rgba(255, 255, 255, 0.06);
-    --header-tab-active-color: #2dd4bf;
-    --header-tab-active-bg: rgba(45, 212, 191, 0.12);
-    --header-tab-active-border: #2dd4bf;
-    --footer-bg: #040912;
-    --footer-border: rgba(45, 212, 191, 0.16);
-    --footer-text: #e2e8f0;
-    --footer-text-muted: #8497af;
+    /* --- Marco en oscuro ---
+       La escalera #070e18 → #0f1b30 → #17263f → #2a4fa8 se mantiene entre los
+       tonos 215 y 222 de principio a fin, así que nada puede chocar. Todos los
+       bordes son un hex navy sólido, nunca una menta con alfa: era esa mezcla
+       la que componía el cian intruso. */
+    --hdr-bg: #0f1b30;
+    --hdr-bg-2: #0b1425;
+    --hdr-edge: #263a63;
+    --hdr-shadow: 0 1px 0 rgba(255, 255, 255, 0.035), 0 12px 32px -18px rgba(0, 0, 0, 0.95);
+    --hdr-title: #eef4fb;
+    --hdr-sub: #93a7c6;
+
+    --hdr-well: #17263f;
+    --hdr-well-edge: #24365c;
+    --hdr-tab: #9db2cd;
+    --hdr-tab-hover-bg: rgba(147, 197, 253, 0.10);
+    --hdr-tab-hover-ink: #dbe6f5;
+    --hdr-tab-active-bg: #2a4fa8;
+    --hdr-tab-active-ink: #ffffff;
+    --hdr-occupancy: #2dd4bf;
+    --hdr-occupancy-glow: rgba(45, 212, 191, 0.45);
+
+    --hdr-field-bg: #17263f;
+    --hdr-field-edge: #263a63;
+    --hdr-field-ink: #a8bad4;
+    --hdr-field-focus: #2dd4bf;
+    --hdr-cta-bg: #2a4fa8;
+    --hdr-cta-bg-hover: #3762c4;
+    --hdr-cta-ink: #ffffff;
+    --hdr-ghost-ink: #9db2cd;
+    --hdr-ghost-edge: #263a63;
+    --hdr-chip-bg: rgba(45, 212, 191, 0.12);
+    --hdr-chip-ink: #5eead4;
+    --hdr-chip-edge: rgba(45, 212, 191, 0.30);
+
+    --ftr-bg: #0d1729;
+    --ftr-bg-2: #0a1220;
+    --ftr-edge: rgba(45, 212, 191, 0.22);
+    --ftr-body: #cbd8ea;
+    --ftr-muted: #9db2cd;
+    --ftr-well: rgba(255, 255, 255, 0.04);
+    --ftr-well-edge: rgba(255, 255, 255, 0.08);
+    --ftr-hair: rgba(255, 255, 255, 0.07);
+    --ftr-seg-2: #3762c4;
+    --ftr-seg-3: rgba(255, 255, 255, 0.24);
+
 
     --primary-light: #60a5fa;
+    --navy-ink: #93c5fd;         /* 8,6:1 sobre #1a2d47 */
+    --teal-ink: #5eead4;         /* 10,4:1 sobre #1a2d47 */
     --text-main: #f1f5f9;
     --text-title: #e2e8f0;
     --text-muted: #94a3b8;
@@ -168,24 +191,56 @@
   --glass-border: rgba(79, 209, 181, 0.16);
   --mol-canvas-bg: #0f1c2e;
 
-  /* Header & Footer en Dark Mode armonizado */
-  --header-bg: rgba(11, 20, 34, 0.92);
-  --header-border: rgba(45, 212, 191, 0.16);
-  --header-shadow: 0 6px 24px -2px rgba(0, 0, 0, 0.55);
-  --header-search-bg: rgba(22, 38, 62, 0.85);
-  --header-search-border: rgba(45, 212, 191, 0.22);
-  --header-search-text: #e2e8f0;
-  --header-tab-color: #94a3b8;
-  --header-tab-hover-bg: rgba(255, 255, 255, 0.06);
-  --header-tab-active-color: #2dd4bf;
-  --header-tab-active-bg: rgba(45, 212, 191, 0.12);
-  --header-tab-active-border: #2dd4bf;
-  --footer-bg: #040912;
-  --footer-border: rgba(45, 212, 191, 0.16);
-  --footer-text: #e2e8f0;
-  --footer-text-muted: #8497af;
+  /* --- Marco en oscuro ---
+     La escalera #070e18 → #0f1b30 → #17263f → #2a4fa8 se mantiene entre los
+     tonos 215 y 222 de principio a fin, así que nada puede chocar. Todos los
+     bordes son un hex navy sólido, nunca una menta con alfa: era esa mezcla
+     la que componía el cian intruso. */
+  --hdr-bg: #0f1b30;
+  --hdr-bg-2: #0b1425;
+  --hdr-edge: #263a63;
+  --hdr-shadow: 0 1px 0 rgba(255, 255, 255, 0.035), 0 12px 32px -18px rgba(0, 0, 0, 0.95);
+  --hdr-title: #eef4fb;
+  --hdr-sub: #93a7c6;
+
+  --hdr-well: #17263f;
+  --hdr-well-edge: #24365c;
+  --hdr-tab: #9db2cd;
+  --hdr-tab-hover-bg: rgba(147, 197, 253, 0.10);
+  --hdr-tab-hover-ink: #dbe6f5;
+  --hdr-tab-active-bg: #2a4fa8;
+  --hdr-tab-active-ink: #ffffff;
+  --hdr-occupancy: #2dd4bf;
+  --hdr-occupancy-glow: rgba(45, 212, 191, 0.45);
+
+  --hdr-field-bg: #17263f;
+  --hdr-field-edge: #263a63;
+  --hdr-field-ink: #a8bad4;
+  --hdr-field-focus: #2dd4bf;
+  --hdr-cta-bg: #2a4fa8;
+  --hdr-cta-bg-hover: #3762c4;
+  --hdr-cta-ink: #ffffff;
+  --hdr-ghost-ink: #9db2cd;
+  --hdr-ghost-edge: #263a63;
+  --hdr-chip-bg: rgba(45, 212, 191, 0.12);
+  --hdr-chip-ink: #5eead4;
+  --hdr-chip-edge: rgba(45, 212, 191, 0.30);
+
+  --ftr-bg: #0d1729;
+  --ftr-bg-2: #0a1220;
+  --ftr-edge: rgba(45, 212, 191, 0.22);
+  --ftr-body: #cbd8ea;
+  --ftr-muted: #9db2cd;
+  --ftr-well: rgba(255, 255, 255, 0.04);
+  --ftr-well-edge: rgba(255, 255, 255, 0.08);
+  --ftr-hair: rgba(255, 255, 255, 0.07);
+  --ftr-seg-2: #3762c4;
+  --ftr-seg-3: rgba(255, 255, 255, 0.24);
+
 
   --primary-light: #60a5fa;
+  --navy-ink: #93c5fd;
+  --teal-ink: #5eead4;
   --text-main: #f1f5f9;
   --text-title: #e2e8f0;
   --text-muted: #94a3b8;
@@ -307,15 +362,46 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  min-width: 0;
 }
-.badge-navy { background: var(--primary-bg); color: var(--navy); border: 1px solid rgba(30,58,138,0.18); }
-.badge-teal { background: var(--secondary-bg); color: var(--secondary-dark); border: 1px solid rgba(13,148,136,0.2); }
+/* Para las de verdad cortas (una o dos palabras) que no deben partirse. */
+.qfdos-badge.badge-nowrap { white-space: nowrap; }
+
+/* .badge-navy y .badge-teal viven en App.css, que se importa después y gana
+   por orden de origen. No se duplican aquí. */
 .badge-mint { background: var(--tertiary-bg); color: #0f766e; border: 1px solid rgba(45,212,191,0.25); }
 .badge-amber { background: rgba(245,158,11,0.1); color: #b45309; border: 1px solid rgba(245,158,11,0.25); }
 .badge-red { background: rgba(239,68,68,0.09); color: #b91c1c; border: 1px solid rgba(239,68,68,0.2); }
 .badge-purple { background: rgba(139,92,246,0.1); color: #6d28d9; border: 1px solid rgba(139,92,246,0.2); }
 .badge-green { background: rgba(16,185,129,0.1); color: #065f46; border: 1px solid rgba(16,185,129,0.2); }
+/* Faltaban: se usaban en cuatro sitios y no existían, así que la insignia de
+   inflamabilidad salía como texto suelto con un borde negro. */
+.badge-yellow { background: rgba(234,179,8,0.12); color: #a16207; border: 1px solid rgba(234,179,8,0.30); }
+.badge-gold   { background: rgba(202,138,4,0.12); color: #854d0e; border: 1px solid rgba(202,138,4,0.30); }
+
+/* ==========================================================================
+   Paneles de fondo blanco forzado
+   Los lienzos de RDKit y las fichas pensadas para imprimir fijan el fondo a
+   blanco, y ahí el tema oscuro deja de valer: la tinta clara quedaría azul
+   pálido sobre blanco. Dentro de esta clase los tokens vuelven a su versión
+   clara, de modo que lo que cuelgue del panel se lee igual en ambos temas.
+   ========================================================================== */
+.panel-claro {
+  background: #ffffff;
+  --navy-ink: #1e3a8a;
+  --teal-ink: #0f766e;
+  --text-main: #000000;
+  --text-title: #1e3a8a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  --border-color: rgba(30, 58, 138, 0.12);
+  --border-strong: rgba(30, 58, 138, 0.22);
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+}
 
 /* ========== Buttons ========== */
 .btn {
@@ -332,18 +418,21 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   white-space: nowrap;
   text-decoration: none;
   line-height: 1.2;
-  outline: none;
 }
-.btn:focus-visible { box-shadow: 0 0 0 3px rgba(13,148,136,0.35); }
+.btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.30);
+}
 .btn:disabled { opacity: 0.48; cursor: not-allowed; pointer-events: none; }
 
 .btn-sm { padding: 5px 10px; font-size: 0.8rem; gap: 5px; }
 .btn-lg { padding: 11px 22px; font-size: 0.95rem; gap: 7px; }
 
-.btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+.btn-primary { background: var(--navy); color: #fff; border-color: var(--navy-ink); }
 .btn-primary:hover { background: var(--primary-dark); border-color: var(--primary-dark); }
 
-.btn-secondary { background: var(--teal); color: #fff; border-color: var(--teal); }
+.btn-secondary { background: var(--teal); color: #fff; border-color: var(--teal-ink); }
 .btn-secondary:hover { background: var(--secondary-dark); }
 
 .btn-mint { background: var(--mint); color: var(--navy-dark); border-color: var(--mint); }
@@ -354,7 +443,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-color: var(--border-color);
   color: var(--text-main);
 }
-.btn-outline:hover { border-color: var(--teal); color: var(--teal); background: var(--secondary-bg); }
+.btn-outline:hover { border-color: var(--teal-ink); color: var(--teal-ink); background: var(--secondary-bg); }
 
 .btn-ghost { background: transparent; border-color: transparent; color: var(--text-muted); }
 .btn-ghost:hover { background: var(--surface-alt); color: var(--text-main); }
@@ -501,7 +590,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
 .login-title {
   font-size: 1.55rem;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--navy-ink);
   letter-spacing: -0.025em;
   line-height: 1.2;
 }
@@ -547,7 +636,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   width: 18px;
   height: 18px;
   border: 2px solid var(--border-color);
-  border-top-color: var(--teal);
+  border-top-color: var(--teal-ink);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   flex-shrink: 0;
@@ -617,7 +706,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   cursor: default;
   transition: all var(--transition-fast);
 }
-.user-chip:hover { border-color: var(--teal); background: var(--secondary-bg); }
+.user-chip:hover { border-color: var(--teal-ink); background: var(--secondary-bg); }
 .user-avatar {
   width: 28px;
   height: 28px;
@@ -642,22 +731,99 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
 .user-chip-role { font-size: 0.68rem; color: var(--text-muted); }
 
 /* ========== Navigation & Header (Top Academic Aesthetics) ========== */
+/* ==========================================================================
+   Tokens del marco: cabecera y pie
+   Regla del sistema: el navy sostiene la estructura, el teal es la marca y
+   LA MENTA APARECE UNA SOLA VEZ POR REGIÓN Y SIEMPRE SIGNIFICA «ESTÁS AQUÍ».
+   Antes convivían cinco colores de tres familias en 90 px de alto, y los
+   bordes de menta al 14 % sobre navy componían un cian (tono 200) que no
+   pertenecía a ninguna: ese era el choque del modo oscuro.
+   ========================================================================== */
+:root {
+  --affinity-edge: linear-gradient(90deg, #1e3a8a 0%, #0d9488 62%, #2dd4bf 100%);
+
+  --hdr-bg: #ffffff;
+  --hdr-bg-2: #f4f8fd;
+  --hdr-edge: rgba(30, 58, 138, 0.14);
+  --hdr-shadow: 0 1px 0 rgba(30, 58, 138, 0.05), 0 10px 26px -16px rgba(23, 37, 84, 0.35);
+  --hdr-title: #0f2d5c;
+  --hdr-sub: #475569;
+
+  --hdr-well: #eaeef7;
+  --hdr-well-edge: rgba(30, 58, 138, 0.10);
+  --hdr-tab: #3d4d66;
+  --hdr-tab-hover-bg: rgba(30, 58, 138, 0.07);
+  --hdr-tab-hover-ink: #1e3a8a;
+  --hdr-tab-active-bg: #1e3a8a;
+  --hdr-tab-active-ink: #ffffff;
+  --hdr-occupancy: #0d9488;
+  --hdr-occupancy-glow: rgba(13, 148, 136, 0.30);
+
+  --hdr-field-bg: #f2f6fc;
+  --hdr-field-edge: rgba(30, 58, 138, 0.16);
+  --hdr-field-ink: #475569;
+  --hdr-field-focus: #0d9488;
+  --hdr-cta-bg: #1e3a8a;
+  --hdr-cta-bg-hover: #172554;
+  --hdr-cta-ink: #ffffff;
+  --hdr-ghost-ink: #475569;
+  --hdr-ghost-edge: rgba(30, 58, 138, 0.18);
+  --hdr-chip-bg: rgba(13, 148, 136, 0.10);
+  --hdr-chip-ink: #0f766e;
+  --hdr-chip-edge: rgba(13, 148, 136, 0.28);
+
+  /* El pie es campo oscuro en los dos temas, así que su tinta es clara siempre */
+  --ftr-bg: #172554;
+  --ftr-bg-2: #101c42;
+  --ftr-edge: rgba(45, 212, 191, 0.30);
+  --ftr-ink: #ffffff;
+  --ftr-body: #dbe4f5;
+  --ftr-muted: #b6c6e0;
+  --ftr-accent: #5eead4;
+  --ftr-well: rgba(255, 255, 255, 0.05);
+  --ftr-well-edge: rgba(255, 255, 255, 0.11);
+  --ftr-hair: rgba(255, 255, 255, 0.09);
+  --ftr-seg-1: linear-gradient(90deg, #2dd4bf 0%, #0d9488 100%);
+  --ftr-seg-2: #4f7fd6;
+  --ftr-seg-3: rgba(255, 255, 255, 0.30);
+}
+
+/* ==========================================================================
+   Cabecera
+   ========================================================================== */
 .qfdos-header-root {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--header-border);
-  box-shadow: var(--header-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: background var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  /* Opaca a propósito. Con backdrop-filter el tono de la cabecera seguía al
+     contenido que pasaba por debajo mientras el canal de secciones se quedaba
+     fijo: dos superficies hermanas que se separaban al hacer scroll. */
+  background: linear-gradient(180deg, var(--hdr-bg) 0%, var(--hdr-bg-2) 100%);
+  border-bottom: 1px solid var(--hdr-edge);
+  box-shadow: var(--hdr-shadow);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+/* Filo de afinidad: el único sitio donde navy, teal y menta conviven. Al
+   declararlo una vez aquí, el resto de la cabecera puede quedarse en un tono. */
+.qfdos-header-root::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: var(--affinity-edge);
+}
+
+.qfdos-header-root > .container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem 0.65rem;
 }
 
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   background: none;
   border: none;
   cursor: pointer;
@@ -671,267 +837,374 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   width: 38px;
   height: 38px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+  /* Marco navy sólido: el degradado navy→teal recorría las dos familias de
+     color en 38 px y era quien abría el conflicto. */
+  background: var(--hdr-cta-bg);
   padding: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(16, 49, 92, 0.20);
-  transition: transform var(--transition-fast);
+  box-shadow: 0 0 0 1px var(--hdr-well-edge), 0 5px 14px -6px rgba(23, 37, 84, 0.55);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
 }
 .header-brand:hover .header-logo-badge {
-  transform: scale(1.04);
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px var(--hdr-occupancy), 0 8px 18px -6px rgba(23, 37, 84, 0.60);
 }
-.header-logo-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-  object-fit: cover;
-}
+.header-logo-img { width: 100%; height: 100%; border-radius: 6px; object-fit: cover; }
 
 .brand-title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.15rem;
-  color: var(--text-title);
-  letter-spacing: -0.02em;
-}
-.nav-tab:hover {
-  color: var(--text-title);
-  background: var(--header-tab-hover-bg);
-}
-:root[data-theme='dark'] .nav-tab:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-.nav-tab.active {
-  color: #ffffff !important;
-  background: linear-gradient(135deg, #10315c 0%, #1e3a8a 100%) !important;
-  border-color: #071c38 !important;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(16, 49, 92, 0.35);
-}
-:root[data-theme='dark'] .nav-tab.active {
-  color: #042f2c !important;
-  background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%) !important;
-  border-color: #2dd4bf !important;
-  box-shadow: 0 2px 10px rgba(45, 212, 191, 0.35);
+  font-size: 1.16rem;
+  line-height: 1.1;
+  color: var(--hdr-title);
+  letter-spacing: -0.02em;
 }
 .brand-version-badge {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.64rem;
+  font-weight: 600;
   padding: 1px 6px;
-  border-radius: 4px;
-  background: var(--header-tab-hover-bg);
-  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  background: var(--hdr-tab-hover-bg);
+  color: var(--hdr-sub);
+  font-variant-numeric: tabular-nums;
 }
 .brand-sub {
-  font-size: 0.68rem;
+  font-size: 0.69rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--hdr-sub);
   white-space: nowrap;
 }
 
-/* Buscador Inteligente */
+/* Los chips de la cabecera necesitan receta propia: la de tarjeta clara daba
+   1,69:1 sobre este fondo. */
+.qfdos-header-root .qfdos-badge {
+  background: var(--hdr-chip-bg);
+  color: var(--hdr-chip-ink);
+  border: 1px solid var(--hdr-chip-edge);
+}
+
 .header-search {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  background: var(--header-search-bg);
-  border: 1px solid var(--header-search-border);
-  border-radius: var(--radius-full);
-  color: var(--header-search-text);
-  cursor: pointer;
   flex: 1 1 auto;
-  max-width: 440px;
-  min-width: 180px;
-  transition: all var(--transition-fast);
+  min-width: 0;
+  max-width: 460px;
+  /* Se pega a la marca y empuja las herramientas al extremo: el hueco queda
+     todo a la derecha en vez de partirse a los dos lados. */
+  margin-right: auto;
+  padding: 7px 12px;
+  border-radius: var(--radius-md);
+  background: var(--hdr-field-bg);
+  border: 1px solid var(--hdr-field-edge);
+  color: var(--hdr-field-ink);
+  font: inherit;
+  font-size: 0.81rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth),
+              background var(--transition-smooth);
 }
-.header-search:hover {
-  background: var(--surface);
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(12, 115, 104, 0.12);
+.header-search:hover,
+.header-search:focus-visible {
+  border-color: var(--hdr-field-focus);
+  box-shadow: 0 0 0 3px var(--hdr-occupancy-glow);
+  outline: none;
 }
-.header-search-icon {
-  color: var(--teal);
-  flex-shrink: 0;
-}
+.header-search-icon { color: var(--hdr-field-focus); flex-shrink: 0; }
 .header-search-texto {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex: 1;
   text-align: left;
 }
-.header-search-kbd {
+.header-search-kbd,
+.header-search kbd {
+  flex-shrink: 0;
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  font-weight: 700;
-  padding: 2px 6px;
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  color: var(--text-muted);
-  flex-shrink: 0;
+  font-weight: 500;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  background: var(--hdr-bg);
+  border: 1px solid var(--hdr-field-edge);
+  color: var(--hdr-field-ink);
 }
 
-.header-tools {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
+.header-tools { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
 
+/* La acción principal es navy. Antes era teal, y DESIGN.md reserva el teal
+   como acento secundario: no puede ser el color dominante de la cabecera. */
 .btn-header-action {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--secondary-dark) 100%);
-  color: #ffffff;
-  border: none;
-  font-weight: 700;
-  font-size: 0.8rem;
-  padding: 6px 12px;
+  background: var(--hdr-cta-bg);
+  color: var(--hdr-cta-ink);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.79rem;
+  padding: 7px 13px;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 8px rgba(12, 115, 104, 0.25);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all var(--transition-fast);
+  box-shadow: 0 1px 2px rgba(23, 37, 84, 0.20);
+  transition: background var(--transition-smooth), transform var(--transition-smooth),
+              box-shadow var(--transition-smooth);
 }
 .btn-header-action:hover {
+  background: var(--hdr-cta-bg-hover);
+  color: var(--hdr-cta-ink);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(12, 115, 104, 0.35);
-  color: #ffffff;
+  box-shadow: 0 6px 14px -6px rgba(23, 37, 84, 0.55);
 }
 
+/* Gestión Docente sólo la ve el profesorado: no necesita gritar. */
 .btn-header-admin {
-  background: var(--primary);
-  color: #ffffff;
-  border: none;
-  font-weight: 700;
-  font-size: 0.8rem;
-  padding: 6px 12px;
+  background: transparent;
+  color: var(--hdr-ghost-ink);
+  border: 1px solid var(--hdr-ghost-edge);
+  font-weight: 600;
+  font-size: 0.79rem;
+  padding: 7px 12px;
   border-radius: var(--radius-md);
-  box-shadow: 0 2px 8px rgba(16, 49, 92, 0.25);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all var(--transition-fast);
+  box-shadow: none;
+  transition: all var(--transition-smooth);
 }
 .btn-header-admin:hover {
-  background: var(--primary-light);
-  transform: translateY(-1px);
-  color: #ffffff;
+  background: var(--hdr-tab-hover-bg);
+  border-color: var(--hdr-cta-bg);
+  color: var(--hdr-tab-hover-ink);
+  transform: none;
 }
 
 .btn-ghost-clean {
   background: transparent;
   border: 1px solid transparent;
-  color: var(--text-muted);
+  color: var(--hdr-ghost-ink);
   border-radius: var(--radius-md);
-  padding: 6px 8px;
+  padding: 7px 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-smooth);
 }
-.btn-ghost-clean:hover {
-  background: var(--header-tab-hover-bg);
-  color: var(--text-title);
-}
+.btn-ghost-clean:hover { background: var(--hdr-tab-hover-bg); color: var(--hdr-tab-hover-ink); }
 
-/* Barra de Pestañas de Navegación */
+/* ==========================================================================
+   Canal de secciones y regla de ocupación
+   Las ocho pestañas son sitios de unión. Una barra de menta de 2 px hace de
+   ligando: se desplaza por el canal y se acopla bajo el sitio ocupado. Es la
+   única menta de la cabecera y siempre significa lo mismo.
+   ========================================================================== */
 .header-nav {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
-  padding-bottom: 2px;
+  padding: 5px 6px 9px;
+  background: var(--hdr-well);
+  border: 1px solid var(--hdr-well-edge);
+  border-radius: var(--radius-lg);
+  scroll-behavior: smooth;
 }
 .header-nav::-webkit-scrollbar { display: none; }
 
 .nav-tab {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 6px 13px;
   border-radius: var(--radius-md);
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 600;
-  color: var(--header-tab-color);
+  color: var(--hdr-tab);
   background: transparent;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all var(--transition-fast);
   white-space: nowrap;
   flex-shrink: 0;
+  transition: color var(--transition-smooth), background var(--transition-smooth);
 }
-.nav-tab:hover {
-  color: var(--text-title);
-  background: var(--header-tab-hover-bg);
-}
+.nav-tab:hover { color: var(--hdr-tab-hover-ink); background: var(--hdr-tab-hover-bg); }
 .nav-tab.active {
-  color: var(--header-tab-active-color);
-  background: var(--header-tab-active-bg);
-  border-color: var(--header-tab-active-border);
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(12, 115, 104, 0.12);
+  color: var(--hdr-tab-active-ink);
+  background: var(--hdr-tab-active-bg);
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 2px 6px -2px rgba(23, 37, 84, 0.45);
 }
 
-/* ========== Footer Oficial QFDOS (Estética Premium) ========== */
+.nav-occupancy {
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 1px;
+  width: var(--occ-w, 0px);
+  transform: translate3d(var(--occ-x, 0px), 0, 0);
+  opacity: var(--occ-o, 0);
+  background: var(--hdr-occupancy);
+  box-shadow: 0 0 8px var(--hdr-occupancy-glow);
+  pointer-events: none;
+  transition: transform 200ms var(--ease-out),
+              width 200ms var(--ease-out),
+              opacity 200ms var(--ease-out);
+}
+/* Respaldo si el indicador no llega a montarse */
+.header-nav:not(:has(.nav-occupancy)) .nav-tab.active {
+  box-shadow: inset 0 -2px 0 var(--hdr-occupancy), 0 2px 6px -2px rgba(23, 37, 84, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-occupancy { transition: none; }
+  .header-nav { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   Pie: campo oscuro en ambos temas
+   ========================================================================== */
 .qfdos-footer-root {
-  background: var(--footer-bg);
-  color: var(--footer-text);
-  border-top: 1px solid var(--footer-border);
-  padding: 3rem 1.5rem 1.5rem 1.5rem;
-  margin-top: 4rem;
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
   position: relative;
+  margin-top: 4rem;
+  padding: 3rem 1.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--ftr-bg) 0%, var(--ftr-bg-2) 100%);
+  color: var(--ftr-body);
+  border-top: 1px solid var(--ftr-edge);
   overflow: hidden;
 }
+/* El mismo filo que la cabecera: el documento queda encuadrado arriba y abajo
+   por el mismo gesto. */
 .qfdos-footer-root::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 10%;
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--teal) 50%, transparent 100%);
-  opacity: 0.6;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--affinity-edge);
 }
+
 .qfdos-footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1.15fr 1fr 1.1fr;
   gap: 2.5rem;
   margin-bottom: 2rem;
 }
-.qfdos-footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+@media (max-width: 940px) {
+  .qfdos-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+.qfdos-footer-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+
 .qfdos-footer-heading {
-  font-size: 0.92rem;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  margin-bottom: 4px;
+  font-family: var(--font-primary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ftr-muted);
+  margin-bottom: 6px;
 }
+.qfdos-footer-root .brand-title { color: var(--ftr-ink); }
+.qfdos-footer-root h4 { color: var(--ftr-ink); font-family: var(--font-primary); }
+.qfdos-footer-root p { color: var(--ftr-muted); }
+
+.qfdos-footer-root .qfdos-badge {
+  background: rgba(45, 212, 191, 0.14);
+  color: var(--ftr-accent);
+  border: 1px solid rgba(45, 212, 191, 0.30);
+}
+.qfdos-footer-root .qfdos-badge.badge-neutral {
+  background: var(--ftr-well);
+  color: var(--ftr-body);
+  border-color: var(--ftr-well-edge);
+}
+
+.ftr-person {
+  padding: 11px 13px;
+  border-radius: var(--radius-md);
+  background: var(--ftr-well);
+  border: 1px solid var(--ftr-well-edge);
+  border-left: 2px solid var(--ftr-accent);
+  transition: background var(--transition-smooth), border-color var(--transition-smooth);
+}
+.ftr-person:hover { background: rgba(255, 255, 255, 0.075); }
+.ftr-person-name { font-weight: 700; font-size: 0.88rem; color: var(--ftr-ink); }
+.ftr-person-role { font-size: 0.74rem; color: var(--ftr-accent); font-weight: 600; margin-top: 1px; }
+.ftr-person-mail {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ftr-muted);
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+.ftr-person-mail:hover { color: var(--ftr-accent); }
+
+/* Barra de ocupación de la evaluación: el mismo objeto que la regla de la
+   cabecera, ahora midiendo cuánto pesa cada bloque. */
+.ftr-affinity {
+  display: flex;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--ftr-well);
+  border: 1px solid var(--ftr-well-edge);
+  margin: 2px 0 12px;
+}
+.ftr-affinity-seg { height: 100%; }
+.ftr-affinity-seg + .ftr-affinity-seg { border-left: 1px solid var(--ftr-bg); }
+.ftr-affinity-seg.is-primary { background: var(--ftr-seg-1); }
+.ftr-affinity-seg.is-second { background: var(--ftr-seg-2); }
+.ftr-affinity-seg.is-minor { background: var(--ftr-seg-3); }
+
+.ftr-eval-row {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: baseline;
+  gap: 9px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--ftr-hair);
+  font-size: 0.8rem;
+}
+.ftr-eval-row:last-child { border-bottom: none; }
+.ftr-eval-key { width: 8px; height: 8px; border-radius: 2px; align-self: center; }
+.ftr-eval-key.is-primary { background: var(--ftr-seg-1); }
+.ftr-eval-key.is-second { background: var(--ftr-seg-2); }
+.ftr-eval-key.is-minor { background: var(--ftr-seg-3); }
+.ftr-eval-label { color: var(--ftr-body); min-width: 0; }
+.ftr-eval-note { display: block; font-size: 0.7rem; color: var(--ftr-muted); }
+.ftr-eval-pct {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ftr-ink);
+}
+.ftr-eval-row.is-primary .ftr-eval-pct { color: var(--ftr-accent); }
+
 .qfdos-footer-sub {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--ftr-hair);
   padding-top: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  font-size: 0.74rem;
-  color: var(--footer-text-muted);
+  font-size: 0.73rem;
+  color: var(--ftr-muted);
 }
+.qfdos-footer-sub a { color: var(--ftr-muted); }
+.qfdos-footer-sub a:hover { color: var(--ftr-accent); }
 
 /* Responsive Header Media Queries */
 @media (max-width: 1200px) {
@@ -1255,8 +1528,22 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
 }
 
 @media (pointer: coarse) {
-  .nav-tab { min-height: 40px; }
-  .header-tools .btn { min-height: 40px; }
+  .nav-tab { min-height: 44px; }
+  .header-tools .btn,
+  .btn-sm,
+  .btn-ghost-clean,
+  .user-chip,
+  .header-search { min-height: 44px; }
+}
+
+/* Por debajo de 560 px el buscador cede su sitio: la lupa vive también en el
+   modal de búsqueda, y las herramientas necesitan el ancho entero. Antes esto
+   no desbordaba visiblemente porque `overflow-x: hidden` lo recortaba. */
+@media (max-width: 560px) {
+  .header-search { display: none; }
+  .header-tools { flex-wrap: wrap; justify-content: flex-end; }
+  .qfdos-header-root > .container { padding: 0.5rem 1rem 0.55rem; }
+  .btn { max-width: 100%; white-space: normal; }
 }
 
 /* ========== Topic Cards (Temas) ========== */
@@ -1307,8 +1594,8 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-left: 3.5px solid var(--border-color);
   transition: border-color var(--transition-fast);
 }
-.ann-card.ann-alta { border-left-color: var(--navy); }
-.ann-card.ann-normal { border-left-color: var(--teal); }
+.ann-card.ann-alta { border-left-color: var(--navy-ink); }
+.ann-card.ann-normal { border-left-color: var(--teal-ink); }
 
 /* ========== Molecule Drawer ========== */
 .mol-drawer-wrap {
@@ -1386,8 +1673,8 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   text-align: left;
   width: 100%;
 }
-.quiz-option:hover { border-color: var(--teal); background: var(--secondary-bg); }
-.quiz-option.selected { border-color: var(--navy); background: var(--primary-bg); }
+.quiz-option:hover { border-color: var(--teal-ink); background: var(--secondary-bg); }
+.quiz-option.selected { border-color: var(--navy-ink); background: var(--primary-bg); }
 .quiz-option.correct { border-color: var(--accent-emerald); background: rgba(16,185,129,0.08); }
 .quiz-option.incorrect { border-color: var(--accent-red); background: rgba(239,68,68,0.07); }
 
@@ -1403,7 +1690,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
 .markdown-content code { background: var(--surface-alt); padding: 2px 5px; border-radius: 3px; font-family: var(--font-mono); font-size: 0.85em; }
 .markdown-content pre { background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; overflow-x: auto; margin: 0.75rem 0; }
 .markdown-content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.84rem; }
-.markdown-content th { background: var(--primary-bg); color: var(--navy); font-weight: 700; padding: 7px 10px; border: 1px solid var(--border-color); }
+.markdown-content th { background: var(--primary-bg); color: var(--navy-ink); font-weight: 700; padding: 7px 10px; border: 1px solid var(--border-color); }
 .markdown-content td { padding: 6px 10px; border: 1px solid var(--border-color); }
 .markdown-content blockquote { border-left: 3px solid var(--teal); padding-left: 12px; color: var(--text-muted); font-style: italic; margin: 0.5rem 0; }
 
@@ -1499,9 +1786,9 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   cursor: pointer;
   transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
 }
-.uploader-drop:hover { border-color: var(--teal); background: var(--secondary-bg); }
+.uploader-drop:hover { border-color: var(--teal-ink); background: var(--secondary-bg); }
 .uploader-drop.is-dragging {
-  border-color: var(--teal);
+  border-color: var(--teal-ink);
   border-style: solid;
   background: var(--secondary-bg);
   transform: scale(1.008);
@@ -1515,7 +1802,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   place-items: center;
   border-radius: var(--radius-full);
   background: var(--secondary-bg);
-  color: var(--teal);
+  color: var(--teal-ink);
 }
 
 .uploader-error {
@@ -1585,7 +1872,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast);
 }
-.icon-btn:hover { background: var(--surface-alt); color: var(--teal); }
+.icon-btn:hover { background: var(--surface-alt); color: var(--teal-ink); }
 .icon-btn-danger:hover { background: var(--semantic-bad-bg); color: var(--accent-red); }
 
 .uploader-footer {
@@ -1874,7 +2161,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   gap: 4px;
   font-size: 0.74rem;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--teal-ink);
   flex-shrink: 0;
 }
 
@@ -2096,7 +2383,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  color: var(--teal);
+  color: var(--teal-ink);
   flex-shrink: 0;
   padding: 0 6px;
 }
@@ -2146,7 +2433,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   font-family: var(--font-display);
   font-size: 1.7rem;
   font-weight: 600;
-  color: var(--teal);
+  color: var(--teal-ink);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -2159,7 +2446,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-radius: var(--radius-sm);
   background: var(--secondary-bg);
 }
-.calc-limitante strong { color: var(--teal); }
+.calc-limitante strong { color: var(--teal-ink); }
 
 .calc-pasos {
   display: flex;
@@ -2177,7 +2464,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border-bottom: 1px dashed var(--border-color);
 }
 .calc-pasos li:last-child { border-bottom: none; padding-bottom: 0; }
-.calc-pasos li::marker { color: var(--teal); font-weight: 700; }
+.calc-pasos li::marker { color: var(--teal-ink); font-weight: 700; }
 
 .calc-paso-titulo {
   font-size: 0.8rem;
@@ -2213,7 +2500,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   font-variant-numeric: tabular-nums;
   padding-left: 2px;
 }
-.calc-igual strong { color: var(--teal); }
+.calc-igual strong { color: var(--teal-ink); }
 
 .calc-nota {
   font-size: 0.74rem;
@@ -2274,7 +2561,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   border: 1px solid var(--border-color);
   border-left: 3px solid var(--navy);
 }
-.calc-global .calc-resultado-grande { color: var(--navy); }
+.calc-global .calc-resultado-grande { color: var(--navy-ink); }
 
 /* Sección que ha fallado — el resto de la aplicación sigue en pie */
 .error-zona {
@@ -2512,61 +2799,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
   .mis-entregas-fecha { margin-left: 0; width: 100%; }
 }
 
-/* ==========================================================================
-   Buscador de la cabecera
-   Ocupa el hueco entre la marca y las herramientas. Antes ese espacio quedaba
-   vacío y, aunque las dos filas estaban alineadas al píxel, la de arriba
-   parecía descolgada por contraste con la barra continua de navegación.
-   ========================================================================== */
-.header-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: 460px;
-  /* Se pega a la marca y empuja las herramientas al extremo: el hueco queda
-     todo a la derecha, en vez de partirse a ambos lados del buscador. */
-  margin-right: auto;
-  padding: 5px 11px;
-  border-radius: var(--radius-md);
-  background: var(--surface-alt);
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font: inherit;
-  font-size: 0.8rem;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color var(--transition-fast), background var(--transition-fast);
-}
-.header-search:hover {
-  border-color: var(--border-strong);
-  background: var(--surface);
-}
-.header-search:focus-visible {
-  border-color: var(--border-focus);
-  background: var(--surface);
-}
-
-.header-search-texto {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.header-search kbd {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  padding: 1px 5px;
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-light);
-}
-
 /* Al estrecharse, el buscador se reduce a su icono antes de desaparecer */
 @media (max-width: 900px) {
   .header-search { max-width: none; }
@@ -2644,26 +2876,6 @@ html, body { overflow-x: hidden; max-width: 100%; }
    se desliza, y el degradado del borde avisa de que queda contenido a la
    derecha en lugar de dejarlo cortado sin más.
    ========================================================================== */
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 4px 6px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-}
-.header-nav::-webkit-scrollbar { display: none; }
-
-.nav-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-}
 /* A partir de aquí las pestañas se estrechan antes de tener que deslizarse.
    Estas reglas no funcionaban mientras los botones llevaban estilos en línea:
    un estilo en línea gana siempre a una media query. */

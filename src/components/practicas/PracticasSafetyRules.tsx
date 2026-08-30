@@ -233,8 +233,11 @@ export const PracticasSafetyRules: React.FC<PracticasSafetyRulesProps> = ({
                   gap: '0.4rem'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-title)' }}>
+                {/* El nombre ocupa su propia línea: etiquetas como «Ácido Mineral
+                    Corrosivo y Oxidante Fuerte» miden más que media tarjeta y
+                    antes partían el nombre del reactivo en cuatro renglones. */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '6px' }}>
+                  <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-title)', minWidth: 0, flex: '1 1 100%', overflowWrap: 'anywhere' }}>
                     {r.reagent}
                   </span>
                   <span className={`qfdos-badge ${badgeColor}`} style={{ fontSize: '0.68rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -374,7 +377,7 @@ export const PracticasSafetyRules: React.FC<PracticasSafetyRulesProps> = ({
       {/* Formulario de Firma Digital */}
       <form onSubmit={handleConfirmAndSign} className="qfdos-card" style={{ padding: '1.75rem', background: 'var(--surface)', border: '1.5px solid var(--border-color)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
-          <UserCheck size={22} color="var(--navy)" />
+          <UserCheck size={22} color="var(--navy-ink)" />
           <div>
             <h3 style={{ margin: 0, fontWeight: 800, fontSize: '1.15rem', color: 'var(--text-title)' }}>
               Firma del Compromiso y Declaración de Conformidad

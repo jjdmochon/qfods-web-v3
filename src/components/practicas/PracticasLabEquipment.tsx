@@ -341,8 +341,8 @@ export const PracticasLabEquipment: React.FC = () => {
               </div>
 
               {/* Vector SVG Image Container */}
-              <div style={{
-                background: '#ffffff',
+              <div className="panel-claro" style={{
+                
                 border: '1.5px solid var(--border)',
                 borderRadius: '12px',
                 padding: '0.5rem',
@@ -379,7 +379,7 @@ export const PracticasLabEquipment: React.FC = () => {
                       fontSize: '0.74rem'
                     }}
                   >
-                    <strong style={{ color: 'var(--navy)', display: 'block', marginBottom: '2px' }}>
+                    <strong style={{ color: 'var(--navy-ink)', display: 'block', marginBottom: '2px' }}>
                       📌 {kn.label}
                     </strong>
                     <span style={{ color: 'var(--text-muted)', lineHeight: 1.35 }}>{kn.text}</span>
@@ -551,7 +551,7 @@ export const PracticasLabEquipment: React.FC = () => {
                           <td style={{ fontWeight: 700, color: 'var(--text-title)' }}>
                             {item.name}
                           </td>
-                          <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy)' }}>
+                          <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy-ink)' }}>
                             {item.count}
                           </td>
                           <td>

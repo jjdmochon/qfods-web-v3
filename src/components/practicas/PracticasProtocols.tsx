@@ -85,7 +85,7 @@ export const PracticasProtocols: React.FC = () => {
           gap: '1rem'
         }}>
           <div>
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--teal-ink)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               {currentStep.subtitle}
             </div>
             <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: '0.25rem 0' }}>
@@ -96,7 +96,7 @@ export const PracticasProtocols: React.FC = () => {
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--surface)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-            <Calendar size={15} color="var(--navy)" />
+            <Calendar size={15} color="var(--navy-ink)" />
             <span style={{ fontSize: '0.76rem', fontWeight: 600, color: 'var(--text-title)' }}>
               {currentStep.dayAssigned}
             </span>
@@ -111,7 +111,7 @@ export const PracticasProtocols: React.FC = () => {
         <div className="qfdos-card" style={{ padding: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Sparkles size={16} color="var(--teal)" />
+              <Sparkles size={16} color="var(--teal-ink)" />
               <h4 style={{ margin: 0, fontWeight: 700, fontSize: '0.98rem', color: 'var(--text-title)' }}>
                 Esquema de Reacción Vectorial de Alta Resolución (400 DPI)
               </h4>
@@ -125,8 +125,8 @@ export const PracticasProtocols: React.FC = () => {
             </button>
           </div>
 
-          <div style={{
-            background: '#ffffff',
+          <div className="panel-claro" style={{
+            
             borderRadius: '10px',
             border: '1px solid var(--border-color)',
             padding: '1rem',
@@ -152,15 +152,15 @@ export const PracticasProtocols: React.FC = () => {
             border: '1px solid var(--border-color)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--navy)', textTransform: 'uppercase' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--navy-ink)', textTransform: 'uppercase' }}>
                 Producto Esperado
               </span>
-              <span className="font-tech" style={{ fontSize: '0.75rem', color: 'var(--teal)', fontWeight: 600 }}>
+              <span className="font-tech" style={{ fontSize: '0.75rem', color: 'var(--teal-ink)', fontWeight: 600 }}>
                 PM = {currentStep.product.mw} g/mol
               </span>
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <div style={{ width: '80px', height: '65px', background: '#fff', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div className="panel-claro" style={{ width: '80px', height: '65px', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Chem2DDrawer smiles={currentStep.product.smiles} width={75} height={60} />
               </div>
               <div style={{ flex: 1, fontSize: '0.82rem' }}>
@@ -197,7 +197,7 @@ export const PracticasProtocols: React.FC = () => {
                     border: '1px solid var(--border-color)'
                   }}
                 >
-                  <div style={{ width: '45px', height: '40px', background: '#fff', borderRadius: '4px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div className="panel-claro" style={{ width: '45px', height: '40px', borderRadius: '4px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Chem2DDrawer smiles={item.reagent.smiles} width={40} height={35} />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -205,7 +205,7 @@ export const PracticasProtocols: React.FC = () => {
                       {item.reagent.name}
                     </div>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', fontSize: '0.74rem' }}>
-                      <span className="font-tech" style={{ color: 'var(--teal)', fontWeight: 600 }}>{item.amountPrescribed}</span>
+                      <span className="font-tech" style={{ color: 'var(--teal-ink)', fontWeight: 600 }}>{item.amountPrescribed}</span>
                       <span style={{ color: 'var(--text-muted)' }}>({item.role})</span>
                     </div>
                   </div>
@@ -238,7 +238,7 @@ export const PracticasProtocols: React.FC = () => {
         {/* Procedure Breakdown */}
         <div className="qfdos-card" style={{ padding: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
-            <CheckCircle2 size={18} color="var(--navy)" />
+            <CheckCircle2 size={18} color="var(--navy-ink)" />
             <h4 style={{ margin: 0, fontWeight: 800, fontSize: '1rem', color: 'var(--text-title)' }}>
               Procedimiento Operativo Detallado
             </h4>
@@ -296,7 +296,7 @@ export const PracticasProtocols: React.FC = () => {
                   style={{
                     fontSize: '0.76rem',
                     background: 'rgba(30,58,138,0.06)',
-                    color: 'var(--navy)',
+                    color: 'var(--navy-ink)',
                     padding: '4px 9px',
                     borderRadius: '6px',
                     fontWeight: 600,
@@ -312,7 +312,7 @@ export const PracticasProtocols: React.FC = () => {
           {/* Practical Tips & Tricks */}
           <div className="qfdos-card" style={{ padding: '1.25rem', background: 'linear-gradient(135deg, rgba(13,148,136,0.05) 0%, rgba(45,212,191,0.05) 100%)', borderLeft: '4px solid var(--teal)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.5rem' }}>
-              <Info size={16} color="var(--teal)" />
+              <Info size={16} color="var(--teal-ink)" />
               <h4 style={{ margin: 0, fontWeight: 700, fontSize: '0.9rem', color: 'var(--teal-dark)' }}>
                 Consejos Clave de Purificación
               </h4>
@@ -332,7 +332,7 @@ export const PracticasProtocols: React.FC = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {TIMELINE.map((t, idx) => (
                 <div key={idx} style={{ fontSize: '0.76rem', display: 'flex', flexDirection: 'column', gap: '2px', borderBottom: idx < TIMELINE.length - 1 ? '1px solid var(--border-color)' : 'none', paddingBottom: '4px' }}>
-                  <span style={{ fontWeight: 700, color: 'var(--navy)' }}>{t.day}: {t.title}</span>
+                  <span style={{ fontWeight: 700, color: 'var(--navy-ink)' }}>{t.day}: {t.title}</span>
                   <span style={{ color: 'var(--text-muted)' }}>{t.desc}</span>
                 </div>
               ))}

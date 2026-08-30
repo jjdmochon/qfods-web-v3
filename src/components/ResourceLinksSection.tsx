@@ -66,7 +66,7 @@ export const ResourceLinksSection: React.FC<ResourceLinksSectionProps> = ({
       {/* Encabezado */}
       <div style={{ marginBottom: '1.75rem', maxWidth: '72ch' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 6 }}>
-          <Compass size={24} color="var(--teal)" />
+          <Compass size={24} color="var(--teal-ink)" />
           <h2 style={{ fontSize: '1.8rem', fontWeight: 600, color: 'var(--text-title)' }}>
             Enlaces de interés
           </h2>

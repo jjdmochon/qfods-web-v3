@@ -244,7 +244,7 @@ function renderInlineFormatted(text: string): React.ReactNode {
           padding: '1px 5px',
           fontFamily: 'var(--font-mono)',
           fontSize: '0.84em',
-          color: 'var(--navy)'
+          color: 'var(--navy-ink)'
         }}>
           {matchedStr.slice(1, -1)}
         </code>

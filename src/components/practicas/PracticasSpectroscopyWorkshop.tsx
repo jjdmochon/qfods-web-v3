@@ -140,7 +140,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
           gap: '1rem'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ width: '65px', height: '55px', background: '#fff', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="panel-claro" style={{ width: '65px', height: '55px', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Chem2DDrawer smiles={currentCompound.smiles} width={60} height={50} />
             </div>
             <div>
@@ -240,7 +240,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
           </div>
 
           {/* High Resolution Spectrum Image Box */}
-          <div className="qfdos-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff' }}>
+          <div className="qfdos-card panel-claro" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             
             <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
               <h4 style={{ margin: 0, fontWeight: 800, fontSize: '0.96rem', color: 'var(--text-title)' }}>
@@ -296,8 +296,8 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <strong className="font-tech" style={{ color: 'var(--navy)' }}>δ = {sig.ppm} ppm</strong>
-                        <span style={{ color: 'var(--teal)', fontWeight: 600 }}>{sig.type} {sig.integral ? `(${sig.integral})` : ''}</span>
+                        <strong className="font-tech" style={{ color: 'var(--navy-ink)' }}>δ = {sig.ppm} ppm</strong>
+                        <span style={{ color: 'var(--teal-ink)', fontWeight: 600 }}>{sig.type} {sig.integral ? `(${sig.integral})` : ''}</span>
                       </div>
                       <div style={{ color: 'var(--text-title)', fontWeight: 600 }}>{sig.assignment}</div>
                       {sig.deptSignal && (
@@ -314,7 +314,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                 </h5>
                 <div style={{ fontSize: '0.82rem', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <div>• <strong>Tipo de Ion:</strong> {currentCompound.msData.ionType}</div>
-                  <div>• <strong>m/z Experimental:</strong> <span className="font-tech" style={{ fontWeight: 700, color: 'var(--navy)' }}>{currentCompound.msData.mOverZ}</span> (Calculado: {currentCompound.msData.calcMOverZ}, Error: {currentCompound.msData.errorPpm} ppm)</div>
+                  <div>• <strong>m/z Experimental:</strong> <span className="font-tech" style={{ fontWeight: 700, color: 'var(--navy-ink)' }}>{currentCompound.msData.mOverZ}</span> (Calculado: {currentCompound.msData.calcMOverZ}, Error: {currentCompound.msData.errorPpm} ppm)</div>
                   <div>• <strong>Fórmula Elemental:</strong> <span className="font-tech">{currentCompound.msData.formula}</span></div>
                   <div>• <strong>Interpretación:</strong> {currentCompound.msData.explanation}</div>
                 </div>
@@ -337,7 +337,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
             
             {/* 1H Table */}
             <div style={{ border: '1px solid var(--border-color)', borderRadius: '8px', overflow: 'hidden' }}>
-              <div style={{ background: 'var(--surface-muted)', padding: '8px 14px', borderBottom: '1px solid var(--border-color)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--navy)' }}>
+              <div style={{ background: 'var(--surface-muted)', padding: '8px 14px', borderBottom: '1px solid var(--border-color)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--navy-ink)' }}>
                 Espectro de ¹H RMN
               </div>
               <div style={{ overflowX: 'auto' }}>
@@ -353,7 +353,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                   <tbody>
                     {currentCompound.peaks1H.map((p: SpectrumPeak, idx: number) => (
                       <tr key={idx}>
-                        <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy)' }}>{p.ppm}</td>
+                        <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy-ink)' }}>{p.ppm}</td>
                         <td>{p.type}</td>
                         <td className="font-tech">{p.integral || '-'}</td>
                         <td style={{ fontWeight: 600, color: 'var(--text-title)' }}>{p.assignment}</td>
@@ -366,7 +366,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
 
             {/* 13C & DEPT Table */}
             <div style={{ border: '1px solid var(--border-color)', borderRadius: '8px', overflow: 'hidden' }}>
-              <div style={{ background: 'var(--surface-muted)', padding: '8px 14px', borderBottom: '1px solid var(--border-color)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--teal)' }}>
+              <div style={{ background: 'var(--surface-muted)', padding: '8px 14px', borderBottom: '1px solid var(--border-color)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--teal-ink)' }}>
                 Espectro de ¹³C RMN y DEPT-135
               </div>
               <div style={{ overflowX: 'auto' }}>
@@ -381,7 +381,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                   <tbody>
                     {currentCompound.peaks13C.map((p: SpectrumPeak, idx: number) => (
                       <tr key={idx}>
-                        <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy)' }}>{p.ppm}</td>
+                        <td className="font-tech" style={{ fontWeight: 700, color: 'var(--navy-ink)' }}>{p.ppm}</td>
                         <td>
                           <span className={`qfdos-badge ${p.deptSignal === 'positivo' ? 'badge-teal' : p.deptSignal === 'negativo' ? 'badge-gold' : 'badge-navy'}`} style={{ fontSize: '0.68rem' }}>
                             {p.deptSignal || 'C cuaternario'}
@@ -422,7 +422,7 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                     borderLeft: '4px solid var(--teal)'
                   }}
                 >
-                  <Sparkles size={16} color="var(--teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                  <Sparkles size={16} color="var(--teal-ink)" style={{ flexShrink: 0, marginTop: '2px' }} />
                   <div style={{ fontSize: '0.85rem', color: 'var(--text-main)', lineHeight: 1.55 }}>
                     {keyText}
                   </div>
@@ -438,8 +438,8 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
             </h4>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div style={{ background: '#fff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700, color: 'var(--navy)', fontSize: '0.9rem' }}>
+              <div className="panel-claro" style={{ padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700, color: 'var(--navy-ink)', fontSize: '0.9rem' }}>
                   DHPP (4-Fenildihidropiridina)
                 </h5>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.78rem', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -450,8 +450,8 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                 </ul>
               </div>
 
-              <div style={{ background: '#fff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700, color: 'var(--teal)', fontSize: '0.9rem' }}>
+              <div className="panel-claro" style={{ padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 700, color: 'var(--teal-ink)', fontSize: '0.9rem' }}>
                   Nifedipina (4-(2-Nitrofenil)dihidropiridina)
                 </h5>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.78rem', color: 'var(--text-main)', display: 'flex', flexDirection: 'column', gap: '4px' }}>

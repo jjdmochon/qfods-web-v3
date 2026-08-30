@@ -52,7 +52,7 @@ export const MisEntregas: React.FC = () => {
     <div className="mis-entregas">
       <div className="mis-entregas-cabecera">
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Inbox size={17} color="var(--teal)" />
+          <Inbox size={17} color="var(--teal-ink)" />
           <strong>Mis entregas</strong>
           {entregas && (
             <span className="qfdos-badge badge-teal" style={{ fontSize: '0.65rem' }}>

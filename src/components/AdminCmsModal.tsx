@@ -455,7 +455,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
         {/* Header */}
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Settings size={22} color="var(--navy)" />
+            <Settings size={22} color="var(--navy-ink)" />
             <div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-title)' }}>
                 Panel de Administración CMS · Profesorado UGR
@@ -580,7 +580,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
                     onClick={() => setActiveTab('modules')}
                     style={{
                       background: 'none', border: 'none', padding: 0, font: 'inherit',
-                      color: 'var(--teal)', fontWeight: 700, cursor: 'pointer', textDecoration: 'underline'
+                      color: 'var(--teal-ink)', fontWeight: 700, cursor: 'pointer', textDecoration: 'underline'
                     }}
                   >
                     Módulos
@@ -740,7 +740,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
 
                     {/* SECTION: 4 RECURSOS OBLIGATORIOS DEL PROFESOR */}
                     <div style={{ background: 'var(--surface-alt)', padding: '12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
-                      <h5 style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--teal)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <h5 style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--teal-ink)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Upload size={16} /> Recursos y Enlaces Obligatorios por Módulo
                       </h5>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px' }}>
@@ -748,7 +748,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
                         {/* 1. Diapositivas PDF */}
                         <div>
                           <label style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-title)', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '3px' }}>
-                            <FileText size={13} color="var(--navy)" /> PDF de Diapositivas
+                            <FileText size={13} color="var(--navy-ink)" /> PDF de Diapositivas
                           </label>
                           <input
                             type="text"
@@ -763,7 +763,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
                         {/* 2. Apuntes PDF */}
                         <div>
                           <label style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-title)', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '3px' }}>
-                            <FileText size={13} color="var(--teal)" /> PDF de Apuntes Oficiales
+                            <FileText size={13} color="var(--teal-ink)" /> PDF de Apuntes Oficiales
                           </label>
                           <input
                             type="text"
@@ -938,7 +938,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
                               </span>
                             )}
                           </div>
-                          <span style={{ fontSize: '0.78rem', color: 'var(--teal)', fontWeight: 600 }}>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--teal-ink)', fontWeight: 600 }}>
                             {topic.subtitle}
                           </span>
 
@@ -1232,7 +1232,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
 
                 {resourceLinks.map(l => (
                   <div key={l.id} className="link-admin-item">
-                    <Link2 size={16} color="var(--teal)" style={{ flexShrink: 0, marginTop: 3 }} />
+                    <Link2 size={16} color="var(--teal-ink)" style={{ flexShrink: 0, marginTop: 3 }} />
 
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap' }}>
@@ -1479,7 +1479,7 @@ export const AdminCmsModal: React.FC<AdminCmsModalProps> = ({
                     {/* Response display or response form */}
                     {q.response ? (
                       <div style={{ background: 'var(--surface-alt)', padding: '10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-                        <strong style={{ fontSize: '0.78rem', color: 'var(--navy)', display: 'block', marginBottom: '3px' }}>
+                        <strong style={{ fontSize: '0.78rem', color: 'var(--navy-ink)', display: 'block', marginBottom: '3px' }}>
                           Respuesta del Profesor:
                         </strong>
                         <p style={{ fontSize: '0.82rem', color: 'var(--text-main)', lineHeight: 1.5 }}>

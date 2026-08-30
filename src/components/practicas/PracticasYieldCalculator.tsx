@@ -386,7 +386,7 @@ export const PracticasYieldCalculator: React.FC = () => {
               {currentPreset.reactants.map((r, idx) => (
                 <React.Fragment key={r.reagent.id}>
                   {idx > 0 && (
-                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--teal)', padding: '0 4px' }}>
+                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--teal-ink)', padding: '0 4px' }}>
                       +
                     </span>
                   )}
@@ -422,7 +422,7 @@ export const PracticasYieldCalculator: React.FC = () => {
 
             {/* Reaction Arrow */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 8px' }}>
-              <ArrowRight size={24} color="var(--teal)" style={{ strokeWidth: 2.5 }} />
+              <ArrowRight size={24} color="var(--teal-ink)" style={{ strokeWidth: 2.5 }} />
               <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                 Reacción
               </span>
@@ -449,10 +449,10 @@ export const PracticasYieldCalculator: React.FC = () => {
                   bare={true}
                 />
               )}
-              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--navy)', marginTop: 4 }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--navy-ink)', marginTop: 4 }}>
                 {currentPreset.product.name}
               </span>
-              <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', color: 'var(--teal)', fontWeight: 700 }}>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', color: 'var(--teal-ink)', fontWeight: 700 }}>
                 PM: {currentPreset.product.mw} g/mol
               </span>
             </div>
@@ -469,7 +469,7 @@ export const PracticasYieldCalculator: React.FC = () => {
           <div className="qfdos-card" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Scale size={16} color="var(--navy)" />
+                <Scale size={16} color="var(--navy-ink)" />
                 <h4 style={{ margin: 0, fontWeight: 700, fontSize: '0.98rem', color: 'var(--text-title)' }}>
                   1. Cantidades Puestas en el Laboratorio
                 </h4>
@@ -627,7 +627,7 @@ export const PracticasYieldCalculator: React.FC = () => {
               <div>
                 2. <strong>Moles teóricos de producto:</strong> {calculationData.limitingItem?.reagent.name} (limitante con {calculationData.limitingItem?.normalizedRatio.toFixed(4)} mol eq.) rinde un máximo de <strong>{(calculationData.theoreticalProductMoles * 1000).toFixed(2)} mmol</strong> de {currentPreset.product.name}.
               </div>
-              <div style={{ padding: '8px 12px', background: 'rgba(30,58,138,0.06)', borderRadius: '6px', borderLeft: '3px solid var(--navy)', fontWeight: 700, color: 'var(--navy)' }}>
+              <div style={{ padding: '8px 12px', background: 'rgba(30,58,138,0.06)', borderRadius: '6px', borderLeft: '3px solid var(--navy)', fontWeight: 700, color: 'var(--navy-ink)' }}>
                 Masa Teórica Máxima = {(calculationData.theoreticalProductMoles * 1000).toFixed(2)} mmol × {currentPreset.product.mw} g/mol = {calculationData.theoreticalProductMassG.toFixed(3)} g
               </div>
             </div>
@@ -641,7 +641,7 @@ export const PracticasYieldCalculator: React.FC = () => {
           {/* Yield Calculation Card */}
           <div className="qfdos-card" style={{ padding: '1.5rem', borderTop: '4px solid var(--teal)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
-              <Sparkles size={18} color="var(--teal)" />
+              <Sparkles size={18} color="var(--teal-ink)" />
               <h4 style={{ margin: 0, fontWeight: 800, fontSize: '1.05rem', color: 'var(--text-title)' }}>
                 3. Cálculo del Rendimiento Real Obtenido
               </h4>
@@ -660,7 +660,7 @@ export const PracticasYieldCalculator: React.FC = () => {
                   value={experimentalMass || ''}
                   onChange={e => setExperimentalMass(parseFloat(e.target.value) || 0)}
                   className="form-input"
-                  style={{ width: '100%', fontSize: '1.1rem', fontWeight: 700, padding: '8px 12px', fontFamily: 'Roboto Mono, monospace', color: 'var(--navy)' }}
+                  style={{ width: '100%', fontSize: '1.1rem', fontWeight: 700, padding: '8px 12px', fontFamily: 'Roboto Mono, monospace', color: 'var(--navy-ink)' }}
                 />
               </div>
 
@@ -809,7 +809,7 @@ export const PracticasYieldCalculator: React.FC = () => {
                       <div style={{ color: 'var(--text-muted)' }}>{rec.date} · {rec.studentName} ({rec.studentGroup})</div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div className="font-tech" style={{ fontWeight: 700, color: 'var(--teal)' }}>{rec.yieldPercent}%</div>
+                      <div className="font-tech" style={{ fontWeight: 700, color: 'var(--teal-ink)' }}>{rec.yieldPercent}%</div>
                       <div style={{ color: 'var(--text-muted)' }}>{rec.experimentalMass} g / {rec.theoreticalMass} g</div>
                     </div>
                   </div>

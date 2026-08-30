@@ -96,8 +96,8 @@
 
 .btn-outline:hover {
   background: var(--primary-bg);
-  border-color: var(--navy);
-  color: var(--navy);
+  border-color: var(--navy-ink);
+  color: var(--navy-ink);
 }
 
 .btn-sm {
@@ -134,13 +134,13 @@
 
 .badge-navy {
   background: var(--primary-bg);
-  color: var(--navy);
+  color: var(--navy-ink);
   border: 1px solid rgba(30, 58, 138, 0.2);
 }
 
 .badge-teal {
   background: var(--secondary-bg);
-  color: var(--teal);
+  color: var(--teal-ink);
   border: 1px solid rgba(13, 148, 136, 0.2);
 }
 
@@ -163,6 +163,13 @@
 [data-theme='dark'] .badge-amber {
   color: #fbbf24;
 }
+
+/* .badge-emerald tampoco tenía versión oscura: 3,0:1 sobre tarjeta. */
+[data-theme='dark'] .badge-emerald {
+  color: #6ee7b7;
+}
+[data-theme='dark'] .badge-yellow { color: #fde047; }
+[data-theme='dark'] .badge-gold   { color: #facc15; }
 
 .badge-emerald {
   background: rgba(16, 185, 129, 0.1);
@@ -197,12 +204,12 @@
 }
 
 .tab-btn:hover {
-  color: var(--navy);
+  color: var(--navy-ink);
 }
 
 .tab-btn.active {
-  color: var(--navy);
-  border-bottom-color: var(--navy);
+  color: var(--navy-ink);
+  border-bottom-color: var(--navy-ink);
 }
 
 [data-theme='dark'] .tab-btn:hover,
@@ -298,7 +305,7 @@
 
 .form-input:focus, .form-select:focus, .form-textarea:focus {
   outline: none;
-  border-color: var(--teal);
+  border-color: var(--teal-ink);
   box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
 }
 

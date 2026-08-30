@@ -75,7 +75,7 @@ export const StudentQuestionModal: React.FC<StudentQuestionModalProps> = ({
         {/* Header */}
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <HelpCircle size={20} color="var(--teal)" />
+            <HelpCircle size={20} color="var(--teal-ink)" />
             <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)' }}>
               Buzón de Dudas & Consultas Académicas
             </h3>
@@ -157,7 +157,7 @@ export const StudentQuestionModal: React.FC<StudentQuestionModalProps> = ({
           {/* List of Previous Questions & Responses */}
           <div>
             <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-title)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <MessageSquare size={16} color="var(--navy)" />
+              <MessageSquare size={16} color="var(--navy-ink)" />
               Historial de Consultas Respondidas ({questionsList.length})
             </h4>
 
@@ -191,7 +191,7 @@ export const StudentQuestionModal: React.FC<StudentQuestionModalProps> = ({
                       color: 'var(--text-main)',
                       lineHeight: 1.5
                     }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--navy)', fontWeight: 700, marginBottom: '2px', fontSize: '0.78rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--navy-ink)', fontWeight: 700, marginBottom: '2px', fontSize: '0.78rem' }}>
                         <UserCheck size={14} /> Respuesta del Profesor (Dr. Juan José Díaz-Mochón):
                       </div>
                       {q.response}

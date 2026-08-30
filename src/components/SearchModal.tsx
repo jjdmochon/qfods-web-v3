@@ -107,7 +107,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           gap: '10px',
           background: 'var(--surface-raised)'
         }}>
-          <Search size={20} color="var(--navy)" />
+          <Search size={20} color="var(--navy-ink)" />
           <input
             type="text"
             placeholder="Buscar temas, fármacos, dianas PDB, biofísica, glosario..."
@@ -161,7 +161,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <Icon size={18} color="var(--teal)" />
+                        <Icon size={18} color="var(--teal-ink)" />
                         <div>
                           <strong style={{ fontSize: '0.85rem', color: 'var(--text-title)', display: 'block' }}>
                             {tool.title}
@@ -242,7 +242,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     }}
                   >
                     <div>
-                      <strong style={{ fontSize: '0.85rem', color: 'var(--navy)' }}>{drug.name}</strong>
+                      <strong style={{ fontSize: '0.85rem', color: 'var(--navy-ink)' }}>{drug.name}</strong>
                       <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '8px' }}>
                         {drug.role} ({topic.number})
                       </span>

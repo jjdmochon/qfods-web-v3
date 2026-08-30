@@ -286,8 +286,8 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               Resultado y Procedimiento de Laboratorio
             </h4>
 
-            <div style={{
-              background: '#fff',
+            <div className="panel-claro" style={{
+              
               borderRadius: '10px',
               padding: '1.25rem',
               border: '1px solid var(--border-color)',
@@ -295,10 +295,10 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               marginBottom: '1rem'
             }}>
               <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', fontWeight: 600 }}>MASA A PESAR EN BALANZA</div>
-              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--navy)', fontFamily: 'Montserrat, sans-serif' }}>
+              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--navy-ink)', fontFamily: 'Montserrat, sans-serif' }}>
                 {solidWeighedMass.toFixed(3)} g
               </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--teal)', fontWeight: 700 }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--teal-ink)', fontWeight: 700 }}>
                 de {solidName} ({solidPurity}% pureza)
               </div>
             </div>
@@ -428,8 +428,8 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               Molaridad Comercial y Volumen a Medir
             </h4>
 
-            <div style={{
-              background: '#fff',
+            <div className="panel-claro" style={{
+              
               borderRadius: '10px',
               padding: '1.25rem',
               border: '1px solid var(--border-color)',
@@ -437,10 +437,10 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               marginBottom: '1rem'
             }}>
               <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>VOLUMEN DE ÁCIDO/BASE A PIPETEAR</div>
-              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--teal)', fontFamily: 'Montserrat, sans-serif' }}>
+              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--teal-ink)', fontFamily: 'Montserrat, sans-serif' }}>
                 {liquidNeededVolMl.toFixed(2)} mL
               </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--navy)', fontWeight: 700 }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--navy-ink)', fontWeight: 700 }}>
                 (Molaridad de la botella = {liquidCommercialMolarity.toFixed(2)} M)
               </div>
             </div>
@@ -521,8 +521,8 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               Volumen Alícuota a Tomar
             </h4>
 
-            <div style={{
-              background: '#fff',
+            <div className="panel-claro" style={{
+              
               borderRadius: '10px',
               padding: '1.25rem',
               border: '1px solid var(--border-color)',
@@ -530,10 +530,10 @@ export const PracticasSolutionsCalculator: React.FC = () => {
               marginBottom: '1rem'
             }}>
               <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>VOLUMEN DE ALÍCUOTA MADRE (V₁)</div>
-              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--navy)', fontFamily: 'Montserrat, sans-serif' }}>
+              <div style={{ fontSize: '2.2rem', fontWeight: 900, color: 'var(--navy-ink)', fontFamily: 'Montserrat, sans-serif' }}>
                 {dilutionV1NeededMl.toFixed(2)} mL
               </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--teal)', fontWeight: 700 }}>
+              <div style={{ fontSize: '0.78rem', color: 'var(--teal-ink)', fontWeight: 700 }}>
                 Completar con agua desionizada hasta {dVol2} mL
               </div>
             </div>
@@ -643,7 +643,7 @@ export const PracticasSolutionsCalculator: React.FC = () => {
                 {feedback.fullSteps && (
                   <div style={{ marginTop: '0.75rem', fontSize: '0.82rem', color: 'var(--text-main)' }}>
                     <div style={{ fontWeight: 700, marginBottom: '4px' }}>Resolución Explicada:</div>
-                    <div style={{ whiteSpace: 'pre-line', background: '#fff', padding: '10px 14px', borderRadius: '6px', border: '1px solid var(--border-color)', fontFamily: 'Roboto Mono, monospace', fontSize: '0.78rem', lineHeight: 1.5 }}>
+                    <div className="panel-claro" style={{ whiteSpace: 'pre-line', padding: '10px 14px', borderRadius: '6px', border: '1px solid var(--border-color)', fontFamily: 'Roboto Mono, monospace', fontSize: '0.78rem', lineHeight: 1.5 }}>
                       {feedback.fullSteps}
                     </div>
                   </div>

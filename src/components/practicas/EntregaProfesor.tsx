@@ -60,7 +60,7 @@ export const EntregaProfesor: React.FC<EntregaProfesorProps> = ({
   return (
     <div className="entrega-box">
       <div className="entrega-head">
-        <Send size={15} color="var(--teal)" />
+        <Send size={15} color="var(--teal-ink)" />
         <strong>Enviar al profesor</strong>
       </div>
 

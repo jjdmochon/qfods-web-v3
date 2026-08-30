@@ -158,7 +158,7 @@ ${q.options.map((opt, oIdx) => {
         {/* Header */}
         <div className="modal-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <FileText size={22} color="var(--teal)" />
+            <FileText size={22} color="var(--teal-ink)" />
             <div>
               <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-title)', margin: 0 }}>
                 Generador & Editor de Preguntas de Examen
@@ -352,7 +352,7 @@ ${q.options.map((opt, oIdx) => {
                         fontSize: '0.8rem',
                         color: 'var(--text-main)'
                       }}>
-                        <strong style={{ color: 'var(--teal)' }}>Fundamento Farmacológico:</strong> {q.explanation}
+                        <strong style={{ color: 'var(--teal-ink)' }}>Fundamento Farmacológico:</strong> {q.explanation}
                       </div>
                     </div>
                   ))}
@@ -436,7 +436,7 @@ ${q.options.map((opt, oIdx) => {
                         border: `1px solid ${manualCorrectIndex === oIdx ? '#10b981' : 'var(--border-color)'}`
                       }}
                     >
-                      <span className="font-mono" style={{ fontWeight: 800, color: 'var(--navy)' }}>
+                      <span className="font-mono" style={{ fontWeight: 800, color: 'var(--navy-ink)' }}>
                         {String.fromCharCode(65 + oIdx)})
                       </span>
                       <input

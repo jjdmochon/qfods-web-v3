@@ -79,7 +79,7 @@ export const AffinitySimulator: React.FC = () => {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 700, marginBottom: '4px' }}>
                 <span>Constante de Disociación (Kd):</span>
-                <span className="font-mono" style={{ color: 'var(--navy)' }}>{kd.toFixed(2)} nM</span>
+                <span className="font-mono" style={{ color: 'var(--navy-ink)' }}>{kd.toFixed(2)} nM</span>
               </div>
               <input
                 type="range"
@@ -100,7 +100,7 @@ export const AffinitySimulator: React.FC = () => {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 700, marginBottom: '4px' }}>
                 <span>Constante de Inhibición (Ki):</span>
-                <span className="font-mono" style={{ color: 'var(--teal)' }}>{ki.toFixed(2)} nM</span>
+                <span className="font-mono" style={{ color: 'var(--teal-ink)' }}>{ki.toFixed(2)} nM</span>
               </div>
               <input
                 type="range"
@@ -194,7 +194,7 @@ export const AffinitySimulator: React.FC = () => {
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                 Valor Experimental de IC50
               </span>
-              <div className="font-mono" style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--teal)', margin: '4px 0' }}>
+              <div className="font-mono" style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--teal-ink)', margin: '4px 0' }}>
                 {ic50.toFixed(2)} <span style={{ fontSize: '0.9rem' }}>nM</span>
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
@@ -207,7 +207,7 @@ export const AffinitySimulator: React.FC = () => {
               <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>
                 Energía Libre de Gibbs (ΔG°)
               </span>
-              <div className="font-mono" style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--navy)', margin: '4px 0' }}>
+              <div className="font-mono" style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--navy-ink)', margin: '4px 0' }}>
                 {deltaG_kcal.toFixed(2)} <span style={{ fontSize: '0.9rem' }}>kcal/mol</span>
               </div>
               <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
@@ -246,12 +246,12 @@ export const AffinitySimulator: React.FC = () => {
           <div className="qfdos-card" style={{ padding: '1.25rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <BarChart2 size={16} color="var(--teal)" />
+                <BarChart2 size={16} color="var(--teal-ink)" />
                 <h4 style={{ fontSize: '0.9rem', color: 'var(--text-title)', fontWeight: 700 }}>
                   Curva de Saturación Ligando-Receptor: Ocupación (%) vs. [L]
                 </h4>
               </div>
-              <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--teal)' }}>
+              <span className="font-mono" style={{ fontSize: '0.72rem', color: 'var(--teal-ink)' }}>
                 50% Ocupación = {kd.toFixed(2)} nM
               </span>
             </div>
@@ -308,7 +308,7 @@ export const AffinitySimulator: React.FC = () => {
       {/* Pedagogical Takeaways */}
       <div className="qfdos-card" style={{ marginTop: '1.5rem', background: 'var(--surface-alt)', borderLeft: '4px solid var(--navy)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <Zap size={18} color="var(--navy)" />
+          <Zap size={18} color="var(--navy-ink)" />
           <h4 style={{ fontSize: '0.92rem', color: 'var(--text-title)', fontWeight: 700 }}>
             Fundamento Farmacológico para Examen de QFDOS
           </h4>

@@ -46,7 +46,7 @@ export const CalendarioClassroom: React.FC = () => {
       <div className="classroom-cal-cabecera">
         <div>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-title)', margin: 0 }}>
-            <CalendarDays size={17} style={{ verticalAlign: -3, marginRight: 6, color: 'var(--teal)' }} />
+            <CalendarDays size={17} style={{ verticalAlign: -3, marginRight: 6, color: 'var(--teal-ink)' }} />
             Calendario del grupo en Classroom
           </h3>
           <p style={{ fontSize: '0.83rem', color: 'var(--text-muted)', margin: '3px 0 0', maxWidth: '68ch', lineHeight: 1.55 }}>
