@@ -6,6 +6,7 @@ import {
   AcademicCalendarEvent
 } from '../data/courseInfoData';
 import { descargarIcs } from '../services/calendarioIcs';
+import { CalendarioClassroom } from './CalendarioClassroom';
 import {
   Calendar, Clock, MapPin, Mail, ExternalLink, BookOpen,
   Sparkles, CheckCircle2, AlertCircle, FileText,
@@ -731,6 +732,8 @@ export const CourseInfoSection: React.FC = () => {
       {/* PESTAÑA 3: CALENDARIO ACADÉMICO & FECHAS CLAVE */}
       {activeTab === 'calendario' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+          <CalendarioClassroom />
           
           {/* Cabecera y Filtros del Calendario */}
           <div className="qfdos-card" style={{ padding: '1.25rem' }}>

@@ -2444,3 +2444,60 @@ html, body { overflow-x: hidden; max-width: 100%; }
   line-height: 1.55;
   color: var(--text-muted);
 }
+
+/* ==========================================================================
+   Calendario incrustado de Classroom
+   ========================================================================== */
+.classroom-cal-cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+.classroom-cal-modos { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* Google entrega el iframe con medidas fijas (800×600); aquí se ajusta al
+   ancho disponible para que no desborde en pantallas estrechas. */
+.classroom-cal-marco {
+  width: 100%;
+  height: 620px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #fff;
+}
+.classroom-cal-marco.is-agenda { height: 460px; }
+.classroom-cal-marco iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.classroom-cal-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  /* En móvil la vista de mes es ilegible: la agenda aprovecha mejor el alto */
+  .classroom-cal-marco { height: 520px; }
+  .classroom-cal-marco.is-agenda { height: 420px; }
+  .classroom-cal-modos { width: 100%; }
+  .classroom-cal-modos .btn { flex: 1; }
+}
+
+/* El iframe se sirve desde Google y no sigue el tema de la página: en modo
+   oscuro se le baja algo el brillo para que no deslumbre. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .classroom-cal-marco iframe { filter: brightness(0.92); }
+}
+:root[data-theme='dark'] .classroom-cal-marco iframe { filter: brightness(0.92); }
+
+@media print {
+  .classroom-cal-marco, .classroom-cal-acciones { display: none !important; }
+}
