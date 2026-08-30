@@ -1222,9 +1222,9 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   .brand-sub { display: none; }
   .tool-label, .admin-btn-label { display: none; }
 }
-@media (max-width: 860px) {
-  .header-search { max-width: 100%; order: 3; flex-basis: 100%; }
-}
+/* El `order: 3` que había aquí mandaba el buscador detrás de las
+   herramientas y contradecía la escalera de arriba: a 900 px se reduce a su
+   icono junto a la marca, y a 560 px desaparece. */
 
 /* ========== Hero Section Redesign (Top Tier Academic Standard) ========== */
 .qfdos-hero-section {
