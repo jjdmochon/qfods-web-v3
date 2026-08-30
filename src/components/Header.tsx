@@ -84,7 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="qfdos-header-root">
       <div className="container">
         {/* Fila Superior: Marca Principal + Búsqueda Inteligente + Herramientas */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1.25rem' }}>
+        <div className="header-fila">
           {/* Brand */}
           <button
             onClick={() => setActiveTab('hub')}

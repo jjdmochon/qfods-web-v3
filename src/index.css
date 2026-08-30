@@ -936,6 +936,17 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   color: var(--hdr-field-ink);
 }
 
+/* La fila lleva clase propia porque en línea ganaba a las media queries: en
+   móvil no se podía hacer que envolviera. */
+.header-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
 .header-tools { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
 
 /* La acción principal es navy. Antes era teal, y DESIGN.md reserva el teal
@@ -1529,7 +1540,7 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
 
 @media (pointer: coarse) {
   .nav-tab { min-height: 44px; }
-  .header-tools .btn,
+  .btn,
   .btn-sm,
   .btn-ghost-clean,
   .user-chip,
@@ -1541,7 +1552,9 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
    no desbordaba visiblemente porque `overflow-x: hidden` lo recortaba. */
 @media (max-width: 560px) {
   .header-search { display: none; }
-  .header-tools { flex-wrap: wrap; justify-content: flex-end; }
+  .header-fila { flex-wrap: wrap; gap: 0.5rem; }
+  .header-brand { flex: 1 1 auto; min-width: 0; }
+  .header-tools { flex-wrap: wrap; justify-content: flex-end; flex-shrink: 1; }
   .qfdos-header-root > .container { padding: 0.5rem 1rem 0.55rem; }
   .btn { max-width: 100%; white-space: normal; }
 }
