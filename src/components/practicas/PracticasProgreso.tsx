@@ -3,6 +3,7 @@ import { CheckCircle2, Circle, Loader2, AlertCircle, ArrowRight, RefreshCw } fro
 import { useAuth } from '../../context/AuthContext';
 import { misEntregas, EntregaPropia, publicacionDisponible } from '../../services/contenidoRemoto';
 import { MisEntregas } from '../MisEntregas';
+import { MiSemanaPracticas } from '../MiSemanaPracticas';
 
 interface PracticasProgresoProps {
   /** Lleva a la subpestaña que resuelve cada pendiente */
@@ -135,6 +136,8 @@ export const PracticasProgreso: React.FC<PracticasProgresoProps> = ({ onIr }) =>
           </button>
         </div>
       )}
+
+      <MiSemanaPracticas />
 
       {/* Detalle de cada entrega */}
       <MisEntregas />

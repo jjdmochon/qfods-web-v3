@@ -302,7 +302,7 @@ export const QFDOS_INFO = {
   institution: "Universidad de Granada (UGR)",
   faculty: "Facultad de Farmacia",
   department: "Química Farmacéutica y Orgánica",
-  professors: ["Dr. Juan José Díaz-Mochón (Grupo E)", "Dr. Joaquín Campos Rosa (Grupo C)"],
+  professors: ["Dr. Juan José Díaz-Mochón (Profesor Responsable · Grupo E)"],
   designSystem: "QFDOS Structural Affinity Identity v2.0",
   driveFolderUrl: "https://drive.google.com/drive/folders/1_QFDOS_2627_Classroom",
   evaluacion: {

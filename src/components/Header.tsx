@@ -49,100 +49,93 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'admet',      label: 'ADMET',            icon: <Activity size={14} /> },
     { id: 'glosario',   label: 'Glosario',         icon: <BookOpen size={14} /> },
     { id: 'enlaces',    label: 'Enlaces',          icon: <Compass size={14} /> },
-    { id: 'evaluacion', label: 'Evaluación',       icon: <GraduationCap size={14} /> },
+    { id: 'evaluacion', label: 'Evaluación',       icon: <ShieldCheck size={14} /> },
   ];
 
   const initials = user?.name
     ? user.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
-    : '?';
+    : 'JJ';
 
   return (
-    <header style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: 'var(--glass-bg)',
-      borderBottom: '1px solid var(--glass-border)',
-      boxShadow: '0 2px 12px rgba(30,58,138,0.07)',
-      backdropFilter: 'blur(16px)',
-      WebkitBackdropFilter: 'blur(16px)'
-    }}>
-      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', padding: '0.45rem 1.5rem' }}>
-        {/* Fila Superior: Marca + Herramientas / Perfil */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1rem' }}>
+    <header className="qfdos-header-root">
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', padding: '0.5rem 1.5rem' }}>
+        {/* Fila Superior: Marca Principal + Búsqueda Inteligente + Herramientas */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '1.25rem' }}>
           {/* Brand */}
           <button
             onClick={() => setActiveTab('hub')}
             className="header-brand"
           >
-            <img
-              src="https://i.ibb.co/HLCYDc3c/Logo-primario-QFDOS.png"
-              alt="QFDOS"
-              style={{ width: 32, height: 32, borderRadius: 8 }}
-              onError={e => { e.currentTarget.style.display = 'none'; }}
-            />
+            <div className="header-logo-badge">
+              <img
+                src="https://i.ibb.co/HLCYDc3c/Logo-primario-QFDOS.png"
+                alt="QFDOS"
+                className="header-logo-img"
+                onError={e => { e.currentTarget.style.display = 'none'; }}
+              />
+            </div>
             <div style={{ lineHeight: 1.15, textAlign: 'left' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                <span style={{ fontWeight: 800, fontSize: '0.92rem', color: 'var(--text-title)', letterSpacing: '-0.01em' }}>QFDOS</span>
-                <span className="qfdos-badge badge-teal" style={{ fontSize: '0.58rem', padding: '1px 5px' }}>v3</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span className="brand-title">QFDOS</span>
+                <span className="brand-version-badge">2026/27</span>
+                <span className="qfdos-badge badge-teal" style={{ fontSize: '0.62rem', padding: '1px 6px', fontWeight: 800 }}>Grupo E</span>
               </div>
-              <span className="brand-sub" style={{ fontSize: '0.62rem', color: 'var(--text-muted)' }}>Química Farmacéutica II · UGR</span>
+              <span className="brand-sub">Química Farmacéutica II · Fac. Farmacia UGR</span>
             </div>
           </button>
 
-          {/* Buscador: ocupa el espacio entre la marca y las herramientas */}
+          {/* Buscador: ocupa el espacio central */}
           <button
             onClick={onOpenSearch}
             className="header-search"
             title="Búsqueda global (Ctrl+K)"
           >
-            <Search size={15} />
-            <span className="header-search-texto">Buscar temas, fármacos, dianas…</span>
-            <kbd>⌘K</kbd>
+            <Search size={15} className="header-search-icon" />
+            <span className="header-search-texto">Buscar dianas, fármacos, cinética, RMN…</span>
+            <kbd className="header-search-kbd">⌘K</kbd>
           </button>
 
           {/* Right tools */}
-          <div className="header-tools" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div className="header-tools">
             {/* Exam AI */}
             <button
               onClick={onOpenExamGenerator}
-              className="btn btn-sm btn-secondary"
+              className="btn btn-sm btn-header-action"
               title="Generador de Exámenes IA"
             >
               <FileText size={14} /><span className="tool-label">Examen IA</span>
             </button>
 
-            {/* Buzón */}
+            {/* Buzón de Consultas */}
             <button
               onClick={onOpenStudentQuestion}
-              className="btn btn-sm btn-ghost"
-              title="Buzón de Dudas"
+              className="btn btn-sm btn-ghost-clean"
+              title="Buzón de Consultas y Tutorías"
             >
-              <HelpCircle size={15} />
+              <HelpCircle size={16} />
             </button>
 
             {/* Admin (sólo profesorado) */}
             {isProfesor && (
               <button
                 onClick={onOpenAdminCms}
-                className="btn btn-sm btn-secondary"
-                style={{ fontWeight: 700, whiteSpace: 'nowrap' }}
+                className="btn btn-sm btn-header-admin"
                 title="Subir materiales y administrar el curso"
               >
                 <Settings size={14} />
-                <span className="admin-btn-label">Gestionar curso</span>
+                <span className="admin-btn-label">Gestión Docente</span>
               </button>
             )}
 
             {/* Theme toggle */}
             <button
               onClick={toggleTheme}
-              className="btn btn-sm btn-ghost"
-              title={theme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
+              className="btn btn-sm btn-ghost-clean"
+              title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
               {theme === 'dark'
-                ? <Sun size={15} color="#f59e0b" />
-                : <Moon size={15} color="var(--navy)" />
+                ? <Sun size={16} color="#fbbf24" />
+                : <Moon size={16} color="var(--navy)" />
               }
             </button>
 
@@ -159,19 +152,19 @@ export const Header: React.FC<HeaderProps> = ({
                   <div className="user-avatar-fallback">{initials}</div>
                 )}
                 <div className="user-chip-text">
-                  <div className="user-chip-name">{user?.name?.split(' ')[0]}</div>
+                  <div className="user-chip-name">{user?.name?.split(' ')[0] || 'Profesor'}</div>
                   <div className="user-chip-role">
                     {!isInstitucional && (
                       <span
-                        title="Has entrado con una cuenta personal de Google, no con la de la UGR"
-                        style={{ color: 'var(--accent-amber)', fontWeight: 700, marginRight: 5 }}
+                        title="Has entrado con una cuenta personal de Google"
+                        style={{ color: 'var(--accent-amber)', fontWeight: 700, marginRight: 4 }}
                       >
-                        Cuenta personal ·
+                        Personal ·
                       </span>
                     )}
                     {isProfesor
-                      ? <span style={{ color: 'var(--teal)', fontWeight: 700 }}>Profesor</span>
-                      : <span>Estudiante</span>
+                      ? <span style={{ color: 'var(--teal)', fontWeight: 700 }}>Prof. Responsable</span>
+                      : <span>Estudiante (Gr. E)</span>
                     }
                   </div>
                 </div>
@@ -187,18 +180,18 @@ export const Header: React.FC<HeaderProps> = ({
                   border: '1px solid var(--border-color)',
                   borderRadius: 'var(--radius-lg)',
                   boxShadow: 'var(--shadow-lg)',
-                  minWidth: 220,
+                  minWidth: 230,
                   overflow: 'hidden',
                   animation: 'slideUp 160ms var(--ease-out)',
                   zIndex: 200
                 }}>
                   <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border-color)', background: 'var(--surface-alt)' }}>
-                    <div style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-title)' }}>{user?.name}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 2 }}>{user?.email}</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.86rem', color: 'var(--text-title)' }}>{user?.name}</div>
+                    <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{user?.email}</div>
                     {isProfesor && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6 }}>
-                        <ShieldCheck size={12} color="var(--teal)" />
-                        <span style={{ fontSize: '0.72rem', color: 'var(--teal)', fontWeight: 700 }}>Acceso Profesor</span>
+                        <ShieldCheck size={13} color="var(--teal)" />
+                        <span style={{ fontSize: '0.72rem', color: 'var(--teal)', fontWeight: 800 }}>Profesor Responsable (Grupo E)</span>
                       </div>
                     )}
                   </div>
@@ -215,10 +208,10 @@ export const Header: React.FC<HeaderProps> = ({
                       cursor: 'pointer',
                       color: 'var(--accent-red)',
                       fontSize: '0.84rem',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       transition: 'background var(--transition-fast)'
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.06)')}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(239,68,68,0.08)')}
                     onMouseLeave={e => (e.currentTarget.style.background = 'none')}
                   >
                     <LogOut size={15} /> Cerrar sesión
@@ -229,8 +222,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Fila Inferior: Barra Completa de Navegación de Secciones */}
-        <nav className="header-nav" aria-label="Secciones">
+        {/* Fila Inferior: Navegación de Pestañas con micro-indicadores */}
+        <nav className="header-nav" aria-label="Secciones del curso">
           {NAV_ITEMS.map(item => (
             <button
               key={item.id}
@@ -238,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
               className={`nav-tab ${activeTab === item.id ? 'active' : ''}`}
             >
               {item.icon}
-              {item.label}
+              <span>{item.label}</span>
             </button>
           ))}
         </nav>

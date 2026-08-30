@@ -270,13 +270,8 @@ export const CourseInfoSection: React.FC = () => {
               </div>
             </div>
 
-            <div style={{ fontSize: '0.82rem', color: 'var(--text-main)', marginTop: '0.25rem' }}>
-              <strong>Otros profesores de la asignatura:</strong>
-              <ul style={{ paddingLeft: '1.2rem', marginTop: '4px', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                {teachingStaff.otherProfessors.map((p, i) => (
-                  <li key={i}>{p}</li>
-                ))}
-              </ul>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5, marginTop: '0.25rem', background: 'var(--neutral-bg)', padding: '10px', borderRadius: '8px' }}>
+              🔬 <strong>Cátedra e Investigación:</strong> Dpto. de Química Farmacéutica y Orgánica (Facultad de Farmacia, Cartuja) y Grupo de Investigación en Centro GENYO (PTS Granada).
             </div>
           </div>
 

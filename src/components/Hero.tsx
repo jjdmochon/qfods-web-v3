@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToTemas, onNavigateToSimul
                 CURSO ACADÉMICO {QFDOS_INFO.year}
               </span>
               <span className="qfdos-badge" style={{ background: 'rgba(255,255,255,0.10)', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', fontSize: '0.7rem' }}>
-                GRUPOS C & E · FACULTAD DE FARMACIA
+                GRUPO E · FACULTAD DE FARMACIA (UGR)
               </span>
               {isProfesor && (
                 <span className="qfdos-badge" style={{ background: 'rgba(45,212,191,0.2)', color: 'var(--mint)', border: '1px solid rgba(45,212,191,0.35)', fontSize: '0.7rem' }}>

@@ -28,7 +28,7 @@ export const COURSE_GENERAL_INFO = {
     name: "Química Farmacéutica II",
     code: "2041142 (2627 QFDOS E)",
     degree: "Grado en Farmacia (4.º Curso)",
-    group: "Grupo E (Tarde) / Oferta A, C, D, E",
+    group: "Grupo E (Turno de Tarde)",
     credits: "6 ECTS",
     faculty: "Facultad de Farmacia",
     university: "Universidad de Granada (UGR)",
@@ -39,10 +39,9 @@ export const COURSE_GENERAL_INFO = {
   teachingStaff: {
     coordinator: "Dr. Juan José Díaz-Mochón",
     email: "juandiaz@go.ugr.es",
-    role: "Profesor Titular / Responsable Grupo E",
+    role: "Profesor Titular · Responsable y Docente Único (Grupo E)",
     departmentLocation: "Departamento de Química Farmacéutica y Orgánica, Facultad de Farmacia, Campus de Cartuja",
-    researchCenterLocation: "Centro GENYO (Centro de Genómica e Investigación Oncológica), Parque Tecnológico de la Salud (PTS), Avenida de la Ilustración 114, 18016 Granada, España",
-    otherProfessors: ["Dr. Joaquín Campos Rosa (Grupo C)"]
+    researchCenterLocation: "Centro GENYO (Centro de Genómica e Investigación Oncológica), Parque Tecnológico de la Salud (PTS), Avenida de la Ilustración 114, 18016 Granada, España"
   },
   classSchedule: {
     room: "Aula 7",
@@ -445,6 +444,25 @@ export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
   // ---------------------------------------------------------------------
   // Plazos administrativos que se derivan de la propia normativa del curso
   // ---------------------------------------------------------------------
+  // ---------------------------------------------------------------------
+  // Prácticas de laboratorio
+  // ---------------------------------------------------------------------
+  {
+    id: 'cal-practicas-periodo',
+    date: '2026-09-14',
+    endDate: '2026-12-22',
+    title: '🧪 Periodo de prácticas de laboratorio',
+    category: 'practicas',
+    description:
+      'Las prácticas se reparten a lo largo de todo el primer semestre. Cada estudiante ' +
+      'tiene asignada una semana concreta y la conoce con antelación: no todo el grupo ' +
+      'coincide. Son cinco sesiones consecutivas de lunes a viernes, y la asistencia a ' +
+      'todas es obligatoria para superar la asignatura. El quinto día se hace el examen ' +
+      'de prácticas y se entrega el cuaderno de la pareja. Consulta tu semana asignada y ' +
+      'añádela a tu calendario desde la pestaña Prácticas.',
+    semester: 1,
+    important: true
+  },
   {
     id: 'cal-euf-solicitud',
     date: '2026-09-25',

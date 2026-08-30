@@ -295,48 +295,95 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Footer */}
-      <footer style={{
-        background: 'var(--navy-dark)',
-        color: '#cbd5e1',
-        padding: '2.25rem 1rem',
-        borderTop: '1px solid rgba(45,212,191,0.15)',
-        marginTop: '3rem'
-      }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-          <div>
-            <h4 style={{ color: '#fff', fontSize: '1rem', fontWeight: 800, marginBottom: 6 }}>
-              {QFDOS_INFO.name} ({QFDOS_INFO.code})
-            </h4>
-            <p style={{ fontSize: '0.8rem', lineHeight: 1.6, color: '#94a3b8' }}>
-              {QFDOS_INFO.department}<br />
-              {QFDOS_INFO.faculty} · {QFDOS_INFO.institution}<br />
-              Curso Académico {QFDOS_INFO.year}
-            </p>
-            <div style={{ marginTop: 10 }}>
-              <span className="qfdos-badge badge-mint" style={{ fontSize: '0.65rem' }}>QFDOS SAI v3.0</span>
+      {/* Footer Oficial QFDOS UGR Rediseñado */}
+      <footer className="qfdos-footer-root">
+        <div className="container">
+          <div className="qfdos-footer-grid">
+            {/* Columna 1: Asignatura y Cátedra */}
+            <div className="qfdos-footer-col">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                <span className="brand-title" style={{ fontSize: '1.1rem' }}>QFDOS</span>
+                <span className="qfdos-badge badge-teal" style={{ fontSize: '0.62rem', padding: '1px 6px', fontWeight: 800 }}>
+                  2026/2027
+                </span>
+                <span className="qfdos-badge" style={{ background: 'rgba(255,255,255,0.08)', color: '#fff', fontSize: '0.62rem', border: '1px solid rgba(255,255,255,0.15)' }}>
+                  Grupo E
+                </span>
+              </div>
+              <h4 style={{ color: '#ffffff', fontSize: '0.98rem', fontWeight: 800, margin: '0 0 6px 0' }}>
+                {QFDOS_INFO.name} ({QFDOS_INFO.code})
+              </h4>
+              <p style={{ fontSize: '0.8rem', lineHeight: 1.6, color: 'var(--footer-text-muted)', margin: 0 }}>
+                {QFDOS_INFO.department}<br />
+                {QFDOS_INFO.faculty} · {QFDOS_INFO.institution}<br />
+                Campus Universitario de Cartuja · Granada (España)
+              </p>
+              <div style={{ marginTop: '12px' }}>
+                <span className="qfdos-badge badge-mint" style={{ fontSize: '0.66rem', fontWeight: 800 }}>
+                  QFDOS Structural Affinity v2.0
+                </span>
+              </div>
+            </div>
+
+            {/* Columna 2: Profesorado Responsable */}
+            <div className="qfdos-footer-col">
+              <h5 className="qfdos-footer-heading">Profesorado Responsable</h5>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ padding: '10px 12px', background: 'rgba(255,255,255,0.04)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#ffffff' }}>
+                    Dr. Juan José Díaz-Mochón
+                  </div>
+                  <div style={{ fontSize: '0.74rem', color: 'var(--mint)', fontWeight: 600, marginTop: '1px' }}>
+                    Profesor Titular · Docente y Responsable de Grupo E
+                  </div>
+                  <div style={{ fontSize: '0.76rem', color: 'var(--footer-text-muted)', marginTop: '4px', fontFamily: 'var(--font-mono)' }}>
+                    juandiaz@go.ugr.es
+                  </div>
+                </div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--footer-text-muted)', lineHeight: 1.45 }}>
+                  📍 Tutorías presenciales en Fac. Farmacia (Cartuja), Centro GENYO (PTS) o videoconferencia por Google Meet.
+                </div>
+              </div>
+            </div>
+
+            {/* Columna 3: Ponderación Oficial de Evaluación */}
+            <div className="qfdos-footer-col">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                <h5 className="qfdos-footer-heading" style={{ margin: 0 }}>Evaluación Continua (UGR)</h5>
+                <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--mint)' }}>100%</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.8rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 8px', background: 'rgba(45,212,191,0.08)', borderRadius: '6px', border: '1px solid rgba(45,212,191,0.2)' }}>
+                  <span style={{ color: '#e2e8f0', fontWeight: 600 }}>• Examen Final Oficial (Obligatorio, mín. 5)</span>
+                  <strong style={{ color: 'var(--mint)', fontFamily: 'var(--font-mono)' }}>70%</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 8px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px' }}>
+                  <span style={{ color: '#cbd5e1' }}>• Examen Parcial (No eliminatorio)</span>
+                  <strong style={{ color: '#94d4f0', fontFamily: 'var(--font-mono)' }}>20%</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 8px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px' }}>
+                  <span style={{ color: '#cbd5e1' }}>• Prácticas de Laboratorio (Obligatorio)</span>
+                  <strong style={{ color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>5%</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 8px', background: 'rgba(255,255,255,0.03)', borderRadius: '6px' }}>
+                  <span style={{ color: '#cbd5e1' }}>• Trabajos y/o Seminarios</span>
+                  <strong style={{ color: '#cbd5e1', fontFamily: 'var(--font-mono)' }}>5%</strong>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div>
-            <h5 style={{ color: '#fff', fontSize: '0.88rem', fontWeight: 700, marginBottom: 7 }}>Profesorado</h5>
-            <ul style={{ listStyle: 'none', fontSize: '0.8rem', color: '#94a3b8', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {QFDOS_INFO.professors.map((p, i) => <li key={i}>· {p}</li>)}
-            </ul>
+          {/* Subfooter de copyright y acceso institucional */}
+          <div className="qfdos-footer-sub">
+            <div>
+              Universidad de Granada (UGR) · Grado en Farmacia · Asignatura: Química Farmacéutica II (Grupo E)
+            </div>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <span>Acceso institucional: @correo.ugr.es / @ugr.es</span>
+              <span>•</span>
+              <span>Plataforma QFDOS v3.2</span>
+            </div>
           </div>
-
-          <div>
-            <h5 style={{ color: '#fff', fontSize: '0.88rem', fontWeight: 700, marginBottom: 7 }}>Evaluación Continua</h5>
-            <p style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.6 }}>
-              · 70% Exámenes de Convocatoria Oficial<br />
-              · 15% Prácticas de Laboratorio<br />
-              · 15% Cuestionarios, Seminarios & Proyecto
-            </p>
-          </div>
-        </div>
-
-        <div className="container" style={{ marginTop: '1.25rem', paddingTop: '0.85rem', borderTop: '1px solid rgba(255,255,255,0.07)', textAlign: 'center', fontSize: '0.72rem', color: '#475569' }}>
-          Universidad de Granada (UGR) · Plataforma QFDOS v3.0 · Acceso restringido @correo.ugr.es / @ugr.es
         </div>
       </footer>
     </div>
