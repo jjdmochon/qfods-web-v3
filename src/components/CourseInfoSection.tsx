@@ -756,11 +756,13 @@ export const CourseInfoSection: React.FC = () => {
                   style={{ marginTop: 10, fontWeight: 700 }}
                   title="Descargar para Google Calendar, Outlook o el movil"
                 >
-                  <Download size={14} /> Añadir a mi calendario ({filteredEvents.length} eventos)
+                  <Download size={14} /> Añadir a mi calendario ({filteredEvents.length} eventos + clases)
                 </button>
-                <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)', margin: '5px 0 0 0', maxWidth: '52ch', lineHeight: 1.5 }}>
-                  Descarga un fichero .ics con lo que estés viendo ahora, filtros incluidos.
-                  Al abrirlo se añade a tu calendario habitual; las fechas clave avisan con dos días de antelación.
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)', margin: '5px 0 0 0', maxWidth: '56ch', lineHeight: 1.5 }}>
+                  Descarga un fichero .ics y ábrelo: se añade a Google Calendar, Outlook o el móvil.
+                  Incluye <strong>las clases de lunes, martes y jueves a las 17:00 h en el Aula 7</strong>,
+                  ya descontados los festivos, y los exámenes con su hora oficial. Los exámenes avisan
+                  el día antes y una hora antes; las clases, 30 minutos antes.
                 </p>
               </div>
 
