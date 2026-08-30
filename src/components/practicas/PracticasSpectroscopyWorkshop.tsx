@@ -229,10 +229,12 @@ export const PracticasSpectroscopyWorkshop: React.FC = () => {
                 onClick={() => setUseRotatedView(!useRotatedView)}
                 className="btn btn-sm btn-outline"
                 style={{ fontSize: '0.76rem', display: 'flex', alignItems: 'center', gap: '6px' }}
-                title="Girar 90 grados para lectura horizontal sin inclinar la cabeza"
+                title={useRotatedView
+                  ? 'Ver el escaneo tal cual salió del espectrómetro, en vertical'
+                  : 'Volver a la vista orientada para leer sin inclinar la cabeza'}
               >
                 <RotateCw size={14} />
-                {useRotatedView ? 'Vista Vertical' : 'Vista Horizontal 90° (Recomendada)'}
+                {useRotatedView ? 'Ver escaneo original' : 'Vista orientada (recomendada)'}
               </button>
             </div>
           </div>
