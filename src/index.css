@@ -32,20 +32,20 @@
   --mint: var(--tertiary);
 
   /* --- Header & Footer Tokens --- */
-  --header-bg: rgba(255, 255, 255, 0.88);
-  --header-border: rgba(16, 49, 92, 0.10);
-  --header-shadow: 0 4px 20px -2px rgba(16, 49, 92, 0.06), 0 2px 6px -1px rgba(16, 49, 92, 0.04);
-  --header-search-bg: #f1f5f9;
-  --header-search-border: rgba(16, 49, 92, 0.12);
-  --header-search-text: #182739;
-  --header-tab-color: #475569;
-  --header-tab-hover-bg: #e2e8f0;
-  --header-tab-active-color: #0f2d5c;
-  --header-tab-active-bg: rgba(16, 49, 92, 0.08);
-  --header-tab-active-border: #0c7368;
-  --footer-bg: #071c38;
-  --footer-border: rgba(79, 209, 181, 0.18);
-  --footer-text: #e2e8f0;
+  --header-bg: #ffffff;
+  --header-border: rgba(30, 58, 138, 0.12);
+  --header-shadow: 0 4px 20px -2px rgba(30, 58, 138, 0.08), 0 2px 6px -1px rgba(30, 58, 138, 0.04);
+  --header-search-bg: #f8fafc;
+  --header-search-border: rgba(30, 58, 138, 0.18);
+  --header-search-text: #0f172a;
+  --header-tab-color: #334155;
+  --header-tab-hover-bg: #f1f5f9;
+  --header-tab-active-color: #1e3a8a;
+  --header-tab-active-bg: rgba(30, 58, 138, 0.08);
+  --header-tab-active-border: #1e3a8a;
+  --footer-bg: #172554;
+  --footer-border: rgba(45, 212, 191, 0.22);
+  --footer-text: #f8fafc;
   --footer-text-muted: #94a3b8;
 
   /* --- Superficies (neutros con sesgo azul, no gris puro) --- */
@@ -695,6 +695,26 @@ h4, h5, h6 { font-family: var(--font-primary); letter-spacing: -0.005em; }
   font-size: 1.15rem;
   color: var(--text-title);
   letter-spacing: -0.02em;
+}
+.nav-tab:hover {
+  color: var(--text-title);
+  background: var(--header-tab-hover-bg);
+}
+:root[data-theme='dark'] .nav-tab:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav-tab.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #10315c 0%, #1e3a8a 100%) !important;
+  border-color: #071c38 !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(16, 49, 92, 0.35);
+}
+:root[data-theme='dark'] .nav-tab.active {
+  color: #042f2c !important;
+  background: linear-gradient(135deg, #5eead4 0%, #2dd4bf 100%) !important;
+  border-color: #2dd4bf !important;
+  box-shadow: 0 2px 10px rgba(45, 212, 191, 0.35);
 }
 .brand-version-badge {
   font-family: var(--font-mono);
@@ -2630,22 +2650,20 @@ html, body { overflow-x: hidden; max-width: 100%; }
   gap: 4px;
   width: 100%;
   overflow-x: auto;
-  padding-top: 2px;
-  border-top: 1px solid var(--border-color);
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  /* Difumina el último tramo: se ve que la barra continúa */
-  mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent);
+  padding: 4px 6px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
 }
 .header-nav::-webkit-scrollbar { display: none; }
 
-.header-nav .nav-tab {
-  flex-shrink: 0;
+.nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 6px 14px;
-  font-size: 0.82rem;
-  font-weight: 600;
 }
-
 /* A partir de aquí las pestañas se estrechan antes de tener que deslizarse.
    Estas reglas no funcionaban mientras los botones llevaban estilos en línea:
    un estilo en línea gana siempre a una media query. */
@@ -2726,6 +2744,39 @@ html, body { overflow-x: hidden; max-width: 100%; }
   font-size: 0.78rem;
   line-height: 1.55;
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Panel principal (Estética Structural Affinity DESIGN.md)
+   ========================================================================== */
+.course-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+}
+.course-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--navy);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.course-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.course-stat .stat-value {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 /* ==========================================================================
