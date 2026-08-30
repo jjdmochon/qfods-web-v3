@@ -342,25 +342,120 @@ export const PracticasYieldCalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* Reaction Scheme Summary Bar */}
+        {/* Reaction Scheme & 2D Chemical Structures Display */}
         <div style={{
-          background: 'linear-gradient(135deg, rgba(30,58,138,0.06) 0%, rgba(13,148,136,0.04) 100%)',
-          borderRadius: '8px',
-          padding: '0.85rem 1.2rem',
+          background: 'var(--surface-alt)',
+          borderRadius: '12px',
+          padding: '1.25rem',
+          border: '1px solid var(--border-color)',
           borderLeft: '4px solid var(--teal)',
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
+          flexDirection: 'column',
           gap: '1rem'
         }}>
-          <div>
-            <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>REACCIÓN SELECCIONADA:</div>
-            <div style={{ fontWeight: 800, color: 'var(--text-title)', fontSize: '0.98rem' }}>{currentPreset.subtitle}</div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Esquema Químico de la Reacción
+              </div>
+              <div style={{ fontWeight: 800, color: 'var(--text-title)', fontSize: '1.05rem', marginTop: 2 }}>
+                {currentPreset.subtitle}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span className="qfdos-badge badge-mint" style={{ fontSize: '0.72rem' }}>
+                Producto: {currentPreset.product.name} (PM = {currentPreset.product.mw} g/mol)
+              </span>
+            </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>Producto:</span>
-            <span style={{ fontWeight: 700, color: 'var(--navy)', fontSize: '0.86rem' }}>{currentPreset.product.name} (PM = {currentPreset.product.mw} g/mol)</span>
+
+          {/* Molecular 2D Structures Flow: Reactants -> Product */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '1rem',
+            padding: '1rem 0.5rem',
+            background: 'var(--surface)',
+            borderRadius: '10px',
+            border: '1px solid var(--border-color)'
+          }}>
+            {/* Reactants List */}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+              {currentPreset.reactants.map((r, idx) => (
+                <React.Fragment key={r.reagent.id}>
+                  {idx > 0 && (
+                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--teal)', padding: '0 4px' }}>
+                      +
+                    </span>
+                  )}
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    background: 'var(--surface-alt)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '8px',
+                    padding: '8px 10px',
+                    textAlign: 'center',
+                    minWidth: 140
+                  }}>
+                    {r.reagent.smiles && (
+                      <Chem2DDrawer
+                        smiles={r.reagent.smiles}
+                        width={130}
+                        height={100}
+                        bare={true}
+                      />
+                    )}
+                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-title)', marginTop: 4 }}>
+                      {r.stoichiometry > 1 ? `${r.stoichiometry} × ` : ''}{r.reagent.name}
+                    </span>
+                    <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+                      PM: {r.reagent.mw} g/mol
+                    </span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+
+            {/* Reaction Arrow */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 8px' }}>
+              <ArrowRight size={24} color="var(--teal)" style={{ strokeWidth: 2.5 }} />
+              <span style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                Reacción
+              </span>
+            </div>
+
+            {/* Target Product */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              background: 'rgba(45, 212, 191, 0.08)',
+              border: '1.5px solid var(--teal)',
+              borderRadius: '8px',
+              padding: '8px 12px',
+              textAlign: 'center',
+              minWidth: 150,
+              boxShadow: '0 4px 12px rgba(13, 148, 136, 0.12)'
+            }}>
+              {currentPreset.product.smiles && (
+                <Chem2DDrawer
+                  smiles={currentPreset.product.smiles}
+                  width={140}
+                  height={100}
+                  bare={true}
+                />
+              )}
+              <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--navy)', marginTop: 4 }}>
+                {currentPreset.product.name}
+              </span>
+              <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', color: 'var(--teal)', fontWeight: 700 }}>
+                PM: {currentPreset.product.mw} g/mol
+              </span>
+            </div>
           </div>
         </div>
       </div>
