@@ -5,11 +5,12 @@ import {
   ACADEMIC_CALENDAR_EVENTS,
   AcademicCalendarEvent
 } from '../data/courseInfoData';
+import { descargarIcs } from '../services/calendarioIcs';
 import {
   Calendar, Clock, MapPin, Mail, ExternalLink, BookOpen,
   Sparkles, CheckCircle2, AlertCircle, FileText,
   HelpCircle, ChevronRight, UserCheck, ShieldCheck,
-  Building, Video, Users, Info, Award, AlertTriangle, Scale
+  Building, Video, Users, Info, Award, AlertTriangle, Scale, Download
 } from 'lucide-react';
 
 export const CourseInfoSection: React.FC = () => {
@@ -28,7 +29,10 @@ export const CourseInfoSection: React.FC = () => {
       (selectedSemester === '1' && event.semester === 1) ||
       (selectedSemester === '2' && event.semester === 2);
     return matchCategory && matchSemester;
-  });
+  })
+    // Se ordena aquí y no en el fichero de datos: así añadir un evento nuevo
+    // no obliga a colocarlo en su sitio exacto dentro del array.
+    .sort((a, b) => a.date.localeCompare(b.date));
 
   const getCategoryBadge = (category: AcademicCalendarEvent['category']) => {
     switch (category) {
@@ -742,6 +746,21 @@ export const CourseInfoSection: React.FC = () => {
                 </h3>
                 <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>
                   Aprobado por el Consejo de Gobierno de la Universidad de Granada y adaptado a la Facultad de Farmacia.
+                </p>
+
+                {/* Consultar el calendario no basta: para que avise, tiene que
+                    estar en la agenda que ya se mira cada dia. */}
+                <button
+                  onClick={() => descargarIcs(filteredEvents)}
+                  className="btn btn-sm btn-secondary"
+                  style={{ marginTop: 10, fontWeight: 700 }}
+                  title="Descargar para Google Calendar, Outlook o el movil"
+                >
+                  <Download size={14} /> Añadir a mi calendario ({filteredEvents.length} eventos)
+                </button>
+                <p style={{ fontSize: '0.74rem', color: 'var(--text-muted)', margin: '5px 0 0 0', maxWidth: '52ch', lineHeight: 1.5 }}>
+                  Descarga un fichero .ics con lo que estés viendo ahora, filtros incluidos.
+                  Al abrirlo se añade a tu calendario habitual; las fechas clave avisan con dos días de antelación.
                 </p>
               </div>
 

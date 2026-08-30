@@ -440,5 +440,77 @@ export const ACADEMIC_CALENDAR_EVENTS: AcademicCalendarEvent[] = [
     category: 'acta',
     description: 'Fecha límite de entrega de actas extraordinarias del segundo semestre.',
     semester: 2
+  },
+
+  // ---------------------------------------------------------------------
+  // Plazos administrativos que se derivan de la propia normativa del curso
+  // ---------------------------------------------------------------------
+  {
+    id: 'cal-euf-solicitud',
+    date: '2026-09-25',
+    title: '⏳ Fin del plazo: solicitud de Evaluación Única Final',
+    category: 'acta',
+    description:
+      'Dos primeras semanas de clase desde el inicio de la docencia (14 de septiembre). ' +
+      'Se solicita por vía telemática al Director/a del Departamento, alegando motivos ' +
+      'laborales, de salud, discapacidad u otra causa justificada. La resolución llega en ' +
+      '10 días hábiles. Quien se matricule más tarde dispone de 2 semanas desde su matrícula.',
+    semester: 1,
+    important: true
+  },
+
+  // ---------------------------------------------------------------------
+  // Festivos que faltaban. Los de Semana Santa y Corpus son móviles: se
+  // calculan a partir del Domingo de Pascua, que en 2027 cae el 28 de marzo.
+  // ---------------------------------------------------------------------
+  {
+    id: 'cal-ene-01',
+    date: '2027-01-01',
+    title: 'Año Nuevo',
+    category: 'festivo',
+    description: 'Festivo nacional, dentro del periodo de vacaciones de Navidad.',
+    semester: 1
+  },
+  {
+    id: 'cal-ene-06',
+    date: '2027-01-06',
+    title: 'Epifanía del Señor (Reyes)',
+    category: 'festivo',
+    description: 'Festivo nacional, último día de las vacaciones de Navidad.',
+    semester: 1
+  },
+  {
+    id: 'cal-jueves-santo',
+    date: '2027-03-25',
+    title: 'Jueves Santo',
+    category: 'festivo',
+    description: 'Festivo. Dentro del periodo no lectivo de Semana Santa (22–29 de marzo).',
+    semester: 2
+  },
+  {
+    id: 'cal-viernes-santo',
+    date: '2027-03-26',
+    title: 'Viernes Santo',
+    category: 'festivo',
+    description: 'Festivo nacional. Dentro del periodo no lectivo de Semana Santa.',
+    semester: 2
+  },
+  {
+    id: 'cal-dia-cruz',
+    date: '2027-05-03',
+    title: 'Día de la Cruz (Granada)',
+    category: 'festivo',
+    description: 'Fiesta local de Granada. Lunes no lectivo: la docencia de QFDOS de ese día se traslada o se recupera.',
+    semester: 2,
+    important: true
+  },
+  {
+    id: 'cal-corpus',
+    date: '2027-05-27',
+    title: 'Corpus Christi (Granada)',
+    category: 'festivo',
+    description: 'Fiesta local de Granada, jueves de la semana del Corpus. Coincide con el tramo final de docencia del segundo semestre.',
+    semester: 2,
+    important: true
   }
 ];
