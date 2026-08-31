@@ -422,8 +422,8 @@ export const PracticasPairReport: React.FC = () => {
   const handleExportCSV = () => {
     const headers = [
       'ID_Pareja', 'Grupo', 'Puesto', 'Turno', 'Fecha',
-      'Alumno_1', 'DNI_1', 'Email_1',
-      'Alumno_2', 'DNI_2', 'Email_2',
+      'Alumno_1', 'Email_1',
+      'Alumno_2', 'Email_2',
       'Rend_Etapa1_Pct', 'Rend_Propranolol_Pct', 'Pf_Propranolol',
       'Compuesto_Hantzsch', 'Rend_Hantzsch_Pct', 'Pf_Hantzsch',
       'Estado', 'Nota_Final_10', 'Feedback_Profesor', 'Fecha_Calificacion'
@@ -436,10 +436,8 @@ export const PracticasPairReport: React.FC = () => {
       `"${r.turno}"`,
       `"${r.fecha}"`,
       `"${r.student1.nombre}"`,
-      `"${r.student1.dni}"`,
       `"${r.student1.email}"`,
       `"${r.student2.nombre}"`,
-      `"${r.student2.dni}"`,
       `"${r.student2.email}"`,
       r.step1.yieldPercentage,
       r.step2.yieldAccumulated,
@@ -478,8 +476,8 @@ export const PracticasPairReport: React.FC = () => {
       r.id.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student1.nombre.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student2.nombre.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
-      r.student1.dni.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
-      r.student2.dni.toLowerCase().includes(profesorSearchTerm.toLowerCase());
+      r.student1.email.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
+      r.student2.email.toLowerCase().includes(profesorSearchTerm.toLowerCase());
     return matchesGroup && matchesSearch;
   });
 
@@ -701,20 +699,8 @@ export const PracticasPairReport: React.FC = () => {
                     required
                   />
                   <input
-                    type="text"
-                    placeholder="DNI / NIE *"
-                    value={currentReport.student1.dni}
-                    onChange={e => setCurrentReport(prev => ({
-                      ...prev,
-                      student1: { ...prev.student1, dni: e.target.value }
-                    }))}
-                    className="qfdos-input"
-                    style={{ width: '100%', fontSize: '0.82rem' }}
-                    required
-                  />
-                  <input
                     type="email"
-                    placeholder="Email (@correo.ugr.es)"
+                    placeholder="Email (@correo.ugr.es o @go.ugr.es)"
                     value={currentReport.student1.email}
                     onChange={e => setCurrentReport(prev => ({
                       ...prev,
@@ -745,20 +731,8 @@ export const PracticasPairReport: React.FC = () => {
                     required
                   />
                   <input
-                    type="text"
-                    placeholder="DNI / NIE *"
-                    value={currentReport.student2.dni}
-                    onChange={e => setCurrentReport(prev => ({
-                      ...prev,
-                      student2: { ...prev.student2, dni: e.target.value }
-                    }))}
-                    className="qfdos-input"
-                    style={{ width: '100%', fontSize: '0.82rem' }}
-                    required
-                  />
-                  <input
                     type="email"
-                    placeholder="Email (@correo.ugr.es)"
+                    placeholder="Email (@correo.ugr.es o @go.ugr.es)"
                     value={currentReport.student2.email}
                     onChange={e => setCurrentReport(prev => ({
                       ...prev,
@@ -1295,7 +1269,7 @@ export const PracticasPairReport: React.FC = () => {
               <Search size={16} color="var(--text-muted)" />
               <input
                 type="text"
-                placeholder="Buscar por Alumno/a, DNI o ID de Pareja..."
+                placeholder="Buscar por Alumno/a, Email o ID de Pareja..."
                 value={profesorSearchTerm}
                 onChange={e => setProfesorSearchTerm(e.target.value)}
                 className="qfdos-input"
@@ -1347,8 +1321,8 @@ export const PracticasPairReport: React.FC = () => {
                       <span className="qfdos-badge badge-teal" style={{ fontSize: '0.7rem' }}>{rep.grupo}</span>
                     </td>
                     <td style={{ padding: '0.75rem' }}>
-                      <strong>1. {rep.student1.nombre}</strong> <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>({rep.student1.dni})</span><br />
-                      <strong>2. {rep.student2.nombre}</strong> <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>({rep.student2.dni})</span>
+                      <strong>1. {rep.student1.nombre}</strong> {rep.student1.email && <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>({rep.student1.email})</span>}<br />
+                      <strong>2. {rep.student2.nombre}</strong> {rep.student2.email && <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>({rep.student2.email})</span>}
                     </td>
                     <td style={{ padding: '0.75rem', fontFamily: 'Roboto Mono, monospace', fontSize: '0.76rem' }}>
                       Oxirano: <strong>{rep.step1.yieldPercentage}%</strong><br />
@@ -1417,7 +1391,7 @@ export const PracticasPairReport: React.FC = () => {
                     Informe de Laboratorio: Pareja {activeGradingReport.id} ({activeGradingReport.grupo} · Puesto {activeGradingReport.puesto})
                   </h3>
                   <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Estudiantes: <strong>{activeGradingReport.student1.nombre}</strong> ({activeGradingReport.student1.dni}) y <strong>{activeGradingReport.student2.nombre}</strong> ({activeGradingReport.student2.dni})
+                    Estudiantes: <strong>{activeGradingReport.student1.nombre}</strong> {activeGradingReport.student1.email && `(${activeGradingReport.student1.email})`} y <strong>{activeGradingReport.student2.nombre}</strong> {activeGradingReport.student2.email && `(${activeGradingReport.student2.email})`}
                   </p>
                 </div>
                 <button
