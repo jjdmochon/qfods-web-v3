@@ -1764,18 +1764,18 @@ export const PRACTICE_EXAM_QUESTIONS: PracticeExamQuestion[] = [
 
 export interface LabPairReport {
   id: string;
-  grupo: string;
+  grupo?: string;
   puesto: number;
-  turno: 'Mañana' | 'Tarde';
+  turno: '8:30-11:30' | '11:30-14:30' | '16:00-19:00' | string;
   fecha: string;
   student1: {
     nombre: string;
-    dni: string;
+    dni?: string;
     email: string;
   };
   student2: {
     nombre: string;
-    dni: string;
+    dni?: string;
     email: string;
   };
   step1: {

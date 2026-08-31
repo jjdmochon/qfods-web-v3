@@ -309,9 +309,9 @@ export const PracticasYieldCalculator: React.FC = () => {
       
       const updatedDraft = draft ? { ...draft } : {
         id: `REP-${Date.now().toString().slice(-6)}`,
-        grupo: studentGroup || 'Grupo A',
+        grupo: studentGroup || 'Prácticas QFDOS',
         puesto: 1,
-        turno: 'Mañana',
+        turno: '8:30-11:30',
         fecha: new Date().toISOString().split('T')[0],
         student1: { nombre: studentName || '', dni: '', email: '' },
         student2: { nombre: '', dni: '', email: '' },

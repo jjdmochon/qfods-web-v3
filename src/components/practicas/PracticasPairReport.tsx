@@ -83,10 +83,10 @@ export const PracticasPairReport: React.FC = () => {
       console.error('Error loading draft report', e);
     }
     return {
-      id: `REP-${Date.now().toString().slice(-6)}`,
-      grupo: 'Grupo A',
+      id: `P${1}-${Date.now().toString().slice(-4)}`,
+      grupo: 'Prácticas',
       puesto: 1,
-      turno: 'Mañana',
+      turno: '8:30-11:30',
       fecha: new Date().toISOString().split('T')[0],
       student1: {
         nombre: '',
@@ -153,7 +153,7 @@ export const PracticasPairReport: React.FC = () => {
 
   // Professor Review State
   const [selectedReportIdForGrading, setSelectedReportIdForGrading] = useState<string | null>(null);
-  const [profesorFilterGroup, setProfesorFilterGroup] = useState<string>('all');
+  const [profesorFilterTurno, setProfesorFilterTurno] = useState<string>('all');
   const [profesorSearchTerm, setProfesorSearchTerm] = useState<string>('');
   const [tempGrade, setTempGrade] = useState<number>(9.0);
   const [tempFeedback, setTempFeedback] = useState<string>('');
@@ -260,7 +260,7 @@ export const PracticasPairReport: React.FC = () => {
 
     const finalReport: LabPairReport = {
       ...currentReport,
-      id: `${currentReport.grupo.replace(' ', '')}-P${currentReport.puesto.toString().padStart(2, '0')}`,
+      id: `P${currentReport.puesto.toString().padStart(2, '0')}-${currentReport.turno.replace(':', '').replace('-', '_')}`,
       status: 'Entregado',
       submittedAt: submissionTime
     };
@@ -292,8 +292,8 @@ export const PracticasPairReport: React.FC = () => {
       v ? `${v.toLocaleString('es-ES')} ${unidad}` : '';
 
     return {
-      grupo: r.grupo,
       puesto: String(r.puesto),
+      turno: r.turno || '8:30-11:30',
       alumno1: r.student1.nombre || '',
       email1: r.student1.email || '',
       alumno2: r.student2.nombre || '',
@@ -338,10 +338,10 @@ export const PracticasPairReport: React.FC = () => {
   // Load a demo pair for student testing
   const handleLoadStudentDemo = () => {
     setCurrentReport({
-      id: 'GPE-P04',
-      grupo: 'Grupo E',
+      id: 'P04-830_1130',
+      grupo: 'Prácticas',
       puesto: 4,
-      turno: 'Mañana',
+      turno: '8:30-11:30',
       fecha: '2026-03-12',
       student1: {
         nombre: 'Elena Morales Ruiz',
@@ -421,7 +421,7 @@ export const PracticasPairReport: React.FC = () => {
   // Export all grades to CSV for Professor Juanjo
   const handleExportCSV = () => {
     const headers = [
-      'ID_Pareja', 'Grupo', 'Puesto', 'Turno', 'Fecha',
+      'ID_Pareja', 'Puesto', 'Turno', 'Fecha',
       'Alumno_1', 'Email_1',
       'Alumno_2', 'Email_2',
       'Rend_Etapa1_Pct', 'Rend_Propranolol_Pct', 'Pf_Propranolol',
@@ -431,7 +431,6 @@ export const PracticasPairReport: React.FC = () => {
 
     const rows = reports.map(r => [
       `"${r.id}"`,
-      `"${r.grupo}"`,
       `"${r.puesto}"`,
       `"${r.turno}"`,
       `"${r.fecha}"`,
@@ -471,14 +470,14 @@ export const PracticasPairReport: React.FC = () => {
 
   // Filtered reports for Professor table
   const filteredProfessorReports = reports.filter(r => {
-    const matchesGroup = profesorFilterGroup === 'all' || r.grupo === profesorFilterGroup;
+    const matchesTurno = profesorFilterTurno === 'all' || r.turno === profesorFilterTurno;
     const matchesSearch = profesorSearchTerm === '' ||
       r.id.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student1.nombre.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student2.nombre.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student1.email.toLowerCase().includes(profesorSearchTerm.toLowerCase()) ||
       r.student2.email.toLowerCase().includes(profesorSearchTerm.toLowerCase());
-    return matchesGroup && matchesSearch;
+    return matchesTurno && matchesSearch;
   });
 
   const activeGradingReport = reports.find(r => r.id === selectedReportIdForGrading);
@@ -621,23 +620,7 @@ export const PracticasPairReport: React.FC = () => {
               </h3>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
-              <div>
-                <label className="label-text" style={{ fontSize: '0.78rem', fontWeight: 700 }}>Grupo de Prácticas *</label>
-                <select
-                  value={currentReport.grupo}
-                  onChange={e => setCurrentReport(prev => ({ ...prev, grupo: e.target.value }))}
-                  className="qfdos-input"
-                  style={{ width: '100%', fontSize: '0.84rem' }}
-                >
-                  <option value="Grupo A">Grupo A (Semana 1)</option>
-                  <option value="Grupo B">Grupo B (Semana 2)</option>
-                  <option value="Grupo C">Grupo C (Semana 3)</option>
-                  <option value="Grupo D">Grupo D (Semana 4)</option>
-                  <option value="Grupo E">Grupo E (Semana 5)</option>
-                </select>
-              </div>
-
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
               <div>
                 <label className="label-text" style={{ fontSize: '0.78rem', fontWeight: 700 }}>Puesto Asignado *</label>
                 <select
@@ -653,15 +636,16 @@ export const PracticasPairReport: React.FC = () => {
               </div>
 
               <div>
-                <label className="label-text" style={{ fontSize: '0.78rem', fontWeight: 700 }}>Turno *</label>
+                <label className="label-text" style={{ fontSize: '0.78rem', fontWeight: 700 }}>Turno de Prácticas *</label>
                 <select
                   value={currentReport.turno}
                   onChange={e => setCurrentReport(prev => ({ ...prev, turno: e.target.value as any }))}
                   className="qfdos-input"
                   style={{ width: '100%', fontSize: '0.84rem' }}
                 >
-                  <option value="Mañana">Mañana (09:00 - 14:00)</option>
-                  <option value="Tarde">Tarde (15:00 - 20:00)</option>
+                  <option value="8:30-11:30">8:30 - 11:30</option>
+                  <option value="11:30-14:30">11:30 - 14:30</option>
+                  <option value="16:00-19:00">16:00 - 19:00</option>
                 </select>
               </div>
 
@@ -1210,8 +1194,8 @@ export const PracticasPairReport: React.FC = () => {
               navegador, así que aquí es donde sale del equipo de la pareja. */}
           <EntregaProfesor
             hoja="Cuaderno de parejas"
-            titulo={`Cuaderno de prácticas · ${currentReport.grupo} · Puesto ${currentReport.puesto}`}
-            nombreFichero={`cuaderno-${currentReport.grupo.replace(/\s+/g, '')}-puesto${currentReport.puesto}`}
+            titulo={`Cuaderno de prácticas · Puesto ${currentReport.puesto} · Turno ${currentReport.turno}`}
+            nombreFichero={`cuaderno-puesto${currentReport.puesto}-turno${currentReport.turno.replace(':', '').replace('-', '_')}`}
             deshabilitado={!currentReport.student1.nombre || !currentReport.student2.nombre}
             motivoDeshabilitado="Escribid los nombres de los dos miembros de la pareja antes de entregar."
             datos={construirDatosEntrega()}
@@ -1280,17 +1264,15 @@ export const PracticasPairReport: React.FC = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Filter size={16} color="var(--text-muted)" />
               <select
-                value={profesorFilterGroup}
-                onChange={e => setProfesorFilterGroup(e.target.value)}
+                value={profesorFilterTurno}
+                onChange={e => setProfesorFilterTurno(e.target.value)}
                 className="qfdos-input"
                 style={{ fontSize: '0.84rem' }}
               >
-                <option value="all">Todos los Grupos</option>
-                <option value="Grupo A">Grupo A</option>
-                <option value="Grupo B">Grupo B</option>
-                <option value="Grupo C">Grupo C</option>
-                <option value="Grupo D">Grupo D</option>
-                <option value="Grupo E">Grupo E</option>
+                <option value="all">Todos los Turnos</option>
+                <option value="8:30-11:30">8:30 - 11:30</option>
+                <option value="11:30-14:30">11:30 - 14:30</option>
+                <option value="16:00-19:00">16:00 - 19:00</option>
               </select>
             </div>
           </div>
@@ -1301,7 +1283,7 @@ export const PracticasPairReport: React.FC = () => {
               <thead>
                 <tr style={{ background: 'var(--surface-muted)', borderBottom: '2px solid var(--border)', textAlign: 'left' }}>
                   <th style={{ padding: '0.75rem' }}>ID / Puesto</th>
-                  <th style={{ padding: '0.75rem' }}>Grupo</th>
+                  <th style={{ padding: '0.75rem' }}>Turno</th>
                   <th style={{ padding: '0.75rem' }}>Pareja de Estudiantes</th>
                   <th style={{ padding: '0.75rem' }}>Rendimientos (%)</th>
                   <th style={{ padding: '0.75rem' }}>Puntos de Fusión</th>
@@ -1315,10 +1297,10 @@ export const PracticasPairReport: React.FC = () => {
                   <tr key={rep.id} style={{ borderBottom: '1px solid var(--border)' }}>
                     <td style={{ padding: '0.75rem', fontWeight: 800, color: 'var(--navy-ink)' }}>
                       {rep.id} <br />
-                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>Puesto {rep.puesto} ({rep.turno})</span>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>Puesto {rep.puesto}</span>
                     </td>
                     <td style={{ padding: '0.75rem' }}>
-                      <span className="qfdos-badge badge-teal" style={{ fontSize: '0.7rem' }}>{rep.grupo}</span>
+                      <span className="qfdos-badge badge-teal" style={{ fontSize: '0.7rem' }}>{rep.turno}</span>
                     </td>
                     <td style={{ padding: '0.75rem' }}>
                       <strong>1. {rep.student1.nombre}</strong> {rep.student1.email && <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>({rep.student1.email})</span>}<br />
@@ -1388,7 +1370,7 @@ export const PracticasPairReport: React.FC = () => {
                     REVISIÓN Y CALIFICACIÓN DOCENTE
                   </span>
                   <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 900, color: 'var(--text-title)' }}>
-                    Informe de Laboratorio: Pareja {activeGradingReport.id} ({activeGradingReport.grupo} · Puesto {activeGradingReport.puesto})
+                    Informe de Laboratorio: Pareja {activeGradingReport.id} (Puesto {activeGradingReport.puesto} · Turno {activeGradingReport.turno})
                   </h3>
                   <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                     Estudiantes: <strong>{activeGradingReport.student1.nombre}</strong> {activeGradingReport.student1.email && `(${activeGradingReport.student1.email})`} y <strong>{activeGradingReport.student2.nombre}</strong> {activeGradingReport.student2.email && `(${activeGradingReport.student2.email})`}

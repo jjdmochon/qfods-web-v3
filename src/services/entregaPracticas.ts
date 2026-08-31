@@ -140,6 +140,7 @@ export function componerTexto(titulo: string, datos: Record<string, string>): st
 const ETIQUETAS: Record<string, string> = {
   grupo: 'Grupo',
   puesto: 'Puesto',
+  turno: 'Turno',
   alumno1: 'Alumno 1',
   email1: 'Correo 1',
   alumno2: 'Alumno 2',
