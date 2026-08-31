@@ -62,8 +62,33 @@ export const EvaluationSection: React.FC = () => {
         return;
       }
 
+      // Función robusta para parsear una fila CSV respetando comillas (ej. "García Pérez, Elena")
+      const parseCSVRow = (text: string): string[] => {
+        const result: string[] = [];
+        let cur = '';
+        let inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+          const char = text[i];
+          if (char === '"') {
+            if (inQuotes && text[i + 1] === '"') {
+              cur += '"';
+              i++; // skip escaped quote
+            } else {
+              inQuotes = !inQuotes;
+            }
+          } else if (char === ',' && !inQuotes) {
+            result.push(cur.trim());
+            cur = '';
+          } else {
+            cur += char;
+          }
+        }
+        result.push(cur.trim());
+        return result.map(c => c.replace(/^"|"$/g, '').trim());
+      };
+
       // Parse headers
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+      const headers = parseCSVRow(lines[0]).map(h => h.toLowerCase());
       const emailIdx = headers.findIndex(h => h.includes('email') || h.includes('correo') || h.includes('ugr'));
       const nameIdx = headers.findIndex(h => h.includes('nombre') || h.includes('alumno') || h.includes('estudiante'));
       const finalIdx = headers.findIndex(h => (h.includes('final') || h.includes('70')) && !h.includes('parcial'));
@@ -85,7 +110,7 @@ export const EvaluationSection: React.FC = () => {
       const parsedStudents: StudentEvaluationProfile[] = [];
 
       for (let i = 1; i < lines.length; i++) {
-        const cols = lines[i].split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+        const cols = parseCSVRow(lines[i]);
         const email = emailIdx !== -1 ? cols[emailIdx] : `alumno${i}@correo.ugr.es`;
         const name = nameIdx !== -1 ? cols[nameIdx] : `Estudiante ${i}`;
         
