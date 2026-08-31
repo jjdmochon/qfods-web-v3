@@ -77,7 +77,9 @@ export interface StudentEvaluationProfile {
   name: string;
   attempts: QuizAttempt[];
   labGrade: number;
-  projectGrade: number;
+  projectGrade?: number;
+  parcialGrade?: number;
+  trabajosGrade?: number;
 }
 
 export interface MoleculeDrug {

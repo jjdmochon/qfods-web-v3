@@ -66,14 +66,21 @@ export const EvaluationSection: React.FC = () => {
       const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
       const emailIdx = headers.findIndex(h => h.includes('email') || h.includes('correo') || h.includes('ugr'));
       const nameIdx = headers.findIndex(h => h.includes('nombre') || h.includes('alumno') || h.includes('estudiante'));
-      const finalIdx = headers.findIndex(h => h.includes('final') || h.includes('70'));
+      const finalIdx = headers.findIndex(h => (h.includes('final') || h.includes('70')) && !h.includes('parcial'));
       const parcialIdx = headers.findIndex(h => h.includes('parcial') || h.includes('20'));
-      const labIdx = headers.findIndex(h => h.includes('lab') || h.includes('práct') || h.includes('pract') || h.includes('5'));
-      const trabIdx = headers.findIndex(h => h.includes('trabaj') || h.includes('semin') || h.includes('proyect'));
+      const labIdx = headers.findIndex(h => h.includes('lab') || h.includes('práct') || h.includes('pract') || h.includes('5%'));
+      const trabIdx = headers.findIndex(h => (h.includes('trabaj') || h.includes('semin') || h.includes('proyect')) && !h.includes('lab'));
 
       if (emailIdx === -1 && nameIdx === -1) {
         throw new Error('No se encontraron columnas de correo ni de nombre en la hoja.');
       }
+
+      const parseGrade = (val: string | undefined): number => {
+        if (!val) return 0;
+        const cleaned = val.replace(',', '.').trim();
+        const num = parseFloat(cleaned);
+        return isNaN(num) ? 0 : num;
+      };
 
       const parsedStudents: StudentEvaluationProfile[] = [];
 
@@ -84,10 +91,10 @@ export const EvaluationSection: React.FC = () => {
         
         if (!email && !name) continue;
 
-        const finalGrade = finalIdx !== -1 ? parseFloat(cols[finalIdx]) || 0 : 0;
-        const parcialGrade = parcialIdx !== -1 ? parseFloat(cols[parcialIdx]) || 0 : 0;
-        const labGrade = labIdx !== -1 ? parseFloat(cols[labIdx]) || 0 : 0;
-        const trabGrade = trabIdx !== -1 ? parseFloat(cols[trabIdx]) || 0 : 0;
+        const finalGrade = finalIdx !== -1 ? parseGrade(cols[finalIdx]) : 0;
+        const parcialGrade = parcialIdx !== -1 ? parseGrade(cols[parcialIdx]) : 0;
+        const labGrade = labIdx !== -1 ? parseGrade(cols[labIdx]) : 0;
+        const trabGrade = trabIdx !== -1 ? parseGrade(cols[trabIdx]) : 0;
 
         parsedStudents.push({
           email: email || `estudiante_${i}@correo.ugr.es`,
@@ -105,7 +112,9 @@ export const EvaluationSection: React.FC = () => {
             }
           ],
           labGrade: labGrade,
-          projectGrade: trabGrade
+          parcialGrade: parcialGrade,
+          trabajosGrade: trabGrade,
+          projectGrade: parcialGrade
         });
       }
 
@@ -132,9 +141,9 @@ export const EvaluationSection: React.FC = () => {
     const finalExamAttempt = student.attempts.find(a => a.topicId === 'examen-final') || student.attempts[0];
     const finalExamScore = finalExamAttempt ? finalExamAttempt.score : (student.attempts.length > 0 ? (student.attempts.reduce((s, a) => s + a.score, 0) / student.attempts.length) : 0);
     
-    const parcialScore = student.projectGrade || 0; // Usado como parcial/seminario según hoja
-    const labScore = student.labGrade || 0;
-    const trabajosScore = student.projectGrade || 0;
+    const parcialScore = student.parcialGrade ?? student.projectGrade ?? 0;
+    const labScore = student.labGrade ?? 0;
+    const trabajosScore = student.trabajosGrade ?? 0;
 
     // Regla Guía Docente UGR:
     // Examen Final Oficial: 70% (Requiere nota mínima de 5.0 para promediar)
@@ -192,9 +201,9 @@ export const EvaluationSection: React.FC = () => {
     setEditingEmail(s.email);
     const finalExam = s.attempts.find(a => a.topicId === 'examen-final')?.score || 0;
     setEditExamenFinal(finalExam);
-    setEditParcial(s.projectGrade || 0);
-    setEditLab(s.labGrade || 0);
-    setEditTrabajos(s.projectGrade || 0);
+    setEditParcial(s.parcialGrade ?? s.projectGrade ?? 0);
+    setEditLab(s.labGrade ?? 0);
+    setEditTrabajos(s.trabajosGrade ?? 0);
   };
 
   const handleSaveEdit = (email: string) => {
@@ -215,6 +224,8 @@ export const EvaluationSection: React.FC = () => {
             }
           ],
           labGrade: Number(editLab) || 0,
+          parcialGrade: Number(editParcial) || 0,
+          trabajosGrade: Number(editTrabajos) || 0,
           projectGrade: Number(editParcial) || 0
         };
       }
