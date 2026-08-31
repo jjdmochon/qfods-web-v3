@@ -1812,40 +1812,7 @@ export const INITIAL_GLOSSARY: QfdosGlossaryTerm[] = [
   }
 ];
 
-export const INITIAL_STUDENT_PROFILES: StudentEvaluationProfile[] = [
-  {
-    email: 'alumno.demo@correo.ugr.es',
-    name: 'García Pérez, Elena',
-    attempts: [
-      { id: 'att-1', studentEmail: 'alumno.demo@correo.ugr.es', studentName: 'García Pérez, Elena', topicId: 'tema-00', score: 10, correctCount: 2, totalQuestions: 2, timestamp: '12/09/2026' },
-      { id: 'att-2', studentEmail: 'alumno.demo@correo.ugr.es', studentName: 'García Pérez, Elena', topicId: 'tema-01', score: 8.5, correctCount: 2, totalQuestions: 2, timestamp: '14/09/2026' },
-      { id: 'att-3', studentEmail: 'alumno.demo@correo.ugr.es', studentName: 'García Pérez, Elena', topicId: 'tema-02', score: 9.0, correctCount: 2, totalQuestions: 2, timestamp: '15/09/2026' }
-    ],
-    labGrade: 9.2,
-    projectGrade: 8.8
-  },
-  {
-    email: 'martinez.m@correo.ugr.es',
-    name: 'Martínez López, Manuel',
-    attempts: [
-      { id: 'att-4', studentEmail: 'martinez.m@correo.ugr.es', studentName: 'Martínez López, Manuel', topicId: 'tema-00', score: 8.0, correctCount: 2, totalQuestions: 2, timestamp: '12/09/2026' },
-      { id: 'att-5', studentEmail: 'martinez.m@correo.ugr.es', studentName: 'Martínez López, Manuel', topicId: 'tema-08', score: 9.5, correctCount: 1, totalQuestions: 1, timestamp: '15/09/2026' }
-    ],
-    labGrade: 8.5,
-    projectGrade: 9.0
-  },
-  {
-    email: 'ruiz.s@correo.ugr.es',
-    name: 'Ruiz Delgado, Sofía',
-    attempts: [
-      { id: 'att-6', studentEmail: 'ruiz.s@correo.ugr.es', studentName: 'Ruiz Delgado, Sofía', topicId: 'tema-00', score: 10, correctCount: 2, totalQuestions: 2, timestamp: '11/09/2026' },
-      { id: 'att-7', studentEmail: 'ruiz.s@correo.ugr.es', studentName: 'Ruiz Delgado, Sofía', topicId: 'tema-05', score: 10, correctCount: 1, totalQuestions: 1, timestamp: '13/09/2026' },
-      { id: 'att-8', studentEmail: 'ruiz.s@correo.ugr.es', studentName: 'Ruiz Delgado, Sofía', topicId: 'tema-09', score: 9.0, correctCount: 1, totalQuestions: 1, timestamp: '16/09/2026' }
-    ],
-    labGrade: 9.6,
-    projectGrade: 9.4
-  }
-];
+export const INITIAL_STUDENT_PROFILES: StudentEvaluationProfile[] = [];
 
 export const INITIAL_STUDENT_EVALUATION_DATA = INITIAL_STUDENT_PROFILES;
 

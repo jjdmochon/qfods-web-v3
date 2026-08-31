@@ -284,8 +284,24 @@ export const EvaluationSection: React.FC = () => {
               onClick={handleExportCsv}
               className="btn btn-secondary"
               style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem' }}
+              disabled={students.length === 0}
             >
               <Download size={14} /> Exportar Acta CSV
+            </button>
+
+            <button
+              onClick={() => {
+                if (window.confirm('¿Deseas reiniciar las calificaciones locales?')) {
+                  localStorage.removeItem('qfdos_v3_evaluations');
+                  setStudents([]);
+                  setSheetSyncStatus('Datos locales limpiados. Pulsa "Sincronizar Google Sheets" para cargar las actas oficiales.');
+                }
+              }}
+              className="btn btn-outline"
+              style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}
+              title="Limpiar datos de prueba guardados en este navegador"
+            >
+              Limpiar datos locales
             </button>
           </div>
         )}
@@ -482,134 +498,161 @@ export const EvaluationSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Responsive Table */}
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--border-color)', color: 'var(--text-title)', background: 'var(--surface-alt)' }}>
-                  <th style={{ padding: '10px 12px' }}>Estudiante</th>
-                  <th style={{ padding: '10px 12px' }}>Correo @go.ugr.es</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Examen Final (70%)</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Parcial (20%)</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Laboratorio (5%)</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Trabajos (5%)</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Nota Final</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Estado</th>
-                  <th style={{ padding: '10px 12px', textAlign: 'center' }}>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {displayedStudents.map(s => {
-                  const { finalExamScore, parcialScore, labScore, trabajosScore, finalScore, isPassed, isExamMinimumMet, isLabApproved } = calculateOfficialGrade(s);
-                  const isEditing = editingEmail === s.email;
+          {displayedStudents.length === 0 ? (
+            <div style={{
+              padding: '2.5rem',
+              textAlign: 'center',
+              background: 'var(--surface-alt)',
+              borderRadius: '8px',
+              border: '1px dashed var(--border-strong)'
+            }}>
+              <FileSpreadsheet size={36} color="var(--teal-ink)" style={{ margin: '0 auto 12px' }} />
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-title)', marginBottom: '6px' }}>
+                No hay estudiantes cargados en el acta local
+              </h4>
+              <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', maxWidth: 520, margin: '0 auto 1.25rem' }}>
+                Para cargar las calificaciones oficiales, asegúrate de haber publicado la pestaña de Google Sheets como CSV en la web y pulsa en <strong>"Sincronizar Google Sheets"</strong>.
+              </p>
+              <button
+                onClick={syncFromGoogleSheet}
+                className="btn btn-primary"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.84rem' }}
+                disabled={loadingSheet}
+              >
+                <RefreshCw size={14} className={loadingSheet ? 'anim-spin-slow' : ''} />
+                <span>{loadingSheet ? 'Sincronizando...' : 'Sincronizar Ahora con Google Sheets'}</span>
+              </button>
+            </div>
+          ) : (
+            /* Responsive Table */
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
+                <thead>
+                  <tr style={{ borderBottom: '2px solid var(--border-color)', color: 'var(--text-title)', background: 'var(--surface-alt)' }}>
+                    <th style={{ padding: '10px 12px' }}>Estudiante</th>
+                    <th style={{ padding: '10px 12px' }}>Correo @go.ugr.es</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Examen Final (70%)</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Parcial (20%)</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Laboratorio (5%)</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Trabajos (5%)</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Nota Final</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Estado</th>
+                    <th style={{ padding: '10px 12px', textAlign: 'center' }}>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayedStudents.map(s => {
+                    const { finalExamScore, parcialScore, labScore, trabajosScore, finalScore, isPassed, isExamMinimumMet, isLabApproved } = calculateOfficialGrade(s);
+                    const isEditing = editingEmail === s.email;
 
-                  return (
-                    <tr key={s.email} style={{ borderBottom: '1px solid var(--border-color)' }}>
-                      <td style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--text-main)' }}>
-                        {s.name}
-                      </td>
-                      <td style={{ padding: '10px 12px', color: 'var(--text-muted)', fontSize: '0.78rem' }} className="font-mono">
-                        {s.email}
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
-                        {isEditing ? (
-                          <input
-                            type="number"
-                            step="0.1"
-                            min="0"
-                            max="10"
-                            value={editExamenFinal}
-                            onChange={e => setEditExamenFinal(parseFloat(e.target.value))}
-                            style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
-                          />
-                        ) : (
-                          <span style={{ color: isExamMinimumMet ? 'var(--navy)' : 'var(--accent-red)', fontWeight: 700 }}>
-                            {finalExamScore}
+                    return (
+                      <tr key={s.email} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                        <td style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--text-main)' }}>
+                          {s.name}
+                        </td>
+                        <td style={{ padding: '10px 12px', color: 'var(--text-muted)', fontSize: '0.78rem' }} className="font-mono">
+                          {s.email}
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
+                          {isEditing ? (
+                            <input
+                              type="number"
+                              step="0.1"
+                              min="0"
+                              max="10"
+                              value={editExamenFinal}
+                              onChange={e => setEditExamenFinal(parseFloat(e.target.value))}
+                              style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
+                            />
+                          ) : (
+                            <span style={{ color: isExamMinimumMet ? 'var(--navy)' : 'var(--accent-red)', fontWeight: 700 }}>
+                              {finalExamScore}
+                            </span>
+                          )}
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
+                          {isEditing ? (
+                            <input
+                              type="number"
+                              step="0.1"
+                              min="0"
+                              max="10"
+                              value={editParcial}
+                              onChange={e => setEditParcial(parseFloat(e.target.value))}
+                              style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
+                            />
+                          ) : (
+                            parcialScore
+                          )}
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
+                          {isEditing ? (
+                            <input
+                              type="number"
+                              step="0.1"
+                              min="0"
+                              max="10"
+                              value={editLab}
+                              onChange={e => setEditLab(parseFloat(e.target.value))}
+                              style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
+                            />
+                          ) : (
+                            <span style={{ color: isLabApproved ? 'inherit' : 'var(--accent-red)' }}>
+                              {labScore}
+                            </span>
+                          )}
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
+                          {isEditing ? (
+                            <input
+                              type="number"
+                              step="0.1"
+                              min="0"
+                              max="10"
+                              value={editTrabajos}
+                              onChange={e => setEditTrabajos(parseFloat(e.target.value))}
+                              style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
+                            />
+                          ) : (
+                            trabajosScore
+                          )}
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
+                          <strong style={{ fontSize: '1rem', color: isPassed ? 'var(--navy)' : 'var(--accent-red)' }}>
+                            {finalScore}
+                          </strong>
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }}>
+                          <span className={`qfdos-badge ${isPassed ? (Number(finalScore) >= 9 ? 'badge-emerald' : 'badge-teal') : 'badge-amber'}`} style={{ fontSize: '0.68rem' }}>
+                            {Number(finalScore) >= 9 ? 'Sobresaliente' : isPassed ? 'Aprobado' : 'Suspenso'}
                           </span>
-                        )}
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
-                        {isEditing ? (
-                          <input
-                            type="number"
-                            step="0.1"
-                            min="0"
-                            max="10"
-                            value={editParcial}
-                            onChange={e => setEditParcial(parseFloat(e.target.value))}
-                            style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
-                          />
-                        ) : (
-                          parcialScore
-                        )}
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
-                        {isEditing ? (
-                          <input
-                            type="number"
-                            step="0.1"
-                            min="0"
-                            max="10"
-                            value={editLab}
-                            onChange={e => setEditLab(parseFloat(e.target.value))}
-                            style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
-                          />
-                        ) : (
-                          <span style={{ color: isLabApproved ? 'inherit' : 'var(--accent-red)' }}>
-                            {labScore}
-                          </span>
-                        )}
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
-                        {isEditing ? (
-                          <input
-                            type="number"
-                            step="0.1"
-                            min="0"
-                            max="10"
-                            value={editTrabajos}
-                            onChange={e => setEditTrabajos(parseFloat(e.target.value))}
-                            style={{ width: '55px', padding: '2px 4px', fontSize: '0.8rem', textAlign: 'center' }}
-                          />
-                        ) : (
-                          trabajosScore
-                        )}
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }} className="font-mono">
-                        <strong style={{ fontSize: '1rem', color: isPassed ? 'var(--navy)' : 'var(--accent-red)' }}>
-                          {finalScore}
-                        </strong>
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }}>
-                        <span className={`qfdos-badge ${isPassed ? (Number(finalScore) >= 9 ? 'badge-emerald' : 'badge-teal') : 'badge-amber'}`} style={{ fontSize: '0.68rem' }}>
-                          {Number(finalScore) >= 9 ? 'Sobresaliente' : isPassed ? 'Aprobado' : 'Suspenso'}
-                        </span>
-                      </td>
-                      <td style={{ padding: '10px 12px', textAlign: 'center' }}>
-                        {isEditing ? (
-                          <button
-                            onClick={() => handleSaveEdit(s.email)}
-                            className="btn btn-sm btn-primary"
-                            style={{ padding: '3px 8px', fontSize: '0.72rem' }}
-                          >
-                            <Save size={12} /> Guardar
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => handleStartEdit(s)}
-                            className="btn btn-sm btn-outline"
-                            style={{ padding: '3px 8px', fontSize: '0.72rem' }}
-                          >
-                            <Edit3 size={12} /> Editar
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                        </td>
+                        <td style={{ padding: '10px 12px', textAlign: 'center' }}>
+                          {isEditing ? (
+                            <button
+                              onClick={() => handleSaveEdit(s.email)}
+                              className="btn btn-sm btn-primary"
+                              style={{ padding: '3px 8px', fontSize: '0.72rem' }}
+                            >
+                              <Save size={12} /> Guardar
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => handleStartEdit(s)}
+                              className="btn btn-sm btn-outline"
+                              style={{ padding: '3px 8px', fontSize: '0.72rem' }}
+                            >
+                              <Edit3 size={12} /> Editar
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
 
