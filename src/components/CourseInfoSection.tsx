@@ -282,67 +282,121 @@ export const CourseInfoSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Card: Calendario Oficial de Exámenes (Teoría) */}
-          <div className="qfdos-card card-navy" style={{ gridColumn: '1 / -1', padding: '1.5rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Calendar size={24} color="var(--navy-ink)" />
+          {/* Card: Calendario Oficial de Exámenes (Teoría) - Rediseño Editorial de Alta Gama */}
+          <div className="qfdos-card card-navy" style={{ gridColumn: '1 / -1', padding: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.75rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  borderRadius: '12px', 
+                  background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.12), rgba(13, 148, 136, 0.12))', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  border: '1px solid rgba(30, 58, 138, 0.2)'
+                }}>
+                  <Calendar size={26} color="var(--navy-ink)" />
+                </div>
                 <div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-title)', margin: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span className="qfdos-badge badge-navy" style={{ fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      CONVOCATORIAS OFICIALES
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Curso 2026/2027</span>
+                  </div>
+                  <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--text-title)', margin: '4px 0 0 0', letterSpacing: '-0.02em' }}>
                     Calendario Oficial de Exámenes (Teoría QFDOS)
                   </h3>
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    Convocatorias Oficiales del Curso 2026/2027 · Aprobadas en Junta de Facultad
-                  </span>
                 </div>
               </div>
-              <span className="qfdos-badge badge-teal" style={{ fontSize: '0.74rem', fontWeight: 800 }}>
-                Aprobación con mín. 5,0 en Bloque Teórico
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(13, 148, 136, 0.08)', padding: '6px 14px', borderRadius: '20px', border: '1px solid rgba(13, 148, 136, 0.25)' }}>
+                <ShieldCheck size={16} color="var(--teal-ink)" />
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--teal-ink)' }}>
+                  Aprobación con mín. 5,0 en Bloque Teórico
+                </span>
+              </div>
             </div>
 
-            {/* Tabla Responsive de Exámenes */}
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.86rem' }}>
-                <thead>
-                  <tr style={{ borderBottom: '2px solid var(--border-color)', background: 'var(--surface-alt)' }}>
-                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Tipo de Convocatoria / Examen</th>
-                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Fecha</th>
-                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Hora</th>
-                    <th style={{ padding: '12px 14px', fontWeight: 800, color: 'var(--text-title)' }}>Observaciones y Ponderación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {examSchedule.map((ex, idx) => (
-                    <tr key={idx} style={{
-                      borderBottom: '1px solid var(--border-color)',
-                      background: idx % 2 === 0 ? 'var(--surface)' : 'var(--surface-alt)'
+            {/* Grid de Eventos / Exámenes con diseño visual moderno */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
+              {examSchedule.map((ex, idx) => {
+                const isFinal = ex.tipo.includes('Ordinaria') || ex.tipo.includes('Final');
+                const isParcial = ex.tipo.includes('Parcial');
+                const accentBorder = isFinal ? 'var(--navy)' : isParcial ? 'var(--teal)' : 'var(--purple-border, #9333ea)';
+                const accentBg = isFinal ? 'rgba(30, 58, 138, 0.04)' : isParcial ? 'rgba(13, 148, 136, 0.04)' : 'rgba(147, 51, 234, 0.04)';
+
+                return (
+                  <div 
+                    key={idx}
+                    style={{
+                      background: 'var(--surface)',
+                      border: '1px solid var(--border-color)',
+                      borderTop: `4px solid ${accentBorder}`,
+                      borderRadius: '12px',
+                      padding: '1.35rem',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                    }}
+                  >
+                    {/* Header de la tarjeta */}
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '0.75rem' }}>
+                        <span 
+                          className={`qfdos-badge badge-${ex.badgeColor}`} 
+                          style={{ fontSize: '0.72rem', padding: '4px 10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}
+                        >
+                          {ex.caracter}
+                        </span>
+                        <span style={{ 
+                          fontSize: '0.75rem', 
+                          fontWeight: 800, 
+                          color: 'var(--text-title)', 
+                          background: accentBg, 
+                          padding: '3px 8px', 
+                          borderRadius: '6px',
+                          border: `1px solid ${accentBorder}33`
+                        }}>
+                          Ponderación: {ex.ponderacion}
+                        </span>
+                      </div>
+                      <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-title)', margin: '0 0 0.5rem 0', lineHeight: 1.3 }}>
+                        {ex.tipo}
+                      </h4>
+                      <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.45 }}>
+                        {ex.observaciones}
+                      </p>
+                    </div>
+
+                    {/* Footer con Fecha y Hora */}
+                    <div style={{ 
+                      display: 'flex', 
+                      flexDirection: 'column', 
+                      gap: '6px', 
+                      paddingTop: '0.85rem', 
+                      borderTop: '1px dashed var(--border-color)',
+                      fontSize: '0.84rem'
                     }}>
-                      <td style={{ padding: '14px', verticalAlign: 'middle' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          <span className={`qfdos-badge badge-${ex.badgeColor}`} style={{ fontSize: '0.7rem', padding: '2px 8px', fontWeight: 800 }}>
-                            {ex.caracter}
-                          </span>
-                          <strong style={{ color: 'var(--text-title)', fontSize: '0.92rem' }}>{ex.tipo}</strong>
-                        </div>
-                      </td>
-                      <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
-                        <span style={{ fontWeight: 800, color: 'var(--navy-ink)', fontFamily: 'var(--font-mono)' }}>
-                          📅 {ex.fecha}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-title)' }}>
+                        <Calendar size={15} color={accentBorder} />
+                        <span style={{ fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+                          {ex.fecha}
                         </span>
-                      </td>
-                      <td style={{ padding: '14px', verticalAlign: 'middle', whiteSpace: 'nowrap' }}>
-                        <span style={{ fontWeight: 700, color: 'var(--teal-ink)', fontFamily: 'var(--font-mono)' }}>
-                          ⏰ {ex.hora}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
+                        <Clock size={15} color="var(--text-muted)" />
+                        <span style={{ fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
+                          {ex.hora}
                         </span>
-                      </td>
-                      <td style={{ padding: '14px', verticalAlign: 'middle', color: 'var(--text-main)', lineHeight: 1.45 }}>
-                        <p style={{ margin: 0, fontSize: '0.84rem' }}>{ex.observaciones}</p>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
