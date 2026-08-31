@@ -29,7 +29,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $Source = $PSScriptRoot
-$Local  = 'C:\Users\Juanjo\qfdos-v3-node'
+$Local  = "$env:USERPROFILE\qfdos-v3-node"
 
 function Sync-ToLocal {
     Write-Host 'Sincronizando codigo -> disco local...' -ForegroundColor Cyan
