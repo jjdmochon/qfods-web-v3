@@ -99,25 +99,28 @@ export const CourseInfoSection: React.FC = () => {
               Coordinación e información docente oficial, horarios de aula, tutorías presenciales y online, y calendario académico completo.
             </p>
 
-            <div className="panel-claro" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
               <a
                 href={links.geminiNotebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-sm btn-mint"
+                className="btn btn-sm"
                 style={{
-                  
-                  color: 'var(--navy-ink)',
+                  background: '#2dd4bf',
+                  color: '#042f2e',
                   fontWeight: 800,
                   fontSize: '0.82rem',
                   padding: '8px 16px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '6px',
+                  border: 'none',
+                  textDecoration: 'none'
                 }}
               >
-                <Sparkles size={15} color="var(--teal-ink)" /> Gemini Notebook Oficial del Curso
+                <Sparkles size={15} color="#0f766e" /> Gemini Notebook Oficial del Curso
               </a>
               <a
                 href={links.teachingGuide}
@@ -130,9 +133,12 @@ export const CourseInfoSection: React.FC = () => {
                   border: '1px solid rgba(255,255,255,0.3)',
                   fontWeight: 700,
                   fontSize: '0.82rem',
+                  padding: '8px 16px',
+                  borderRadius: '8px',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '6px',
+                  textDecoration: 'none'
                 }}
               >
                 <BookOpen size={15} /> Guía Docente UGR
