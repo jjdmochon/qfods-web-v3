@@ -401,22 +401,24 @@ export const CourseInfoSection: React.FC = () => {
           </div>
 
           {/* Card: Gemini NotebookLM y Recursos IA */}
-          <div className="qfdos-card card-purple" style={{ gridColumn: '1 / -1' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#f3e8ff', padding: '12px', borderRadius: '12px' }}>
+          <div className="qfdos-card card-purple" style={{ gridColumn: '1 / -1', padding: '1.5rem 1.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', maxWidth: '820px' }}>
+                <div style={{ background: '#f3e8ff', padding: '12px', borderRadius: '12px', flexShrink: 0, marginTop: '2px' }}>
                   <Sparkles size={26} color="#9333ea" />
                 </div>
                 <div>
-                  <span className="qfdos-badge" style={{ background: '#9333ea', color: '#ffffff', fontSize: '0.68rem', marginBottom: '4px' }}>
-                    INTELIGENCIA ARTIFICIAL DOCENTE
-                  </span>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--text-title)', margin: '2px 0' }}>
-                    Gemini NotebookLM Oficial de Química Farmacéutica II
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    <span className="qfdos-badge" style={{ background: '#9333ea', color: '#ffffff', fontSize: '0.68rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      ASISTENTE INTELIGENTE DOCENTE
+                    </span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Grado en Farmacia · UGR</span>
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-title)', margin: '2px 0 6px 0', letterSpacing: '-0.01em' }}>
+                    Gemini NotebookLM: Información General & Guía Docente QFDOS
                   </h3>
-                  <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: 0 }}>
-                    Espacio inteligente con todos los materiales oficiales del curso cargados para resolver dudas conceptuales, 
-                    generar resúmenes estructurados y consultar el temario y las prácticas de forma interactiva.
+                  <p style={{ fontSize: '0.86rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    Espacio interactivo de consulta documental alimentado con la <strong>Información General (administrativa) del Grado de Farmacia (Curso 2026/2027)</strong> y la <strong>Guía Docente oficial de QFDOS</strong>: distribución de aulas, calendario académico y de patrona, códigos de asignaturas, convocatorias oficiales de exámenes y horarios de docencia.
                   </p>
                 </div>
               </div>
@@ -434,10 +436,12 @@ export const CourseInfoSection: React.FC = () => {
                   padding: '10px 18px',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  boxShadow: '0 4px 12px rgba(147, 51, 234, 0.25)',
+                  whiteSpace: 'nowrap'
                 }}
               >
-                <ExternalLink size={14} /> Abrir Gemini NotebookLM
+                <ExternalLink size={15} /> Abrir Gemini NotebookLM
               </a>
             </div>
           </div>
