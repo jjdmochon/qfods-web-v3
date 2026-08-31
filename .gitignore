@@ -30,3 +30,8 @@ desktop.ini
 .env.*.local
 client_secret_*.json
 .claude
+
+# Repositorio y módulo independiente
+Prácticas v4/
+"Prácticas v4"
+
