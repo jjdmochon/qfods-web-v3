@@ -148,6 +148,37 @@ export const PracticasPairReport: React.FC = () => {
     }
   }, [currentReport]);
 
+  // Recargar el borrador cuando la ventana recupere el foco o cambie el almacenamiento local (por ejemplo, desde la Calculadora de Rendimientos)
+  useEffect(() => {
+    const handleSync = () => {
+      try {
+        const saved = localStorage.getItem(DRAFT_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setCurrentReport(prev => {
+            // Solo actualizar si hay cambios
+            if (JSON.stringify(prev) !== saved) {
+              return parsed;
+            }
+            return prev;
+          });
+        }
+      } catch (err) {
+        console.error('Error syncing draft', err);
+      }
+    };
+
+    window.addEventListener('storage', handleSync);
+    window.addEventListener('focus', handleSync);
+    // Revisar al montar el componente
+    handleSync();
+
+    return () => {
+      window.removeEventListener('storage', handleSync);
+      window.removeEventListener('focus', handleSync);
+    };
+  }, []);
+
   // UI state for submit notification
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
 
