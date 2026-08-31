@@ -301,7 +301,66 @@ export const PracticasYieldCalculator: React.FC = () => {
     const updated = [newRecord, ...savedRecords];
     setSavedRecords(updated);
     localStorage.setItem('qfdos_lab_yield_records', JSON.stringify(updated));
-    alert('✓ Registro de rendimiento guardado en el cuaderno digital.');
+
+    // Transferir los datos directamente a la ficha del Cuaderno de Parejas (etapa 1, 2 o 3)
+    try {
+      const draftRaw = localStorage.getItem('qfdos_pair_report_draft');
+      const draft = draftRaw ? JSON.parse(draftRaw) : null;
+      
+      const updatedDraft = draft ? { ...draft } : {
+        id: `REP-${Date.now().toString().slice(-6)}`,
+        grupo: studentGroup || 'Grupo A',
+        puesto: 1,
+        turno: 'Mañana',
+        fecha: new Date().toISOString().split('T')[0],
+        student1: { nombre: studentName || '', dni: '', email: '' },
+        student2: { nombre: '', dni: '', email: '' },
+        step1: { mass1Naftol: 3.00, volEpiclorhidrina: 2.70, massNaOH: 1.20, massProductCrude: 0, yieldPercentage: 0, aspect: 'Aceite ámbar', observations: '' },
+        step2: { massOxirane: 0, volIsopropilamina: 6.00, massProductBase: 0, yieldStage: 0, yieldAccumulated: 0, meltingPointObserved: '', meltingPointReference: '94 - 96 °C', tlcRf: 'Rf = 0.42', observations: '' },
+        step3: { compoundType: 'DHPP', amountAldehyde: '2.55 mL Benzaldehído', volMethylAcetoacetate: 5.40, volNH3Conc: 4.50, massProduct: 0, yieldPercentage: 0, meltingPointObserved: '', meltingPointReference: '194 - 196 °C', crystalHabit: 'Agujas prismáticas amarillas', observations: '' },
+        cuestiones: { q1_dcm_density: '', q2_nmr_c4_proton: '', q3_reflux_safety: '' },
+        status: 'Borrador'
+      };
+
+      if (selectedPresetId === 'propranolol_step1') {
+        const naftolVal = reactantValues['alfa_naftol']?.amount || 3.0;
+        updatedDraft.step1.mass1Naftol = naftolVal;
+        updatedDraft.step1.massProductCrude = experimentalMass;
+        updatedDraft.step1.yieldPercentage = parseFloat(calculationData.yieldPercent.toFixed(1));
+        if (!updatedDraft.step2.massOxirane || updatedDraft.step2.massOxirane === 0) {
+          updatedDraft.step2.massOxirane = experimentalMass;
+        }
+      } else if (selectedPresetId === 'propranolol_step2') {
+        const oxiranoVal = reactantValues['naftoximetiloxirano_calc']?.amount || experimentalMass;
+        updatedDraft.step2.massOxirane = oxiranoVal;
+        updatedDraft.step2.massProductBase = experimentalMass;
+        updatedDraft.step2.yieldStage = parseFloat(calculationData.yieldPercent.toFixed(1));
+        if (observedMp) updatedDraft.step2.meltingPointObserved = observedMp;
+        const initialNaftol = updatedDraft.step1.mass1Naftol || 3.0;
+        const theoGlobal = (initialNaftol / 144.17) * 259.34;
+        updatedDraft.step2.yieldAccumulated = theoGlobal > 0 ? parseFloat(((experimentalMass / theoGlobal) * 100).toFixed(1)) : 0;
+      } else if (selectedPresetId === 'hantzsch_dhpp' || selectedPresetId === 'hantzsch_nifedipina') {
+        const isNif = selectedPresetId === 'hantzsch_nifedipina';
+        updatedDraft.step3.compoundType = isNif ? 'Nifedipina' : 'DHPP';
+        updatedDraft.step3.massProduct = experimentalMass;
+        updatedDraft.step3.yieldPercentage = parseFloat(calculationData.yieldPercent.toFixed(1));
+        if (observedMp) updatedDraft.step3.meltingPointObserved = observedMp;
+        updatedDraft.step3.meltingPointReference = isNif ? '172 - 174 °C' : '194 - 196 °C';
+      }
+
+      if (studentName && !updatedDraft.student1.nombre) {
+        updatedDraft.student1.nombre = studentName;
+      }
+      if (studentGroup) {
+        updatedDraft.grupo = studentGroup;
+      }
+
+      localStorage.setItem('qfdos_pair_report_draft', JSON.stringify(updatedDraft));
+    } catch (err) {
+      console.error('Error sincronizando con el borrador del cuaderno', err);
+    }
+
+    alert('✓ Registro guardado y sincronizado en el «Apartado 7: Cuaderno de Parejas» listo para la entrega.');
   };
 
   return (

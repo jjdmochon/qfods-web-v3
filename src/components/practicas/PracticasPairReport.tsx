@@ -70,62 +70,83 @@ export const PracticasPairReport: React.FC = () => {
     }
   }, [reports]);
 
+  const DRAFT_KEY = 'qfdos_pair_report_draft';
+
   // Current active report being edited by the student pair
-  const [currentReport, setCurrentReport] = useState<LabPairReport>({
-    id: `REP-${Date.now().toString().slice(-6)}`,
-    grupo: 'Grupo E',
-    puesto: 4,
-    turno: 'Mañana',
-    fecha: new Date().toISOString().split('T')[0],
-    student1: {
-      nombre: '',
-      dni: '',
-      email: ''
-    },
-    student2: {
-      nombre: '',
-      dni: '',
-      email: ''
-    },
-    step1: {
-      mass1Naftol: 3.00,
-      volEpiclorhidrina: 2.70,
-      massNaOH: 1.20,
-      massProductCrude: 0,
-      yieldPercentage: 0,
-      aspect: 'Aceite ámbar transparente',
-      observations: ''
-    },
-    step2: {
-      massOxirane: 0,
-      volIsopropilamina: 6.00,
-      massProductBase: 0,
-      yieldStage: 0,
-      yieldAccumulated: 0,
-      meltingPointObserved: '',
-      meltingPointReference: '94 - 96 °C',
-      tlcRf: 'Rf = 0.42 (DCM/MeOH 9:1)',
-      observations: ''
-    },
-    step3: {
-      compoundType: 'DHPP',
-      amountAldehyde: '2.55 mL Benzaldehído',
-      volMethylAcetoacetate: 5.40,
-      volNH3Conc: 4.50,
-      massProduct: 0,
-      yieldPercentage: 0,
-      meltingPointObserved: '',
-      meltingPointReference: '194 - 196 °C',
-      crystalHabit: 'Agujas prismáticas amarillas',
-      observations: ''
-    },
-    cuestiones: {
-      q1_dcm_density: '',
-      q2_nmr_c4_proton: '',
-      q3_reflux_safety: ''
-    },
-    status: 'Borrador'
+  const [currentReport, setCurrentReport] = useState<LabPairReport>(() => {
+    try {
+      const savedDraft = localStorage.getItem(DRAFT_KEY);
+      if (savedDraft) {
+        return JSON.parse(savedDraft);
+      }
+    } catch (e) {
+      console.error('Error loading draft report', e);
+    }
+    return {
+      id: `REP-${Date.now().toString().slice(-6)}`,
+      grupo: 'Grupo A',
+      puesto: 1,
+      turno: 'Mañana',
+      fecha: new Date().toISOString().split('T')[0],
+      student1: {
+        nombre: '',
+        dni: '',
+        email: ''
+      },
+      student2: {
+        nombre: '',
+        dni: '',
+        email: ''
+      },
+      step1: {
+        mass1Naftol: 3.00,
+        volEpiclorhidrina: 2.70,
+        massNaOH: 1.20,
+        massProductCrude: 0,
+        yieldPercentage: 0,
+        aspect: 'Aceite ámbar transparente',
+        observations: ''
+      },
+      step2: {
+        massOxirane: 0,
+        volIsopropilamina: 6.00,
+        massProductBase: 0,
+        yieldStage: 0,
+        yieldAccumulated: 0,
+        meltingPointObserved: '',
+        meltingPointReference: '94 - 96 °C',
+        tlcRf: 'Rf = 0.42 (DCM/MeOH 9:1)',
+        observations: ''
+      },
+      step3: {
+        compoundType: 'DHPP',
+        amountAldehyde: '2.55 mL Benzaldehído',
+        volMethylAcetoacetate: 5.40,
+        volNH3Conc: 4.50,
+        massProduct: 0,
+        yieldPercentage: 0,
+        meltingPointObserved: '',
+        meltingPointReference: '194 - 196 °C',
+        crystalHabit: 'Agujas prismáticas amarillas',
+        observations: ''
+      },
+      cuestiones: {
+        q1_dcm_density: '',
+        q2_nmr_c4_proton: '',
+        q3_reflux_safety: ''
+      },
+      status: 'Borrador'
+    };
   });
+
+  // Persistir borrador del formulario activo para sincronización en tiempo real
+  useEffect(() => {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(currentReport));
+    } catch (e) {
+      console.error('Error saving draft report', e);
+    }
+  }, [currentReport]);
 
   // UI state for submit notification
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
