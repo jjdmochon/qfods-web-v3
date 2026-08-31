@@ -135,11 +135,33 @@ export const PracticasSection: React.FC = () => {
               Química Farmacéutica II · UGR
             </span>
             {isSafetyAccepted ? (
-              <span className="qfdos-badge badge-mint" style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{
+                background: 'rgba(45, 212, 191, 0.2)',
+                color: '#5eead4',
+                border: '1px solid rgba(45, 212, 191, 0.4)',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                padding: '3px 8px',
+                borderRadius: '999px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
                 <CheckCircle2 size={12} /> Normas de Seguridad Aceptadas
               </span>
             ) : (
-              <span className="qfdos-badge badge-red" style={{ fontSize: '0.7rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{
+                background: 'rgba(239, 68, 68, 0.2)',
+                color: '#fca5a5',
+                border: '1px solid rgba(239, 68, 68, 0.4)',
+                fontSize: '0.72rem',
+                fontWeight: 700,
+                padding: '3px 8px',
+                borderRadius: '999px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}>
                 <Lock size={12} /> Lectura de Seguridad Pendiente
               </span>
             )}
@@ -156,36 +178,49 @@ export const PracticasSection: React.FC = () => {
           </p>
 
           {/* Quick Metrics Bar & Download Cuaderno */}
-          <div className="panel-claro" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{
+            display: 'flex',
+            gap: '0.75rem',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            background: 'rgba(0, 0, 0, 0.2)',
+            padding: '0.85rem 1rem',
+            borderRadius: '12px',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            backdropFilter: 'blur(8px)'
+          }}>
             <a
               href="https://drive.google.com/file/d/1zHi7DsEEQ9TsXbelODcG5hcy8_pMl4Bl/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-sm btn-mint"
+              className="btn btn-sm"
               style={{
                 fontWeight: 800,
                 fontSize: '0.82rem',
                 padding: '8px 16px',
-                
-                color: 'var(--navy-ink)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                background: '#2dd4bf',
+                color: '#042f2e',
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px'
+                gap: '8px',
+                border: 'none',
+                textDecoration: 'none'
               }}
             >
               📥 <span>Descargar Cuaderno de Prácticas (PDF)</span>
             </a>
-            <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
+            <div style={{ background: 'rgba(255,255,255,0.14)', color: '#ffffff', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
               🛡️ <strong>Seguridad:</strong> 16 normas y precauciones
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
+            <div style={{ background: 'rgba(255,255,255,0.14)', color: '#ffffff', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
               ⚗️ <strong>3 Reacciones:</strong> Propranolol (I y II) & DHPP
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
+            <div style={{ background: 'rgba(255,255,255,0.14)', color: '#ffffff', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
               🔬 <strong>12 Espectros:</strong> ¹H, ¹³C, DEPT & HRMS
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.12)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
+            <div style={{ background: 'rgba(255,255,255,0.14)', color: '#ffffff', padding: '6px 12px', borderRadius: '8px', fontSize: '0.78rem', fontWeight: 600 }}>
               👥 <strong>Parejas:</strong> Cuaderno conjunto
             </div>
           </div>

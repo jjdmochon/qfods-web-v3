@@ -331,11 +331,19 @@ export const PracticasLabEquipment: React.FC = () => {
             
             {/* Left Column: Vector Scientific Schematic (BioArt / Open Lab Style) */}
             <div className="qfdos-card" style={{ padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span className="qfdos-badge badge-navy" style={{ fontSize: '0.72rem' }}>
-                  📐 ESQUEMA VECTORIAL REPRESENTATIVO
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '0.5rem',
+                paddingBottom: '0.4rem',
+                borderBottom: '1px solid var(--border-color)'
+              }}>
+                <span className="qfdos-badge badge-navy" style={{ fontSize: '0.74rem', padding: '3px 9px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                  📐 <strong>Esquema Vectorial del Montaje</strong>
                 </span>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 500 }}>
                   {currentSetup.sourceAttribution}
                 </span>
               </div>

@@ -3060,3 +3060,82 @@ html, body { overflow-x: hidden; max-width: 100%; }
 @media print {
   .classroom-cal-marco, .classroom-cal-acciones { display: none !important; }
 }
+
+/* ==========================================================================
+   Optimizaciones Globales para Dispositivos Móviles (PWA & Mobile-First UX)
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  .qfdos-header-root > .container {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .header-fila {
+    gap: 0.5rem;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .brand-version-badge {
+    display: none;
+  }
+
+  .header-nav {
+    padding: 4px 4px 6px;
+    gap: 3px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-tab {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .nav-tab svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .qfdos-card {
+    padding: 1.1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .grid-2-cols {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .tool-label, .admin-btn-label {
+    display: none;
+  }
+
+  .btn-header-action, .btn-header-admin {
+    padding: 7px 9px;
+  }
+
+  .user-chip-role {
+    display: none;
+  }
+
+  .user-chip {
+    padding: 3px 6px 3px 3px;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .qfdos-header-root {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+}
