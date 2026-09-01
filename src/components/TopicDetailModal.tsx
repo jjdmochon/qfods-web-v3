@@ -19,7 +19,9 @@ import {
   Play,
   Share2,
   Atom,
-  Lock
+  Lock,
+  Globe,
+  Database
 } from 'lucide-react';
 
 interface TopicDetailModalProps {
@@ -341,7 +343,7 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                     </div>
 
                     {/* Molecular Properties (Lipinski / Veber) */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', fontSize: '0.74rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', fontSize: '0.74rem', marginBottom: '10px' }}>
                       <div style={{ background: 'var(--surface-alt)', padding: '4px 6px', borderRadius: '4px', textAlign: 'center' }}>
                         <span style={{ color: 'var(--text-muted)', display: 'block' }}>PM (Da)</span>
                         <strong>{drug.mw || 'N/A'}</strong>
@@ -354,6 +356,47 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                         <span style={{ color: 'var(--text-muted)', display: 'block' }}>TPSA (Å²)</span>
                         <strong>{drug.tpsa || 'N/A'}</strong>
                       </div>
+                    </div>
+
+                    {/* External DB Links: PubChem & DrugBank */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', borderTop: '1px solid var(--border-color)', paddingTop: '8px' }}>
+                      <button
+                        onClick={() => window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
+                        className="btn btn-sm"
+                        style={{
+                          background: 'rgba(30, 58, 138, 0.08)',
+                          color: 'var(--navy-ink)',
+                          border: '1px solid rgba(30, 58, 138, 0.2)',
+                          fontSize: '0.74rem',
+                          padding: '4px 6px',
+                          justifyContent: 'center',
+                          gap: '4px'
+                        }}
+                        title={`Buscar ${drug.name} en PubChem`}
+                      >
+                        <Globe size={12} />
+                        <span>PubChem</span>
+                        <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                      </button>
+
+                      <button
+                        onClick={() => window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
+                        className="btn btn-sm"
+                        style={{
+                          background: 'rgba(13, 148, 136, 0.08)',
+                          color: 'var(--teal-ink)',
+                          border: '1px solid rgba(13, 148, 136, 0.2)',
+                          fontSize: '0.74rem',
+                          padding: '4px 6px',
+                          justifyContent: 'center',
+                          gap: '4px'
+                        }}
+                        title={`Buscar ${drug.name} en DrugBank`}
+                      >
+                        <Database size={12} />
+                        <span>DrugBank</span>
+                        <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                      </button>
                     </div>
                   </div>
                 ))}

@@ -37,6 +37,7 @@ import { FlashcardsModal } from './components/FlashcardsModal';
 import { StudentQuestionModal } from './components/StudentQuestionModal';
 import { SpotifyPlayerModal } from './components/SpotifyPlayerModal';
 import { SearchModal } from './components/SearchModal';
+import { DrugSearchModal } from './components/DrugSearchModal';
 import { ExamGeneratorModal } from './components/ExamGeneratorModal';
 import { AdminCmsModal } from './components/AdminCmsModal';
 
@@ -129,6 +130,7 @@ export const App: React.FC = () => {
   const [selectedFlashcardsTopic, setSelectedFlashcardsTopic] = useState<QfdosTopic | null>(null);
   const [selectedSpotifyAttachment, setSelectedSpotifyAttachment] = useState<CourseAttachment | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isDrugSearchOpen, setIsDrugSearchOpen] = useState(false);
   const [isExamGeneratorOpen, setIsExamGeneratorOpen] = useState(false);
   const [isStudentQuestionOpen, setIsStudentQuestionOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
@@ -203,6 +205,7 @@ export const App: React.FC = () => {
         <Hero
           onNavigateToTemas={() => setActiveTab('temas')}
           onNavigateToSimulador={() => setActiveTab('simulador')}
+          onOpenDrugSearch={() => setIsDrugSearchOpen(true)}
         />
       )}
 
@@ -272,6 +275,14 @@ export const App: React.FC = () => {
         onNavigateToTab={(tab: any) => setActiveTab(tab)}
         onOpenNotesGenerator={() => {}}
         onOpenExamGenerator={() => setIsExamGeneratorOpen(true)}
+      />
+
+      <DrugSearchModal
+        isOpen={isDrugSearchOpen}
+        onClose={() => setIsDrugSearchOpen(false)}
+        topics={topics}
+        onSelectTopic={setSelectedTopicDetail}
+        onNavigateToTab={(tab: any) => setActiveTab(tab)}
       />
 
       {isExamGeneratorOpen && (

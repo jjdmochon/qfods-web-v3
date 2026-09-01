@@ -6,9 +6,14 @@ import { useAuth } from '../context/AuthContext';
 interface HeroProps {
   onNavigateToTemas: () => void;
   onNavigateToSimulador: () => void;
+  onOpenDrugSearch: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onNavigateToTemas, onNavigateToSimulador }) => {
+export const Hero: React.FC<HeroProps> = ({
+  onNavigateToTemas,
+  onNavigateToSimulador,
+  onOpenDrugSearch
+}) => {
   const { user, isProfesor } = useAuth();
 
   return (
@@ -65,8 +70,9 @@ export const Hero: React.FC<HeroProps> = ({ onNavigateToTemas, onNavigateToSimul
                 <span>Simulador Biofísico</span>
               </button>
               <button
-                onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
+                onClick={onOpenDrugSearch}
                 className="btn-hero-tertiary"
+                title="Buscador inteligente con PubChem y DrugBank"
               >
                 <FlaskConical size={16} />
                 <span>Buscar Fármaco</span>

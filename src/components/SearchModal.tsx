@@ -9,7 +9,11 @@ import {
   Award, 
   Activity, 
   FileText,
-  ArrowRight
+  ArrowRight,
+  FlaskConical,
+  Globe,
+  Database,
+  ExternalLink
 } from 'lucide-react';
 
 interface SearchModalProps {
@@ -21,6 +25,7 @@ interface SearchModalProps {
   onNavigateToTab: (tab: string) => void;
   onOpenNotesGenerator?: () => void;
   onOpenExamGenerator: () => void;
+  onOpenDrugSearch?: () => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
@@ -30,7 +35,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   glossary,
   onSelectTopic,
   onNavigateToTab,
-  onOpenExamGenerator
+  onOpenExamGenerator,
+  onOpenDrugSearch
 }) => {
   const [query, setQuery] = useState('');
 
@@ -82,6 +88,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   // System Tools
   const SYSTEM_TOOLS = [
+    { title: 'Buscador de Fármacos (PubChem & DrugBank)', desc: 'Exploración química 2D, propiedades moleculares y enlaces oficiales', action: onOpenDrugSearch, icon: FlaskConical },
     { title: 'Simulador de Afinidad & Cheng-Prusoff', desc: 'Cálculo de ΔG°, Kd, Ki, IC50 y eficiencia de ligando', tab: 'simulador', icon: Award },
     { title: 'Calculadora ADMET & Reglas de Lipinski / Veber', desc: 'Perfilado físico-químico y gráfico radar', tab: 'admet', icon: Activity },
     { title: 'Generador Oficial de Exámenes IA', desc: 'Creación de preguntas tipo test por nivel de dificultad', action: onOpenExamGenerator, icon: FileText }
@@ -220,36 +227,92 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {/* Drugs Results */}
           {matchedDrugs.length > 0 && (
             <div>
-              <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '6px', display: 'block' }}>
-                Fármacos & Moléculas ({matchedDrugs.length})
-              </span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Fármacos & Moléculas ({matchedDrugs.length})
+                </span>
+                {onOpenDrugSearch && (
+                  <button
+                    onClick={() => { onClose(); onOpenDrugSearch(); }}
+                    style={{ fontSize: '0.7rem', color: 'var(--teal-ink)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}
+                  >
+                    <FlaskConical size={12} /> Abrir Buscador Avanzado
+                  </button>
+                )}
+              </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {matchedDrugs.map(({ drug, topic }, idx) => (
                   <div
                     key={idx}
-                    onClick={() => {
-                      onClose();
-                      onSelectTopic(topic);
-                    }}
                     style={{
                       padding: '8px 12px',
                       borderRadius: 'var(--radius-md)',
                       background: 'var(--surface-alt)',
-                      cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'space-between'
+                      justifyContent: 'space-between',
+                      gap: '8px'
                     }}
                   >
-                    <div>
-                      <strong style={{ fontSize: '0.85rem', color: 'var(--navy-ink)' }}>{drug.name}</strong>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '8px' }}>
-                        {drug.role} ({topic.number})
+                    <div
+                      onClick={() => {
+                        onClose();
+                        onSelectTopic(topic);
+                      }}
+                      style={{ cursor: 'pointer', flex: 1 }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ fontSize: '0.85rem', color: 'var(--navy-ink)' }}>{drug.name}</strong>
+                        <span className="qfdos-badge badge-teal" style={{ fontSize: '0.62rem', padding: '1px 5px' }}>
+                          {topic.number}
+                        </span>
+                        {drug.mw && (
+                          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                            · {drug.mw} Da
+                          </span>
+                        )}
+                      </div>
+                      <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                        {drug.role}
                       </span>
                     </div>
-                    <span className="qfdos-badge badge-teal" style={{ fontSize: '0.65rem' }}>
-                      MW: {drug.mw || '-'} Da
-                    </span>
+
+                    {/* External Direct Links */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <button
+                        onClick={e => {
+                          e.stopPropagation();
+                          window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="btn btn-sm btn-outline"
+                        style={{ fontSize: '0.68rem', padding: '2px 6px', height: '24px', gap: '3px' }}
+                        title="Ver en PubChem"
+                      >
+                        <Globe size={11} /> PubChem
+                      </button>
+                      <button
+                        onClick={e => {
+                          e.stopPropagation();
+                          window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="btn btn-sm btn-outline"
+                        style={{ fontSize: '0.68rem', padding: '2px 6px', height: '24px', gap: '3px' }}
+                        title="Ver en DrugBank"
+                      >
+                        <Database size={11} /> DrugBank
+                      </button>
+                      <button
+                        onClick={() => {
+                          onClose();
+                          onSelectTopic(topic);
+                        }}
+                        className="btn btn-sm btn-outline"
+                        style={{ padding: '2px 5px', height: '24px' }}
+                        title="Ver tema del curso"
+                      >
+                        <ArrowRight size={13} />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -291,8 +354,43 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           )}
 
           {cleanQuery && matchedTopics.length === 0 && matchedDrugs.length === 0 && matchedGlossary.length === 0 && matchedTools.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
-              No se encontraron resultados para «{query}». Prueba buscando por término (ej. Kd, Ki, β-bloqueantes, COX-2, GABA, Morfina).
+            <div style={{ textAlign: 'center', padding: '2rem 1.5rem', color: 'var(--text-muted)', background: 'var(--surface-alt)', borderRadius: 'var(--radius-md)' }}>
+              <FlaskConical size={32} color="var(--teal-ink)" style={{ margin: '0 auto 10px auto' }} />
+              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-title)', marginBottom: '4px' }}>
+                Sin resultados locales para «{query}»
+              </div>
+              <p style={{ fontSize: '0.78rem', marginBottom: '14px' }}>
+                Consulta directamente este término en las bases de datos químicas internacionales:
+              </p>
+              <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => {
+                    window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+                  }}
+                  className="btn btn-sm btn-primary"
+                  style={{ fontSize: '0.75rem' }}
+                >
+                  <Globe size={13} /> Buscar en PubChem <ExternalLink size={11} />
+                </button>
+                <button
+                  onClick={() => {
+                    window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+                  }}
+                  className="btn btn-sm btn-secondary"
+                  style={{ fontSize: '0.75rem' }}
+                >
+                  <Database size={13} /> Buscar en DrugBank <ExternalLink size={11} />
+                </button>
+                {onOpenDrugSearch && (
+                  <button
+                    onClick={() => { onClose(); onOpenDrugSearch(); }}
+                    className="btn btn-sm btn-outline"
+                    style={{ fontSize: '0.75rem' }}
+                  >
+                    <FlaskConical size={13} /> Abrir Buscador QFDOS
+                  </button>
+                )}
+              </div>
             </div>
           )}
 

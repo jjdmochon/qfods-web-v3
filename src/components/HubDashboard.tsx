@@ -5,7 +5,8 @@ import { MolPropertyStrip } from './MolPropertyStrip';
 import { useAuth } from '../context/AuthContext';
 import {
   Award, Activity, Bell, ArrowRight, ChevronRight, FileText,
-  ShieldCheck, UploadCloud, FlaskConical, Shuffle, Lock, Calendar
+  ShieldCheck, UploadCloud, FlaskConical, Shuffle, Lock, Calendar,
+  Globe, Database, ExternalLink
 } from 'lucide-react';
 
 interface HubDashboardProps {
@@ -263,6 +264,47 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
               </div>
 
               <MolPropertyStrip smiles={spotlight.drug.smiles} />
+
+              {/* External DB links for spotlight drug */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                <button
+                  onClick={() => window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(spotlight.drug.name)}`, '_blank', 'noopener,noreferrer')}
+                  className="btn btn-sm"
+                  style={{
+                    background: 'rgba(30, 58, 138, 0.08)',
+                    color: 'var(--navy-ink)',
+                    border: '1px solid rgba(30, 58, 138, 0.2)',
+                    fontSize: '0.74rem',
+                    padding: '4px 6px',
+                    justifyContent: 'center',
+                    gap: '4px'
+                  }}
+                  title={`Buscar ${spotlight.drug.name} en PubChem`}
+                >
+                  <Globe size={12} />
+                  <span>PubChem</span>
+                  <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                </button>
+
+                <button
+                  onClick={() => window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(spotlight.drug.name)}`, '_blank', 'noopener,noreferrer')}
+                  className="btn btn-sm"
+                  style={{
+                    background: 'rgba(13, 148, 136, 0.08)',
+                    color: 'var(--teal-ink)',
+                    border: '1px solid rgba(13, 148, 136, 0.2)',
+                    fontSize: '0.74rem',
+                    padding: '4px 6px',
+                    justifyContent: 'center',
+                    gap: '4px'
+                  }}
+                  title={`Buscar ${spotlight.drug.name} en DrugBank`}
+                >
+                  <Database size={12} />
+                  <span>DrugBank</span>
+                  <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                </button>
+              </div>
 
               <button
                 onClick={() => onSelectTopic(spotlight.topic)}
