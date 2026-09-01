@@ -129,12 +129,18 @@ export const App: React.FC = () => {
   const [selectedQuizTopic, setSelectedQuizTopic] = useState<QfdosTopic | null>(null);
   const [selectedFlashcardsTopic, setSelectedFlashcardsTopic] = useState<QfdosTopic | null>(null);
   const [selectedSpotifyAttachment, setSelectedSpotifyAttachment] = useState<CourseAttachment | null>(null);
+  const [selectedAdmetDrug, setSelectedAdmetDrug] = useState<MoleculeDrug | undefined>(undefined);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isDrugSearchOpen, setIsDrugSearchOpen] = useState(false);
   const [isExamGeneratorOpen, setIsExamGeneratorOpen] = useState(false);
   const [isStudentQuestionOpen, setIsStudentQuestionOpen] = useState(false);
   const [isAdminCmsOpen, setIsAdminCmsOpen] = useState(false);
   const [publicadoEn, setPublicadoEn] = useState<string>(contenidoEnCache()?.publicadoEn ?? '');
+
+  const handleOpenAdmet = (drug: MoleculeDrug) => {
+    setSelectedAdmetDrug(drug);
+    setActiveTab('admet');
+  };
 
   // Persist data
   useEffect(() => { localStorage.setItem('qfdos_v3_topics', JSON.stringify(topics)); }, [topics]);
@@ -235,7 +241,7 @@ export const App: React.FC = () => {
         )}
         {activeTab === 'practicas' && <PracticasSection />}
         {activeTab === 'simulador' && <AffinitySimulator />}
-        {activeTab === 'admet' && <AdmetCalculator />}
+        {activeTab === 'admet' && <AdmetCalculator initialDrug={selectedAdmetDrug} />}
         {activeTab === 'glosario' && <GlossarySection glossary={glossary} />}
         {activeTab === 'enlaces' && (
           <ResourceLinksSection
@@ -254,6 +260,7 @@ export const App: React.FC = () => {
           onOpenQuiz={t => { setSelectedTopicDetail(null); setSelectedQuizTopic(t); }}
           onOpenFlashcards={t => { setSelectedTopicDetail(null); setSelectedFlashcardsTopic(t); }}
           onOpenSpotifyPlayer={att => setSelectedSpotifyAttachment(att)}
+          onOpenAdmet={handleOpenAdmet}
         />
       )}
       {selectedQuizTopic && (
@@ -275,6 +282,8 @@ export const App: React.FC = () => {
         onNavigateToTab={(tab: any) => setActiveTab(tab)}
         onOpenNotesGenerator={() => {}}
         onOpenExamGenerator={() => setIsExamGeneratorOpen(true)}
+        onOpenDrugSearch={() => setIsDrugSearchOpen(true)}
+        onOpenAdmet={handleOpenAdmet}
       />
 
       <DrugSearchModal
@@ -283,6 +292,7 @@ export const App: React.FC = () => {
         topics={topics}
         onSelectTopic={setSelectedTopicDetail}
         onNavigateToTab={(tab: any) => setActiveTab(tab)}
+        onOpenAdmet={handleOpenAdmet}
       />
 
       {isExamGeneratorOpen && (

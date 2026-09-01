@@ -21,7 +21,8 @@ import {
   Atom,
   Lock,
   Globe,
-  Database
+  Database,
+  Activity
 } from 'lucide-react';
 
 interface TopicDetailModalProps {
@@ -30,6 +31,7 @@ interface TopicDetailModalProps {
   onOpenQuiz: (topic: QfdosTopic) => void;
   onOpenFlashcards: (topic: QfdosTopic) => void;
   onOpenSpotifyPlayer: (att: CourseAttachment) => void;
+  onOpenAdmet?: (drug: MoleculeDrug) => void;
 }
 
 export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
@@ -37,7 +39,8 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
   onClose,
   onOpenQuiz,
   onOpenFlashcards,
-  onOpenSpotifyPlayer
+  onOpenSpotifyPlayer,
+  onOpenAdmet
 }) => {
   const [activeTab, setActiveTab] = useState<'sar' | 'materials' | 'drugs'>('sar');
   const { isProfesor } = useAuth();
@@ -358,45 +361,62 @@ export const TopicDetailModal: React.FC<TopicDetailModalProps> = ({
                       </div>
                     </div>
 
-                    {/* External DB Links: PubChem & DrugBank */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', borderTop: '1px solid var(--border-color)', paddingTop: '8px' }}>
-                      <button
-                        onClick={() => window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
-                        className="btn btn-sm"
-                        style={{
-                          background: 'rgba(30, 58, 138, 0.08)',
-                          color: 'var(--navy-ink)',
-                          border: '1px solid rgba(30, 58, 138, 0.2)',
-                          fontSize: '0.74rem',
-                          padding: '4px 6px',
-                          justifyContent: 'center',
-                          gap: '4px'
-                        }}
-                        title={`Buscar ${drug.name} en PubChem`}
-                      >
-                        <Globe size={12} />
-                        <span>PubChem</span>
-                        <ExternalLink size={11} style={{ opacity: 0.7 }} />
-                      </button>
+                    {/* External DB Links: PubChem, DrugBank & ADMET */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid var(--border-color)', paddingTop: '8px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                        <button
+                          onClick={() => window.open(`https://pubchem.ncbi.nlm.nih.gov/#query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
+                          className="btn btn-sm"
+                          style={{
+                            background: 'rgba(30, 58, 138, 0.08)',
+                            color: 'var(--navy-ink)',
+                            border: '1px solid rgba(30, 58, 138, 0.2)',
+                            fontSize: '0.74rem',
+                            padding: '4px 6px',
+                            justifyContent: 'center',
+                            gap: '4px'
+                          }}
+                          title={`Buscar ${drug.name} en PubChem`}
+                        >
+                          <Globe size={12} />
+                          <span>PubChem</span>
+                          <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                        </button>
 
-                      <button
-                        onClick={() => window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
-                        className="btn btn-sm"
-                        style={{
-                          background: 'rgba(13, 148, 136, 0.08)',
-                          color: 'var(--teal-ink)',
-                          border: '1px solid rgba(13, 148, 136, 0.2)',
-                          fontSize: '0.74rem',
-                          padding: '4px 6px',
-                          justifyContent: 'center',
-                          gap: '4px'
-                        }}
-                        title={`Buscar ${drug.name} en DrugBank`}
-                      >
-                        <Database size={12} />
-                        <span>DrugBank</span>
-                        <ExternalLink size={11} style={{ opacity: 0.7 }} />
-                      </button>
+                        <button
+                          onClick={() => window.open(`https://go.drugbank.com/unearth/q?searcher=drugs&query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer')}
+                          className="btn btn-sm"
+                          style={{
+                            background: 'rgba(13, 148, 136, 0.08)',
+                            color: 'var(--teal-ink)',
+                            border: '1px solid rgba(13, 148, 136, 0.2)',
+                            fontSize: '0.74rem',
+                            padding: '4px 6px',
+                            justifyContent: 'center',
+                            gap: '4px'
+                          }}
+                          title={`Buscar ${drug.name} en DrugBank`}
+                        >
+                          <Database size={12} />
+                          <span>DrugBank</span>
+                          <ExternalLink size={11} style={{ opacity: 0.7 }} />
+                        </button>
+                      </div>
+
+                      {onOpenAdmet && (
+                        <button
+                          onClick={() => {
+                            onClose();
+                            onOpenAdmet(drug);
+                          }}
+                          className="btn btn-sm btn-outline"
+                          style={{ width: '100%', fontSize: '0.74rem', padding: '4px 6px', justifyContent: 'center', gap: '5px' }}
+                          title={`Evaluar propiedades ADMET y Lipinski de ${drug.name}`}
+                        >
+                          <Activity size={12} />
+                          <span>Evaluar en ADMET & Lipinski</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}

@@ -287,7 +287,7 @@ export const HubDashboard: React.FC<HubDashboardProps> = ({
                 </button>
 
                 <button
-                  onClick={() => window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(spotlight.drug.name)}`, '_blank', 'noopener,noreferrer')}
+                  onClick={() => window.open(`https://go.drugbank.com/unearth/q?searcher=drugs&query=${encodeURIComponent(spotlight.drug.name)}`, '_blank', 'noopener,noreferrer')}
                   className="btn btn-sm"
                   style={{
                     background: 'rgba(13, 148, 136, 0.08)',

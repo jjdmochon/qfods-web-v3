@@ -43,6 +43,7 @@ interface DrugSearchModalProps {
   topics: QfdosTopic[];
   onSelectTopic?: (topic: QfdosTopic) => void;
   onNavigateToTab?: (tab: string) => void;
+  onOpenAdmet?: (drug: MoleculeDrug) => void;
 }
 
 export const DrugSearchModal: React.FC<DrugSearchModalProps> = ({
@@ -50,7 +51,8 @@ export const DrugSearchModal: React.FC<DrugSearchModalProps> = ({
   onClose,
   topics,
   onSelectTopic,
-  onNavigateToTab
+  onNavigateToTab,
+  onOpenAdmet
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
@@ -553,6 +555,33 @@ export const DrugSearchModal: React.FC<DrugSearchModalProps> = ({
                         <Database size={13} /> Ver en DrugBank <ExternalLink size={11} />
                       </button>
 
+                      <button
+                        onClick={() => {
+                          onClose();
+                          const pubchemDrug: MoleculeDrug = {
+                            name: pubchemResult.name || searchTerm,
+                            smiles: displaySmiles || '',
+                            mw: pubchemResult.molecularWeight,
+                            logP: pubchemResult.xlogp,
+                            tpsa: pubchemResult.tpsa,
+                            hbd: pubchemResult.hbd,
+                            hba: pubchemResult.hba,
+                            rotBonds: pubchemResult.rotatableBonds,
+                            role: 'Compuesto consultado en PubChem PUG REST'
+                          };
+                          if (onOpenAdmet) {
+                            onOpenAdmet(pubchemDrug);
+                          } else if (onNavigateToTab) {
+                            onNavigateToTab('admet');
+                          }
+                        }}
+                        className="btn btn-sm btn-outline"
+                        style={{ fontSize: '0.75rem', padding: '5px 12px' }}
+                        title="Calcular propiedades ADMET y radar chart de este compuesto"
+                      >
+                        <Activity size={13} /> Calcular ADMET
+                      </button>
+
                       <a
                         href={getPubChem3DSdfUrl(pubchemResult.cid)}
                         download={`${pubchemResult.name || 'compound'}_3d.sdf`}
@@ -759,18 +788,21 @@ export const DrugSearchModal: React.FC<DrugSearchModalProps> = ({
                     </div>
 
                     <div style={{ display: 'flex', gap: '6px', justifyContent: 'space-between' }}>
-                      {onNavigateToTab && (
-                        <button
-                          onClick={() => {
-                            onClose();
+                      <button
+                        onClick={() => {
+                          onClose();
+                          if (onOpenAdmet) {
+                            onOpenAdmet(drug);
+                          } else if (onNavigateToTab) {
                             onNavigateToTab('admet');
-                          }}
-                          className="btn btn-sm btn-outline"
-                          style={{ flex: 1, fontSize: '0.7rem', padding: '3px 6px', justifyContent: 'center' }}
-                        >
-                          <Activity size={11} /> ADMET
-                        </button>
-                      )}
+                          }
+                        }}
+                        className="btn btn-sm btn-outline"
+                        style={{ flex: 1, fontSize: '0.7rem', padding: '3px 6px', justifyContent: 'center' }}
+                        title={`Evaluar propiedades ADMET de ${drug.name}`}
+                      >
+                        <Activity size={11} /> ADMET
+                      </button>
                       {onSelectTopic && (
                         <button
                           onClick={() => {

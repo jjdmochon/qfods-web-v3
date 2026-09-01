@@ -86,6 +86,13 @@ export const AdmetCalculator: React.FC<AdmetCalculatorProps> = ({ initialDrug })
   const [customTpsa, setCustomTpsa] = useState<number>(selectedDrug.tpsa || 32.7);
   const [customRotB, setCustomRotB] = useState<number>(selectedDrug.rotBonds || 1);
 
+  // Sincronizar cuando cambia el fármaco seleccionado desde otra pestaña o buscador
+  useEffect(() => {
+    if (initialDrug) {
+      setSelectedDrug(initialDrug);
+    }
+  }, [initialDrug]);
+
   const handleSelectPreset = (drug: MoleculeDrug) => {
     setSelectedDrug(drug);
   };
@@ -191,21 +198,25 @@ export const AdmetCalculator: React.FC<AdmetCalculatorProps> = ({ initialDrug })
           Selecciona un fármaco modelo de QFDOS o ajusta los parámetros manualmente:
         </label>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          {PRESET_DRUGS.map((d, i) => (
-            <button
-              key={i}
-              onClick={() => handleSelectPreset(d)}
-              className="btn btn-sm"
-              style={{
-                background: selectedDrug.name === d.name ? 'var(--navy)' : 'var(--surface)',
-                color: selectedDrug.name === d.name ? '#ffffff' : 'var(--text-main)',
-                borderColor: selectedDrug.name === d.name ? 'var(--navy)' : 'var(--border-color)',
-                fontSize: '0.78rem'
-              }}
-            >
-              {d.name}
-            </button>
-          ))}
+          {(() => {
+            const hasMatch = PRESET_DRUGS.some(d => d.name.toLowerCase() === selectedDrug.name.toLowerCase() || d.smiles === selectedDrug.smiles);
+            const displayedPresets = hasMatch ? PRESET_DRUGS : [selectedDrug, ...PRESET_DRUGS];
+            return displayedPresets.map((d, i) => (
+              <button
+                key={i}
+                onClick={() => handleSelectPreset(d)}
+                className="btn btn-sm"
+                style={{
+                  background: selectedDrug.name === d.name ? 'var(--navy)' : 'var(--surface)',
+                  color: selectedDrug.name === d.name ? '#ffffff' : 'var(--text-main)',
+                  borderColor: selectedDrug.name === d.name ? 'var(--navy)' : 'var(--border-color)',
+                  fontSize: '0.78rem'
+                }}
+              >
+                {d.name}
+              </button>
+            ));
+          })()}
         </div>
       </div>
 

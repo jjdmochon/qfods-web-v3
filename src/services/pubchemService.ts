@@ -340,7 +340,8 @@ export function getPubChemWebUrl(queryOrCid: string | number): string {
 }
 
 export function getDrugBankWebUrl(query: string): string {
-  return `https://go.drugbank.com/unearth/q?query=${encodeURIComponent(query)}`;
+  const clean = query.trim();
+  return `https://go.drugbank.com/unearth/q?searcher=drugs&query=${encodeURIComponent(clean)}`;
 }
 
 /**

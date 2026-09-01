@@ -26,6 +26,7 @@ interface SearchModalProps {
   onOpenNotesGenerator?: () => void;
   onOpenExamGenerator: () => void;
   onOpenDrugSearch?: () => void;
+  onOpenAdmet?: (drug: MoleculeDrug) => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
@@ -36,7 +37,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   onSelectTopic,
   onNavigateToTab,
   onOpenExamGenerator,
-  onOpenDrugSearch
+  onOpenDrugSearch,
+  onOpenAdmet
 }) => {
   const [query, setQuery] = useState('');
 
@@ -293,7 +295,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       <button
                         onClick={e => {
                           e.stopPropagation();
-                          window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer');
+                          window.open(`https://go.drugbank.com/unearth/q?searcher=drugs&query=${encodeURIComponent(drug.name)}`, '_blank', 'noopener,noreferrer');
                         }}
                         className="btn btn-sm btn-outline"
                         style={{ fontSize: '0.68rem', padding: '2px 6px', height: '24px', gap: '3px' }}
@@ -301,6 +303,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       >
                         <Database size={11} /> DrugBank
                       </button>
+                      {onOpenAdmet && (
+                        <button
+                          onClick={e => {
+                            e.stopPropagation();
+                            onClose();
+                            onOpenAdmet(drug);
+                          }}
+                          className="btn btn-sm btn-outline"
+                          style={{ fontSize: '0.68rem', padding: '2px 6px', height: '24px', gap: '3px' }}
+                          title={`Evaluar ADMET de ${drug.name}`}
+                        >
+                          <Activity size={11} /> ADMET
+                        </button>
+                      )}
                       <button
                         onClick={() => {
                           onClose();
@@ -374,7 +390,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 </button>
                 <button
                   onClick={() => {
-                    window.open(`https://go.drugbank.com/unearth/q?query=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+                    window.open(`https://go.drugbank.com/unearth/q?searcher=drugs&query=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
                   }}
                   className="btn btn-sm btn-secondary"
                   style={{ fontSize: '0.75rem' }}
