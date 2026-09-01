@@ -47,9 +47,8 @@ export interface LipinskiVeberRules {
 
 const PUG_REST_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug';
 
-// Standard 16 compound properties list for PUG REST queries
+// Standard 15 compound properties list for PUG REST queries (CID is omitted because it is returned automatically in the root item)
 const PROPERTY_TAGS = [
-  'CID',
   'MolecularFormula',
   'MolecularWeight',
   'CanonicalSMILES',
@@ -76,13 +75,14 @@ const descriptionCache = new Map<number, string>();
  * Transforma una respuesta PUG REST a la estructura tipada PubChemCompoundData
  */
 function parsePubChemPropertyItem(item: any, customName?: string): PubChemCompoundData {
+  const smiles = item.CanonicalSMILES || item.ConnectivitySMILES || item.SMILES || item.IsomericSMILES;
   return {
     cid: item.CID,
     name: customName || item.IUPACName || `CID-${item.CID}`,
     molecularFormula: item.MolecularFormula,
     molecularWeight: item.MolecularWeight ? parseFloat(item.MolecularWeight) : undefined,
-    canonicalSmiles: item.CanonicalSMILES,
-    isomericSmiles: item.IsomericSMILES,
+    canonicalSmiles: smiles,
+    isomericSmiles: item.IsomericSMILES || smiles,
     inchi: item.InChI,
     inchiKey: item.InChIKey,
     iupacName: item.IUPACName,
@@ -95,6 +95,30 @@ function parsePubChemPropertyItem(item: any, customName?: string): PubChemCompou
     rotatableBonds: item.RotatableBondCount,
     heavyAtoms: item.HeavyAtomCount
   };
+}
+
+/**
+ * Autocompletado oficial de PubChem
+ * Endpoint: https://pubchem.ncbi.nlm.nih.gov/rest/autocomplete/compound/<term>/json?limit=<limit>
+ */
+export async function fetchPubChemAutocomplete(
+  term: string,
+  limit: number = 8,
+  signal?: AbortSignal
+): Promise<string[]> {
+  const clean = term.trim();
+  if (!clean || clean.length < 2) return [];
+
+  const url = `https://pubchem.ncbi.nlm.nih.gov/rest/autocomplete/compound/${encodeURIComponent(clean)}/json?limit=${limit}`;
+
+  try {
+    const res = await fetch(url, { signal });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data?.dictionary_terms?.compound || [];
+  } catch {
+    return [];
+  }
 }
 
 /**
@@ -118,7 +142,14 @@ export async function searchPubChemByName(
   try {
     const res = await fetch(url, { signal });
     if (!res.ok) {
-      if (res.status === 404) return null;
+      if (res.status === 404) {
+        // Intento con autocompletado si hay error 404 (ej. ligeras variaciones de nombre o tildes)
+        const suggestions = await fetchPubChemAutocomplete(cleanName, 3, signal);
+        if (suggestions.length && suggestions[0].toLowerCase() !== cleanName.toLowerCase()) {
+          return searchPubChemByName(suggestions[0], signal);
+        }
+        return null;
+      }
       throw new Error(`PubChem PUG REST error: ${res.status} ${res.statusText}`);
     }
 
